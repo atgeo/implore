@@ -3,36 +3,26 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var core: Core
-    @State private var newPrayerText = ""
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                List {
-                    ForEach(core.view.prayers, id: \.id) { prayer in
-                        Text(prayer.text)
-                    }
-                    .onDelete(perform: removePrayers)
+            List {
+                ForEach(core.view.prayers, id: \.id) { prayer in
+                    IntentionRow(prayer: prayer)
                 }
-
-                HStack {
-                    TextField("Prayer intention", text: $newPrayerText)
-                        .textFieldStyle(.roundedBorder)
-                        .onSubmit(addPrayer)
-
-                    Button("Add", action: addPrayer)
-                        .disabled(newPrayerText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
-                .padding()
+                .onDelete(perform: removePrayers)
             }
             .navigationTitle("Intentions")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    NavigationLink {
+                        AddIntentionView(core: core)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
-    }
-
-    private func addPrayer() {
-        let text = newPrayerText
-        newPrayerText = ""
-        core.update(.addPrayer(text: text))
     }
 
     private func removePrayers(at offsets: IndexSet) {
@@ -40,6 +30,30 @@ struct ContentView: View {
         for id in ids {
             core.update(.removePrayer(id: id))
         }
+    }
+}
+
+struct IntentionRow: View {
+    let prayer: Prayer
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(prayer.intention)
+                .font(.body)
+
+            if let details = prayer.details, !details.isEmpty {
+                Text(details)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            if !prayer.tags.isEmpty {
+                Text(prayer.tags.joined(separator: " · "))
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+        }
+        .padding(.vertical, 2)
     }
 }
 

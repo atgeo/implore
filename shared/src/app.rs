@@ -18,12 +18,23 @@ impl App for Implore {
 
     fn update(&self, event: Event, model: &mut Model) -> Command<Effect, Event> {
         match event {
-            Event::AddPrayer { text } => {
-                let text = text.trim().to_string();
-                if !text.is_empty() {
+            Event::AddPrayer {
+                intention,
+                details,
+                tags,
+            } => {
+                let intention = intention.trim().to_string();
+                if !intention.is_empty() {
+                    let details = trim_optional(details);
+                    let tags = normalize_tags(tags);
                     let id = model.next_id;
                     model.next_id += 1;
-                    model.prayers.push(Prayer { id, text });
+                    model.prayers.push(Prayer {
+                        id,
+                        intention,
+                        details,
+                        tags,
+                    });
                 }
             }
             Event::RemovePrayer { id } => {
@@ -41,11 +52,33 @@ impl App for Implore {
     }
 }
 
+fn trim_optional(value: String) -> Option<String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(trimmed.to_string())
+    }
+}
+
+fn normalize_tags(tags: Vec<String>) -> Vec<String> {
+    tags.into_iter()
+        .map(|tag| tag.trim().to_string())
+        .filter(|tag| !tag.is_empty())
+        .collect()
+}
+
 #[derive(Facet, Serialize, Deserialize, Clone, Debug)]
 #[repr(C)]
 pub enum Event {
-    AddPrayer { text: String },
-    RemovePrayer { id: u64 },
+    AddPrayer {
+        intention: String,
+        details: String,
+        tags: Vec<String>,
+    },
+    RemovePrayer {
+        id: u64,
+    },
 }
 
 #[derive(Default)]
@@ -57,7 +90,9 @@ pub struct Model {
 #[derive(Facet, Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct Prayer {
     pub id: u64,
-    pub text: String,
+    pub intention: String,
+    pub details: Option<String>,
+    pub tags: Vec<String>,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Default)]
@@ -75,18 +110,29 @@ pub enum Effect {
 mod test {
     use super::*;
 
+    fn add(
+        app: &Implore,
+        model: &mut Model,
+        intention: &str,
+        details: &str,
+        tags: &[&str],
+    ) {
+        app.update(
+            Event::AddPrayer {
+                intention: intention.into(),
+                details: details.into(),
+                tags: tags.iter().map(|tag| (*tag).into()).collect(),
+            },
+            model,
+        )
+        .expect_only_render();
+    }
+
     #[test]
     fn renders() {
         let app = Implore;
         let mut model = Model::default();
-
-        app.update(
-            Event::AddPrayer {
-                text: "Mom".into(),
-            },
-            &mut model,
-        )
-        .expect_only_render();
+        add(&app, &mut model, "Mom", "", &[]);
     }
 
     #[test]
@@ -98,68 +144,78 @@ mod test {
     }
 
     #[test]
-    fn adds_prayer() {
+    fn adds_prayer_with_optional_fields() {
         let app = Implore;
         let mut model = Model::default();
 
-        app.update(
-            Event::AddPrayer {
-                text: "Mom".into(),
-            },
+        add(
+            &app,
             &mut model,
-        )
-        .expect_only_render();
+            "Mom",
+            "Surgery recovery",
+            &["family", "health"],
+        );
 
         assert_eq!(
             app.view(&model).prayers,
             vec![Prayer {
                 id: 0,
-                text: "Mom".into(),
+                intention: "Mom".into(),
+                details: Some("Surgery recovery".into()),
+                tags: vec!["family".into(), "health".into()],
             }]
         );
     }
 
     #[test]
-    fn ignores_empty_or_whitespace_prayer() {
+    fn adds_prayer_without_optional_fields() {
         let app = Implore;
         let mut model = Model::default();
 
-        app.update(
-            Event::AddPrayer {
-                text: "   ".into(),
-            },
-            &mut model,
-        )
-        .expect_only_render();
-        app.update(
-            Event::AddPrayer {
-                text: String::new(),
-            },
-            &mut model,
-        )
-        .expect_only_render();
-
-        assert!(app.view(&model).prayers.is_empty());
-    }
-
-    #[test]
-    fn trims_prayer_text() {
-        let app = Implore;
-        let mut model = Model::default();
-
-        app.update(
-            Event::AddPrayer {
-                text: "  Dad  ".into(),
-            },
-            &mut model,
-        )
-        .expect_only_render();
+        add(&app, &mut model, "Mom", "", &[]);
 
         assert_eq!(
             app.view(&model).prayers,
             vec![Prayer {
                 id: 0,
-                text: "Dad".into(),
+                intention: "Mom".into(),
+                details: None,
+                tags: vec![],
+            }]
+        );
+    }
+
+    #[test]
+    fn ignores_empty_or_whitespace_intention() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        add(&app, &mut model, "   ", "note", &["tag"]);
+        add(&app, &mut model, "", "", &[]);
+
+        assert!(app.view(&model).prayers.is_empty());
+    }
+
+    #[test]
+    fn trims_fields_and_drops_empty_tags() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        add(
+            &app,
+            &mut model,
+            "  Dad  ",
+            "  recovery  ",
+            &["  family  ", "  ", "health"],
+        );
+
+        assert_eq!(
+            app.view(&model).prayers,
+            vec![Prayer {
+                id: 0,
+                intention: "Dad".into(),
+                details: Some("recovery".into()),
+                tags: vec!["family".into(), "health".into()],
             }]
         );
     }
@@ -169,18 +225,8 @@ mod test {
         let app = Implore;
         let mut model = Model::default();
 
-        let _ = app.update(
-            Event::AddPrayer {
-                text: "Mom".into(),
-            },
-            &mut model,
-        );
-        let _ = app.update(
-            Event::AddPrayer {
-                text: "Dad".into(),
-            },
-            &mut model,
-        );
+        add(&app, &mut model, "Mom", "", &[]);
+        add(&app, &mut model, "Dad", "", &[]);
 
         app.update(Event::RemovePrayer { id: 0 }, &mut model)
             .expect_only_render();
@@ -189,7 +235,9 @@ mod test {
             app.view(&model).prayers,
             vec![Prayer {
                 id: 1,
-                text: "Dad".into(),
+                intention: "Dad".into(),
+                details: None,
+                tags: vec![],
             }]
         );
     }
@@ -199,12 +247,7 @@ mod test {
         let app = Implore;
         let mut model = Model::default();
 
-        let _ = app.update(
-            Event::AddPrayer {
-                text: "Mom".into(),
-            },
-            &mut model,
-        );
+        add(&app, &mut model, "Mom", "", &[]);
 
         app.update(Event::RemovePrayer { id: 99 }, &mut model)
             .expect_only_render();
@@ -213,7 +256,9 @@ mod test {
             app.view(&model).prayers,
             vec![Prayer {
                 id: 0,
-                text: "Mom".into(),
+                intention: "Mom".into(),
+                details: None,
+                tags: vec![],
             }]
         );
     }
