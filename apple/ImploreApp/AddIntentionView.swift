@@ -30,6 +30,7 @@ struct AddIntentionView: View {
 
             Section {
                 TextField("family, health", text: $tagsText)
+                    .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
             } header: {
                 Text("Tags")
