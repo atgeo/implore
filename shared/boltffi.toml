@@ -7,7 +7,7 @@ license = "Apache-2.0"
 
 [targets.apple]
 output = "../apple/generated/Shared"
-include_macos = true
+include_macos = false
 
 [targets.apple.swift]
 module_name = "Shared"

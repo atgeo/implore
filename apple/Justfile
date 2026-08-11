@@ -19,8 +19,9 @@ generate: typegen package generate-project
 build: generate
     xcodebuild \
         -project ImploreApp.xcodeproj \
-        -scheme ImploreApp-macOS \
+        -scheme ImploreApp-iOS \
         -configuration Debug \
+        -destination 'generic/platform=iOS Simulator' \
         build
 
 # local development workflow

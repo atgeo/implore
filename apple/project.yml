@@ -9,9 +9,11 @@ options:
 attributes:
   BuildIndependentTargetsInParallel: true
 
-targetTemplates:
-  app:
+targets:
+  ImploreApp-iOS:
     type: application
+    platform: iOS
+    deploymentTarget: 18.0
     sources:
       - path: ImploreApp
         excludes:
@@ -22,12 +24,6 @@ targetTemplates:
     dependencies:
       - package: Shared
       - package: App
-
-targets:
-  ImploreApp-iOS:
-    templates: [app]
-    platform: iOS
-    deploymentTarget: 18.0
     info:
       path: ImploreApp/Info-iOS.plist
       properties:
@@ -37,16 +33,3 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         UILaunchScreen: {}
-
-  ImploreApp-macOS:
-    templates: [app]
-    platform: macOS
-    deploymentTarget: "15.0"
-    info:
-      path: ImploreApp/Info-macOS.plist
-      properties:
-        CFBundleDisplayName: Implore
-        NSSupportsAutomaticGraphicsSwitching: true
-    settings:
-      OTHER_LDFLAGS: [-w]
-      ENABLE_USER_SCRIPT_SANDBOXING: NO
