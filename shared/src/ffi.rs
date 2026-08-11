@@ -1,0 +1,88 @@
+#![allow(clippy::used_underscore_items)]
+
+use crux_core::{
+    Core,
+    bridge::{Bridge, EffectId},
+};
+
+use crate::Implore;
+
+/// The main interface used by the shell
+pub struct CoreFFI {
+    core: Bridge<Implore>,
+}
+
+impl Default for CoreFFI {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+#[boltffi::export]
+impl CoreFFI {
+    #[must_use]
+    pub fn new() -> Self {
+        Self {
+            core: Bridge::new(Core::new()),
+        }
+    }
+
+    /// Send an event to the app and return the effects.
+    /// # Panics
+    /// If the event cannot be deserialized.
+    /// In production you should handle the error properly.
+    #[must_use]
+    pub fn update(&self, data: &[u8]) -> Vec<u8> {
+        let mut effects = Vec::new();
+        match self.core.update(data, &mut effects) {
+            Ok(()) => effects,
+            Err(e) => panic!("{e}"),
+        }
+    }
+
+    /// Resolve an effect and return the effects.
+    /// # Panics
+    /// If the `data` cannot be deserialized into an effect or the `effect_id` is invalid.
+    /// In production you should handle the error properly.
+    #[must_use]
+    pub fn resolve(&self, id: u32, data: &[u8]) -> Vec<u8> {
+        let mut effects = Vec::new();
+        match self.core.resolve(EffectId(id), data, &mut effects) {
+            Ok(()) => effects,
+            Err(e) => panic!("{e}"),
+        }
+    }
+
+    /// Send an event to the app using owned bytes for generated C# bindings.
+    /// # Panics
+    /// If the event cannot be deserialized.
+    /// In production you should handle the error properly.
+    #[must_use]
+    #[allow(clippy::needless_pass_by_value)]
+    pub fn update_bytes(&self, data: Vec<u8>) -> Vec<u8> {
+        self.update(&data)
+    }
+
+    /// Resolve an effect using owned bytes for generated C# bindings.
+    /// # Panics
+    /// If the `data` cannot be deserialized into an effect or the `effect_id` is invalid.
+    /// In production you should handle the error properly.
+    #[must_use]
+    #[allow(clippy::needless_pass_by_value)]
+    pub fn resolve_bytes(&self, id: u32, data: Vec<u8>) -> Vec<u8> {
+        self.resolve(id, &data)
+    }
+
+    /// Get the current `ViewModel`.
+    /// # Panics
+    /// If the view cannot be serialized.
+    /// In production you should handle the error properly.
+    #[must_use]
+    pub fn view(&self) -> Vec<u8> {
+        let mut view_model = Vec::new();
+        match self.core.view(&mut view_model) {
+            Ok(()) => view_model,
+            Err(e) => panic!("{e}"),
+        }
+    }
+}

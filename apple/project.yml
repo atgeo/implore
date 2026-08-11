@@ -1,0 +1,52 @@
+name: ImploreApp
+packages:
+  Shared:
+    path: ./generated/Shared
+  App:
+    path: ./generated/App
+options:
+  bundleIdPrefix: com.atgeo.implore
+attributes:
+  BuildIndependentTargetsInParallel: true
+
+targetTemplates:
+  app:
+    type: application
+    sources:
+      - path: ImploreApp
+        excludes:
+          - "Info-*.plist"
+    scheme:
+      management:
+        shared: true
+    dependencies:
+      - package: Shared
+      - package: App
+
+targets:
+  ImploreApp-iOS:
+    templates: [app]
+    platform: iOS
+    deploymentTarget: 18.0
+    info:
+      path: ImploreApp/Info-iOS.plist
+      properties:
+        CFBundleDisplayName: Implore
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UILaunchScreen: {}
+
+  ImploreApp-macOS:
+    templates: [app]
+    platform: macOS
+    deploymentTarget: "15.0"
+    info:
+      path: ImploreApp/Info-macOS.plist
+      properties:
+        CFBundleDisplayName: Implore
+        NSSupportsAutomaticGraphicsSwitching: true
+    settings:
+      OTHER_LDFLAGS: [-w]
+      ENABLE_USER_SCRIPT_SANDBOXING: NO

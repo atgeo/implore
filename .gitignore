@@ -1,0 +1,57 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# Apple / Xcode / SwiftPM
+apple/generated/
+**/xcuserdata/
+**/*.xcuserstate/
+**/*.xcuserstate
+**/.swiftpm/
+**/.build/
+DerivedData/
+*.xccheckout
+*.xcscmblueprint
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Android (BoltFFI output)
+Android/generated/
+**/build/
+*.iml
+.gradle/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# WASM / web / Windows (BoltFFI output)
+web-nextjs/generated/
+windows/generated/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.mobileprovision
