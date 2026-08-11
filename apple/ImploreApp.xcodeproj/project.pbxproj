@@ -7,41 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05F39B9147979DF3B4C10333 /* ImploreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
-		4F2D3F9F22672A36D3543DCC /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = D611338B7FC351836B231455 /* Shared */; };
 		8B3033F088C9C5A41B134E16 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 08AC2D01ADA7F6920CE288A4 /* Shared */; };
-		AC275FD50352827E3FEB3138 /* AddIntentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */; };
+		9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */; };
 		B732D0377E04819944429B06 /* core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C314023CD429346511CA770 /* core.swift */; };
-		BC3CB1504C527D3D694F9CF1 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CC0C16CA68C992B899ACB02A /* App */; };
 		BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */; };
 		D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */; };
-		E6B96046264F41FDCF4DCCA2 /* core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C314023CD429346511CA770 /* core.swift */; };
-		EC9CD3B07BD509E3B8950384 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */; };
 		FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStore.swift; sourceTree = "<group>"; };
 		251E98733EC880B827C7660A /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; name = App; path = generated/App; sourceTree = SOURCE_ROOT; };
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
 		8C314023CD429346511CA770 /* core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = core.swift; sourceTree = "<group>"; };
 		AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIntentionView.swift; sourceTree = "<group>"; };
-		BAF8AA15746010C6A0C99F29 /* ImploreApp-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ImploreApp-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF08D43EE2EA8AEB332BE687 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shared; path = generated/Shared; sourceTree = SOURCE_ROOT; };
 		E34EB11125ADB78C27A5BDB1 /* ImploreApp-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "ImploreApp-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5B398E45248C9AC8C9193100 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F2D3F9F22672A36D3543DCC /* Shared in Frameworks */,
-				BC3CB1504C527D3D694F9CF1 /* App in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D3446EBF54E8206FDF1F8955 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -70,6 +56,7 @@
 				61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */,
 				8C314023CD429346511CA770 /* core.swift */,
 				88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */,
+				01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */,
 			);
 			path = ImploreApp;
 			sourceTree = "<group>";
@@ -87,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				E34EB11125ADB78C27A5BDB1 /* ImploreApp-iOS.app */,
-				BAF8AA15746010C6A0C99F29 /* ImploreApp-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,26 +81,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5B715434733D7F479D66C7EF /* ImploreApp-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F134064E0FBB165C86E68342 /* Build configuration list for PBXNativeTarget "ImploreApp-macOS" */;
-			buildPhases = (
-				7F7293139827BA14B285D3BF /* Sources */,
-				5B398E45248C9AC8C9193100 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "ImploreApp-macOS";
-			packageProductDependencies = (
-				D611338B7FC351836B231455 /* Shared */,
-				CC0C16CA68C992B899ACB02A /* App */,
-			);
-			productName = "ImploreApp-macOS";
-			productReference = BAF8AA15746010C6A0C99F29 /* ImploreApp-macOS.app */;
-			productType = "com.apple.product-type.application";
-		};
 		79A35BD35D3FAADD59D9016F /* ImploreApp-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62931CB21BC3A7D7E32EF8E1 /* Build configuration list for PBXNativeTarget "ImploreApp-iOS" */;
@@ -165,23 +131,11 @@
 			projectRoot = "";
 			targets = (
 				79A35BD35D3FAADD59D9016F /* ImploreApp-iOS */,
-				5B715434733D7F479D66C7EF /* ImploreApp-macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7F7293139827BA14B285D3BF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AC275FD50352827E3FEB3138 /* AddIntentionView.swift in Sources */,
-				EC9CD3B07BD509E3B8950384 /* ContentView.swift in Sources */,
-				05F39B9147979DF3B4C10333 /* ImploreApp.swift in Sources */,
-				E6B96046264F41FDCF4DCCA2 /* core.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E1FF7805A356334DF5F53A4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,6 +143,7 @@
 				D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */,
 				FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */,
 				BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */,
+				9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */,
 				B732D0377E04819944429B06 /* core.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,26 +184,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		7692BFEBF614FEB45878DAE5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "ImploreApp/Info-macOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				OTHER_LDFLAGS = (
-					"-w",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.atgeo.implore.ImploreApp-macOS";
-				SDKROOT = macosx;
-			};
-			name = Release;
 		};
 		95358DF5B18FB96FB174548A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -298,6 +233,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -359,29 +295,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D9707158B81EFDB2DB8F12B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "ImploreApp/Info-macOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				OTHER_LDFLAGS = (
-					"-w",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.atgeo.implore.ImploreApp-macOS";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -402,15 +319,6 @@
 			buildConfigurations = (
 				4A913F2FCABD5AFD369ECE49 /* Debug */,
 				4A887CE22447E364F3471353 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		F134064E0FBB165C86E68342 /* Build configuration list for PBXNativeTarget "ImploreApp-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D9707158B81EFDB2DB8F12B4 /* Debug */,
-				7692BFEBF614FEB45878DAE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -436,14 +344,6 @@
 		7E3691C5498E1B0EA15431F3 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
-		};
-		CC0C16CA68C992B899ACB02A /* App */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = App;
-		};
-		D611338B7FC351836B231455 /* Shared */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Shared;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

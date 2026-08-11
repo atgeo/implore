@@ -308,6 +308,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "crux_kv"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b44a680bfd166048ac1423bc4ae2122e0932ce777806da3bb01665f1880104b4"
+dependencies = [
+ "anyhow",
+ "crux_core",
+ "facet",
+ "serde",
+ "serde_bytes",
+ "thiserror",
+]
+
+[[package]]
 name = "crux_macros"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1114,6 +1128,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_bytes"
+version = "0.11.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a5d440709e79d88e51ac01c4b72fc6cb7314017bb7da9eeff678aa94c10e3ea8"
+dependencies = [
+ "serde",
+ "serde_core",
+]
+
+[[package]]
 name = "serde_core"
 version = "1.0.229"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1154,10 +1178,12 @@ dependencies = [
  "boltffi",
  "clap",
  "crux_core",
+ "crux_kv",
  "facet",
  "log",
  "pretty_env_logger",
  "serde",
+ "serde_json",
 ]
 
 [[package]]
