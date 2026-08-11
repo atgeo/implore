@@ -6,7 +6,7 @@ Add prayer intentions with optional details and tags. Shared logic lives in Rust
 
 ## Status
 
-Early scaffold: add/remove intentions on iOS with local persistence via Crux `KeyValue`. iCloud sync, associations, and daily rotation are not built yet.
+Early scaffold: add/remove/archive intentions on iOS with local persistence and Active/Archived/All filters. iCloud sync, associations, and daily rotation are not built yet.
 
 ## Layout
 

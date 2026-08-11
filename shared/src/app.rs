@@ -49,6 +49,7 @@ impl App for Implore {
                     intention,
                     details,
                     tags,
+                    status: PrayerStatus::Active,
                 });
 
                 render().and(persist_prayers(model))
@@ -62,15 +63,38 @@ impl App for Implore {
                     render().and(persist_prayers(model))
                 }
             }
+            Event::ArchivePrayer { id } => set_status(model, id, PrayerStatus::Archived),
+            Event::UnarchivePrayer { id } => set_status(model, id, PrayerStatus::Active),
+            Event::SetFilter { filter } => {
+                model.filter = filter;
+                render()
+            }
             Event::Persisted(_) => Command::done(),
         }
     }
 
     fn view(&self, model: &Model) -> ViewModel {
         ViewModel {
-            prayers: model.prayers.clone(),
+            filter: model.filter,
+            prayers: model
+                .prayers
+                .iter()
+                .filter(|prayer| model.filter.matches(prayer.status))
+                .cloned()
+                .collect(),
         }
     }
+}
+
+fn set_status(model: &mut Model, id: u64, status: PrayerStatus) -> Command<Effect, Event> {
+    let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
+        return render();
+    };
+    if prayer.status == status {
+        return render();
+    }
+    prayer.status = status;
+    render().and(persist_prayers(model))
 }
 
 fn persist_prayers(model: &Model) -> Command<Effect, Event> {
@@ -98,6 +122,33 @@ fn normalize_tags(tags: Vec<String>) -> Vec<String> {
         .collect()
 }
 
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[repr(C)]
+pub enum PrayerStatus {
+    #[default]
+    Active,
+    Archived,
+}
+
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[repr(C)]
+pub enum IntentionFilter {
+    #[default]
+    Active,
+    Archived,
+    All,
+}
+
+impl IntentionFilter {
+    const fn matches(self, status: PrayerStatus) -> bool {
+        match self {
+            Self::All => true,
+            Self::Active => matches!(status, PrayerStatus::Active),
+            Self::Archived => matches!(status, PrayerStatus::Archived),
+        }
+    }
+}
+
 #[derive(Facet, Serialize, Deserialize, Clone, Debug)]
 #[repr(C)]
 pub enum Event {
@@ -110,6 +161,15 @@ pub enum Event {
     },
     RemovePrayer {
         id: u64,
+    },
+    ArchivePrayer {
+        id: u64,
+    },
+    UnarchivePrayer {
+        id: u64,
+    },
+    SetFilter {
+        filter: IntentionFilter,
     },
     /// Internal: shell finished reading the prayers blob.
     #[serde(skip)]
@@ -125,6 +185,7 @@ pub enum Event {
 pub struct Model {
     prayers: Vec<Prayer>,
     next_id: u64,
+    filter: IntentionFilter,
 }
 
 #[derive(Serialize, Deserialize, Clone, Default)]
@@ -139,10 +200,13 @@ pub struct Prayer {
     pub intention: String,
     pub details: Option<String>,
     pub tags: Vec<String>,
+    #[serde(default)]
+    pub status: PrayerStatus,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Default)]
 pub struct ViewModel {
+    pub filter: IntentionFilter,
     pub prayers: Vec<Prayer>,
 }
 
@@ -156,6 +220,22 @@ pub enum Effect {
 #[cfg(test)]
 mod test {
     use super::*;
+
+    fn prayer(
+        id: u64,
+        intention: &str,
+        details: Option<&str>,
+        tags: &[&str],
+        status: PrayerStatus,
+    ) -> Prayer {
+        Prayer {
+            id,
+            intention: intention.into(),
+            details: details.map(str::to_string),
+            tags: tags.iter().map(|tag| (*tag).into()).collect(),
+            status,
+        }
+    }
 
     fn add(
         app: &Implore,
@@ -194,12 +274,7 @@ mod test {
         let mut model = Model::default();
 
         let stored = StoredPrayers {
-            prayers: vec![Prayer {
-                id: 3,
-                intention: "Mom".into(),
-                details: None,
-                tags: vec![],
-            }],
+            prayers: vec![prayer(3, "Mom", None, &[], PrayerStatus::Active)],
             next_id: 4,
         };
         let bytes = serde_json::to_vec(&stored).unwrap();
@@ -210,13 +285,21 @@ mod test {
         assert_eq!(model.next_id, 4);
         assert_eq!(
             app.view(&model).prayers,
-            vec![Prayer {
-                id: 3,
-                intention: "Mom".into(),
-                details: None,
-                tags: vec![],
-            }]
+            vec![prayer(3, "Mom", None, &[], PrayerStatus::Active)]
         );
+    }
+
+    #[test]
+    fn loads_missing_status_as_active() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let bytes = br#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[]}],"next_id":2}"#;
+
+        app.update(Event::PrayersLoaded(Ok(Some(bytes.to_vec()))), &mut model)
+            .expect_only_render();
+
+        assert_eq!(model.prayers[0].status, PrayerStatus::Active);
     }
 
     #[test]
@@ -245,6 +328,7 @@ mod test {
         let model = Model::default();
 
         assert!(app.view(&model).prayers.is_empty());
+        assert_eq!(app.view(&model).filter, IntentionFilter::Active);
     }
 
     #[test]
@@ -263,12 +347,13 @@ mod test {
 
         assert_eq!(
             app.view(&model).prayers,
-            vec![Prayer {
-                id: 0,
-                intention: "Mom".into(),
-                details: Some("Surgery recovery".into()),
-                tags: vec!["family".into(), "health".into()],
-            }]
+            vec![prayer(
+                0,
+                "Mom",
+                Some("Surgery recovery"),
+                &["family", "health"],
+                PrayerStatus::Active,
+            )]
         );
     }
 
@@ -282,12 +367,7 @@ mod test {
 
         assert_eq!(
             app.view(&model).prayers,
-            vec![Prayer {
-                id: 0,
-                intention: "Mom".into(),
-                details: None,
-                tags: vec![],
-            }]
+            vec![prayer(0, "Mom", None, &[], PrayerStatus::Active)]
         );
     }
 
@@ -318,12 +398,13 @@ mod test {
 
         assert_eq!(
             app.view(&model).prayers,
-            vec![Prayer {
-                id: 0,
-                intention: "Dad".into(),
-                details: Some("recovery".into()),
-                tags: vec!["family".into(), "health".into()],
-            }]
+            vec![prayer(
+                0,
+                "Dad",
+                Some("recovery"),
+                &["family", "health"],
+                PrayerStatus::Active,
+            )]
         );
     }
 
@@ -340,12 +421,7 @@ mod test {
 
         assert_eq!(
             app.view(&model).prayers,
-            vec![Prayer {
-                id: 1,
-                intention: "Dad".into(),
-                details: None,
-                tags: vec![],
-            }]
+            vec![prayer(1, "Dad", None, &[], PrayerStatus::Active)]
         );
     }
 
@@ -361,12 +437,76 @@ mod test {
 
         assert_eq!(
             app.view(&model).prayers,
-            vec![Prayer {
-                id: 0,
-                intention: "Mom".into(),
-                details: None,
-                tags: vec![],
-            }]
+            vec![prayer(0, "Mom", None, &[], PrayerStatus::Active)]
+        );
+    }
+
+    #[test]
+    fn archives_prayer_and_hides_from_active_filter() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = add(&app, &mut model, "Dad", "", &[]);
+
+        let mut cmd = app.update(Event::ArchivePrayer { id: 0 }, &mut model);
+        assert_eq!(cmd.effects().count(), 2);
+
+        assert_eq!(
+            app.view(&model).prayers,
+            vec![prayer(1, "Dad", None, &[], PrayerStatus::Active)]
+        );
+        assert_eq!(model.prayers[0].status, PrayerStatus::Archived);
+    }
+
+    #[test]
+    fn filter_archived_and_all() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = add(&app, &mut model, "Dad", "", &[]);
+        let _ = app.update(Event::ArchivePrayer { id: 0 }, &mut model);
+
+        app.update(
+            Event::SetFilter {
+                filter: IntentionFilter::Archived,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(
+            app.view(&model).prayers,
+            vec![prayer(0, "Mom", None, &[], PrayerStatus::Archived)]
+        );
+
+        app.update(
+            Event::SetFilter {
+                filter: IntentionFilter::All,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(app.view(&model).prayers.len(), 2);
+    }
+
+    #[test]
+    fn unarchives_prayer() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = app.update(Event::ArchivePrayer { id: 0 }, &mut model);
+        assert!(app.view(&model).prayers.is_empty());
+
+        let mut cmd = app.update(Event::UnarchivePrayer { id: 0 }, &mut model);
+        assert_eq!(cmd.effects().count(), 2);
+
+        assert_eq!(
+            app.view(&model).prayers,
+            vec![prayer(0, "Mom", None, &[], PrayerStatus::Active)]
         );
     }
 
@@ -387,6 +527,7 @@ mod test {
                 assert_eq!(stored.next_id, 1);
                 assert_eq!(stored.prayers[0].intention, "Mom");
                 assert_eq!(stored.prayers[0].tags, vec!["family".to_string()]);
+                assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
             });
     }
 }
