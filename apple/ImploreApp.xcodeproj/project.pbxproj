@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0551B0510554C64835B7A27E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC33549E306444FE996F54E /* SettingsView.swift */; };
+		171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
 		8B3033F088C9C5A41B134E16 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 08AC2D01ADA7F6920CE288A4 /* Shared */; };
+		9676580860F1F3269772EF02 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6919AFC91DCFABD766110A09 /* Appearance.swift */; };
 		9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */; };
 		B732D0377E04819944429B06 /* core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C314023CD429346511CA770 /* core.swift */; };
 		BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */; };
@@ -18,8 +21,11 @@
 
 /* Begin PBXFileReference section */
 		01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStore.swift; sourceTree = "<group>"; };
+		1CC33549E306444FE996F54E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		251E98733EC880B827C7660A /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; name = App; path = generated/App; sourceTree = SOURCE_ROOT; };
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6919AFC91DCFABD766110A09 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
 		8C314023CD429346511CA770 /* core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = core.swift; sourceTree = "<group>"; };
 		AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIntentionView.swift; sourceTree = "<group>"; };
@@ -53,10 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */,
+				6919AFC91DCFABD766110A09 /* Appearance.swift */,
 				61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */,
 				8C314023CD429346511CA770 /* core.swift */,
 				88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */,
 				01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */,
+				222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */,
+				1CC33549E306444FE996F54E /* SettingsView.swift */,
 			);
 			path = ImploreApp;
 			sourceTree = "<group>";
@@ -86,6 +95,7 @@
 			buildConfigurationList = 62931CB21BC3A7D7E32EF8E1 /* Build configuration list for PBXNativeTarget "ImploreApp-iOS" */;
 			buildPhases = (
 				E1FF7805A356334DF5F53A4F /* Sources */,
+				055C91EFF310D615D2A00513 /* Resources */,
 				D3446EBF54E8206FDF1F8955 /* Frameworks */,
 			);
 			buildRules = (
@@ -135,15 +145,28 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		055C91EFF310D615D2A00513 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E1FF7805A356334DF5F53A4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */,
+				9676580860F1F3269772EF02 /* Appearance.swift in Sources */,
 				FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */,
 				BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */,
 				9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */,
+				0551B0510554C64835B7A27E /* SettingsView.swift in Sources */,
 				B732D0377E04819944429B06 /* core.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,6 +36,15 @@ struct ContentView: View {
             }
             .navigationTitle("Intentions")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel("Settings")
+                }
+
                 ToolbarItem(placement: .principal) {
                     Picker("Filter", selection: filterBinding) {
                         Text("Active").tag(IntentionFilter.active)
@@ -52,6 +61,7 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .accessibilityLabel("Add Intention")
                 }
             }
         }

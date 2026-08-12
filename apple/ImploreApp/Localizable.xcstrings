@@ -1,0 +1,94 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Active" : {
+      "comment" : "Filter segment for active intentions.",
+      "extractionState" : "manual"
+    },
+    "Add Intention" : {
+      "comment" : "Navigation title for the add-intention form.",
+      "extractionState" : "manual"
+    },
+    "All" : {
+      "comment" : "Filter segment that shows every intention.",
+      "extractionState" : "manual"
+    },
+    "Appearance" : {
+      "comment" : "Settings picker for light, dark, or system color scheme.",
+      "extractionState" : "manual"
+    },
+    "Archive" : {
+      "comment" : "Swipe action that archives an intention.",
+      "extractionState" : "manual"
+    },
+    "Archived" : {
+      "comment" : "Filter segment and status caption for archived intentions.",
+      "extractionState" : "manual"
+    },
+    "Dark" : {
+      "comment" : "Appearance option that always uses dark mode.",
+      "extractionState" : "manual"
+    },
+    "Delete" : {
+      "comment" : "Swipe action that deletes an intention.",
+      "extractionState" : "manual"
+    },
+    "Details" : {
+      "comment" : "Section header and field label for optional intention details.",
+      "extractionState" : "manual"
+    },
+    "family, health" : {
+      "comment" : "Placeholder example for the comma-separated tags field.",
+      "extractionState" : "manual"
+    },
+    "Filter" : {
+      "comment" : "Accessibility label for the Active/Archived/All picker.",
+      "extractionState" : "manual"
+    },
+    "Intention" : {
+      "comment" : "Text field label for the required intention name.",
+      "extractionState" : "manual"
+    },
+    "Intentions" : {
+      "comment" : "Navigation title for the main intention list.",
+      "extractionState" : "manual"
+    },
+    "Light" : {
+      "comment" : "Appearance option that always uses light mode.",
+      "extractionState" : "manual"
+    },
+    "Optional note about this intention." : {
+      "comment" : "Footer under the details field.",
+      "extractionState" : "manual"
+    },
+    "Optional. Separate tags with commas." : {
+      "comment" : "Footer under the tags field.",
+      "extractionState" : "manual"
+    },
+    "Save" : {
+      "comment" : "Toolbar button that saves a new intention.",
+      "extractionState" : "manual"
+    },
+    "Settings" : {
+      "comment" : "Navigation title and toolbar accessibility label for settings.",
+      "extractionState" : "manual"
+    },
+    "System" : {
+      "comment" : "Appearance option that follows the device color scheme.",
+      "extractionState" : "manual"
+    },
+    "Tags" : {
+      "comment" : "Section header for optional tags.",
+      "extractionState" : "manual"
+    },
+    "Unarchive" : {
+      "comment" : "Swipe action that restores an archived intention.",
+      "extractionState" : "manual"
+    },
+    "Version" : {
+      "comment" : "Settings row label for the app version.",
+      "extractionState" : "manual"
+    }
+  },
+  "version" : "1.0"
+}

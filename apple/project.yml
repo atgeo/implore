@@ -6,6 +6,7 @@ packages:
     path: ./generated/App
 options:
   bundleIdPrefix: com.atgeo.implore
+  developmentLanguage: en
 attributes:
   BuildIndependentTargetsInParallel: true
 
