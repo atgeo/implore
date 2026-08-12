@@ -27,6 +27,9 @@ targets:
     scheme:
       management:
         shared: true
+    settings:
+      MARKETING_VERSION: ${CARGO_PKG_VERSION}
+      CURRENT_PROJECT_VERSION: 1
     dependencies:
       - package: Shared
       - package: App

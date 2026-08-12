@@ -1,3 +1,6 @@
+# Marketing version from [workspace.package] in the root Cargo.toml.
+version := `cargo pkgid --manifest-path ../Cargo.toml -p shared | sed 's/.*#//'`
+
 # generates Swift types via codegen binary
 typegen:
     cargo run --package shared --bin codegen \
@@ -10,7 +13,7 @@ package:
 
 # rebuilds the Xcode project from project.yml
 generate-project:
-    xcodegen
+    CARGO_PKG_VERSION={{version}} xcodegen
 
 # generates types, builds shared package, and regenerates Xcode project
 generate: typegen package generate-project

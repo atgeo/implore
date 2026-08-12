@@ -15,6 +15,9 @@ use crate::reminder::{self, CivilDateTime, ReminderDigest, DIGEST_HORIZON_DAYS};
 
 const PRAYERS_KEY: &str = "prayers";
 
+/// Marketing version from the workspace package (`CARGO_PKG_VERSION`).
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 impl App for Implore {
     type Event = Event;
     type Model = Model;
@@ -182,6 +185,7 @@ impl App for Implore {
         };
 
         ViewModel {
+            version: VERSION.to_string(),
             filter: model.filter,
             prayers: model
                 .prayers
@@ -413,14 +417,29 @@ pub struct Prayer {
     pub prayed_on: Vec<PrayerLogEntry>,
 }
 
-#[derive(Facet, Serialize, Deserialize, Clone, Default)]
+#[derive(Facet, Serialize, Deserialize, Clone)]
 pub struct ViewModel {
+    /// Workspace crate version (`CARGO_PKG_VERSION`).
+    pub version: String,
     pub filter: IntentionFilter,
     pub prayers: Vec<Prayer>,
     /// Active intentions with a schedule, for local reminder digests (ignore list filter).
     pub reminder_prayers: Vec<Prayer>,
     pub reminder_settings: ReminderSettings,
     pub reminder_digests: Vec<ReminderDigest>,
+}
+
+impl Default for ViewModel {
+    fn default() -> Self {
+        Self {
+            version: VERSION.to_string(),
+            filter: IntentionFilter::default(),
+            prayers: Vec::new(),
+            reminder_prayers: Vec::new(),
+            reminder_settings: ReminderSettings::default(),
+            reminder_digests: Vec::new(),
+        }
+    }
 }
 
 #[effect(facet_typegen)]
@@ -551,6 +570,7 @@ mod test {
 
         assert!(app.view(&model).prayers.is_empty());
         assert_eq!(app.view(&model).filter, IntentionFilter::Active);
+        assert_eq!(app.view(&model).version, VERSION);
     }
 
     #[test]
