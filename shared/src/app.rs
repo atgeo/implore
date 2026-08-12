@@ -34,6 +34,7 @@ impl App for Implore {
                 intention,
                 details,
                 tags,
+                cadence,
             } => {
                 let intention = intention.trim().to_string();
                 if intention.is_empty() {
@@ -50,6 +51,7 @@ impl App for Implore {
                     details,
                     tags,
                     status: PrayerStatus::Active,
+                    cadence,
                 });
 
                 render().and(persist_prayers(model))
@@ -149,6 +151,16 @@ impl IntentionFilter {
     }
 }
 
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[repr(C)]
+pub enum IntentionCadence {
+    #[default]
+    Unscheduled,
+    Daily,
+    Weekly,
+    Monthly,
+}
+
 #[derive(Facet, Serialize, Deserialize, Clone, Debug)]
 #[repr(C)]
 pub enum Event {
@@ -158,6 +170,7 @@ pub enum Event {
         intention: String,
         details: String,
         tags: Vec<String>,
+        cadence: IntentionCadence,
     },
     RemovePrayer {
         id: u64,
@@ -202,6 +215,8 @@ pub struct Prayer {
     pub tags: Vec<String>,
     #[serde(default)]
     pub status: PrayerStatus,
+    #[serde(default)]
+    pub cadence: IntentionCadence,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Default)]
@@ -234,6 +249,7 @@ mod test {
             details: details.map(str::to_string),
             tags: tags.iter().map(|tag| (*tag).into()).collect(),
             status,
+            cadence: IntentionCadence::Unscheduled,
         }
     }
 
@@ -244,11 +260,30 @@ mod test {
         details: &str,
         tags: &[&str],
     ) -> Command<Effect, Event> {
+        add_with_cadence(
+            app,
+            model,
+            intention,
+            details,
+            tags,
+            IntentionCadence::Unscheduled,
+        )
+    }
+
+    fn add_with_cadence(
+        app: &Implore,
+        model: &mut Model,
+        intention: &str,
+        details: &str,
+        tags: &[&str],
+        cadence: IntentionCadence,
+    ) -> Command<Effect, Event> {
         app.update(
             Event::AddPrayer {
                 intention: intention.into(),
                 details: details.into(),
                 tags: tags.iter().map(|tag| (*tag).into()).collect(),
+                cadence,
             },
             model,
         )
@@ -294,12 +329,27 @@ mod test {
         let app = Implore;
         let mut model = Model::default();
 
-        let bytes = br#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[]}],"next_id":2}"#;
+        let bytes =
+            br#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[]}],"next_id":2}"#;
 
         app.update(Event::PrayersLoaded(Ok(Some(bytes.to_vec()))), &mut model)
             .expect_only_render();
 
         assert_eq!(model.prayers[0].status, PrayerStatus::Active);
+        assert_eq!(model.prayers[0].cadence, IntentionCadence::Unscheduled);
+    }
+
+    #[test]
+    fn loads_missing_cadence_as_unscheduled() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let bytes = br#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[],"status":"Active"}],"next_id":2}"#;
+
+        app.update(Event::PrayersLoaded(Ok(Some(bytes.to_vec()))), &mut model)
+            .expect_only_render();
+
+        assert_eq!(model.prayers[0].cadence, IntentionCadence::Unscheduled);
     }
 
     #[test]
@@ -528,6 +578,35 @@ mod test {
                 assert_eq!(stored.prayers[0].intention, "Mom");
                 assert_eq!(stored.prayers[0].tags, vec!["family".to_string()]);
                 assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
+                assert_eq!(stored.prayers[0].cadence, IntentionCadence::Unscheduled);
+            });
+    }
+
+    #[test]
+    fn adds_and_persists_daily_and_monthly_cadence() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.prayers[0].cadence, IntentionCadence::Daily);
+            });
+
+        assert_eq!(app.view(&model).prayers[0].cadence, IntentionCadence::Daily);
+
+        add_with_cadence(&app, &mut model, "Dad", "", &[], IntentionCadence::Monthly)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.prayers[1].cadence, IntentionCadence::Monthly);
             });
     }
 }

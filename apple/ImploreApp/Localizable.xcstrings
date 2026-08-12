@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "A person, family, or cause to pray for." : {
+      "comment" : "Footer under the intention name field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A person, family, or cause to pray for."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una persona, familia o causa por la que orar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une personne, une famille ou une cause à confier."
+          }
+        }
+      }
+    },
+    "A private note for this prayer." : {
+      "comment" : "Footer under the details field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A private note for this prayer."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una nota privada para esta oración."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une note privée pour cette prière."
+          }
+        }
+      }
+    },
     "Active" : {
       "comment" : "Filter segment for active intentions.",
       "extractionState" : "manual",
@@ -45,6 +93,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajouter une intention"
+          }
+        }
+      }
+    },
+    "Add someone you are carrying in prayer." : {
+      "comment" : "Empty-state description when the Active or All list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add someone you are carrying in prayer."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade a alguien que llevas en oración."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez quelqu’un que vous portez dans la prière."
           }
         }
       }
@@ -145,6 +217,30 @@
         }
       }
     },
+    "Daily" : {
+      "comment" : "Cadence option and list caption for a daily intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diaria"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quotidienne"
+          }
+        }
+      }
+    },
     "Dark" : {
       "comment" : "Appearance option that always uses dark mode.",
       "extractionState" : "manual",
@@ -217,26 +313,26 @@
         }
       }
     },
-    "family, health" : {
+    "family, sick, holy souls" : {
       "comment" : "Placeholder example for the comma-separated tags field.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "family, health"
+            "value" : "family, sick, holy souls"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "familia, salud"
+            "value" : "familia, enfermos, ánimas"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "famille, santé"
+            "value" : "famille, malades, âmes du purgatoire"
           }
         }
       }
@@ -265,8 +361,32 @@
         }
       }
     },
+    "How often you hope to pray this." : {
+      "comment" : "Footer under the schedule picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How often you hope to pray this."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con qué frecuencia esperas orar por esto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À quelle fréquence vous espérez prier pour cela."
+          }
+        }
+      }
+    },
     "Intention" : {
-      "comment" : "Text field label for the required intention name.",
+      "comment" : "Section header for the required intention name.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -309,6 +429,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Intentions"
+          }
+        }
+      }
+    },
+    "Intentions you set aside will appear here." : {
+      "comment" : "Empty-state description when the Archived list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intentions you set aside will appear here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las intenciones que apartes aparecerán aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les intentions mises de côté apparaîtront ici."
           }
         }
       }
@@ -361,50 +505,122 @@
         }
       }
     },
-    "Optional note about this intention." : {
-      "comment" : "Footer under the details field.",
+    "Monthly" : {
+      "comment" : "Cadence option and list caption for a monthly intention.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Optional note about this intention."
+            "value" : "Monthly"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nota opcional sobre esta intención."
+            "value" : "Mensual"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Note facultative sur cette intention."
+            "value" : "Mensuelle"
           }
         }
       }
     },
-    "Optional. Separate tags with commas." : {
+    "No intentions yet" : {
+      "comment" : "Empty-state title when the Active or All list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No intentions yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay intenciones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore d’intentions"
+          }
+        }
+      }
+    },
+    "No schedule" : {
+      "comment" : "Cadence option for an intention with no schedule.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No schedule"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin ritmo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans rythme"
+          }
+        }
+      }
+    },
+    "Nothing set aside" : {
+      "comment" : "Empty-state title when the Archived list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing set aside"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nada apartado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien de mis de côté"
+          }
+        }
+      }
+    },
+    "Optional. Separate with commas." : {
       "comment" : "Footer under the tags field.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Optional. Separate tags with commas."
+            "value" : "Optional. Separate with commas."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opcional. Separe las etiquetas con comas."
+            "value" : "Opcional. Separe con comas."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Facultatif. Séparez les étiquettes par des virgules."
+            "value" : "Facultatif. Séparez par des virgules."
           }
         }
       }
@@ -433,6 +649,30 @@
         }
       }
     },
+    "Schedule" : {
+      "comment" : "Section header and picker label for intention cadence.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ritmo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rythme"
+          }
+        }
+      }
+    },
     "Settings" : {
       "comment" : "Navigation title and toolbar accessibility label for settings.",
       "extractionState" : "manual",
@@ -453,6 +693,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réglages"
+          }
+        }
+      }
+    },
+    "Someone you are carrying" : {
+      "comment" : "Placeholder for the required intention name field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Someone you are carrying"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alguien que llevas en oración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelqu’un que vous portez"
           }
         }
       }
@@ -549,6 +813,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        }
+      }
+    },
+    "Weekly" : {
+      "comment" : "Cadence option and list caption for a weekly intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semanal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hebdomadaire"
           }
         }
       }

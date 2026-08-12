@@ -7,31 +7,41 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(core.view.prayers, id: \.id) { prayer in
-                    IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                core.update(.removePrayer(id: prayer.id))
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
+                if core.view.prayers.isEmpty {
+                    ContentUnavailableView(
+                        emptyTitle,
+                        systemImage: "heart",
+                        description: Text(emptyDescription)
+                    )
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                } else {
+                    ForEach(core.view.prayers, id: \.id) { prayer in
+                        IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    core.update(.removePrayer(id: prayer.id))
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
 
-                            if prayer.status == .active {
-                                Button {
-                                    core.update(.archivePrayer(id: prayer.id))
-                                } label: {
-                                    Label("Archive", systemImage: "archivebox")
+                                if prayer.status == .active {
+                                    Button {
+                                        core.update(.archivePrayer(id: prayer.id))
+                                    } label: {
+                                        Label("Archive", systemImage: "archivebox")
+                                    }
+                                    .tint(.orange)
+                                } else {
+                                    Button {
+                                        core.update(.unarchivePrayer(id: prayer.id))
+                                    } label: {
+                                        Label("Unarchive", systemImage: "tray.and.arrow.up")
+                                    }
+                                    .tint(.blue)
                                 }
-                                .tint(.orange)
-                            } else {
-                                Button {
-                                    core.update(.unarchivePrayer(id: prayer.id))
-                                } label: {
-                                    Label("Unarchive", systemImage: "tray.and.arrow.up")
-                                }
-                                .tint(.blue)
                             }
-                        }
+                    }
                 }
             }
             .navigationTitle("Intentions")
@@ -73,6 +83,16 @@ struct ContentView: View {
             set: { core.update(.setFilter(filter: $0)) }
         )
     }
+
+    private var emptyTitle: LocalizedStringKey {
+        core.view.filter == .archived ? "Nothing set aside" : "No intentions yet"
+    }
+
+    private var emptyDescription: LocalizedStringKey {
+        core.view.filter == .archived
+            ? "Intentions you set aside will appear here."
+            : "Add someone you are carrying in prayer."
+    }
 }
 
 struct IntentionRow: View {
@@ -104,9 +124,24 @@ struct IntentionRow: View {
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
+
+            if let cadence = cadenceLabel {
+                Text(cadence)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(.vertical, 2)
         .opacity(prayer.status == .archived ? 0.7 : 1)
+    }
+
+    private var cadenceLabel: LocalizedStringKey? {
+        switch prayer.cadence {
+        case .unscheduled: nil
+        case .daily: "Daily"
+        case .weekly: "Weekly"
+        case .monthly: "Monthly"
+        }
     }
 }
 

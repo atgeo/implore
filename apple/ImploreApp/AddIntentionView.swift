@@ -8,6 +8,7 @@ struct AddIntentionView: View {
     @State private var intention = ""
     @State private var details = ""
     @State private var tagsText = ""
+    @State private var cadence = IntentionCadence.unscheduled
 
     private var canSave: Bool {
         !intention.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -16,7 +17,11 @@ struct AddIntentionView: View {
     var body: some View {
         Form {
             Section {
-                TextField("Intention", text: $intention)
+                TextField("Someone you are carrying", text: $intention)
+            } header: {
+                Text("Intention")
+            } footer: {
+                Text("A person, family, or cause to pray for.")
             }
 
             Section {
@@ -25,17 +30,28 @@ struct AddIntentionView: View {
             } header: {
                 Text("Details")
             } footer: {
-                Text("Optional note about this intention.")
+                Text("A private note for this prayer.")
             }
 
             Section {
-                TextField("family, health", text: $tagsText)
+                TextField("family, sick, holy souls", text: $tagsText)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
             } header: {
                 Text("Tags")
             } footer: {
-                Text("Optional. Separate tags with commas.")
+                Text("Optional. Separate with commas.")
+            }
+
+            Section {
+                Picker("Schedule", selection: $cadence) {
+                    Text("No schedule").tag(IntentionCadence.unscheduled)
+                    Text("Daily").tag(IntentionCadence.daily)
+                    Text("Weekly").tag(IntentionCadence.weekly)
+                    Text("Monthly").tag(IntentionCadence.monthly)
+                }
+            } footer: {
+                Text("How often you hope to pray this.")
             }
         }
         .navigationTitle("Add Intention")
@@ -57,7 +73,8 @@ struct AddIntentionView: View {
             .addPrayer(
                 intention: intention,
                 details: details,
-                tags: tags
+                tags: tags,
+                cadence: cadence
             )
         )
         dismiss()
