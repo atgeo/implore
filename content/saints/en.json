@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "locale": "en",
+  "saints": [
+    {
+      "id": "st-joseph",
+      "name": "St. Joseph",
+      "feast": "03-19",
+      "patronage": ["workers", "fathers", "the Church"],
+      "summary": "Spouse of the Blessed Virgin Mary and guardian of the Holy Family."
+    },
+    {
+      "id": "st-mary",
+      "name": "Blessed Virgin Mary",
+      "feast": "01-01",
+      "patronage": ["all humanity", "mothers", "the sick"],
+      "summary": "Mother of God and our spiritual mother."
+    },
+    {
+      "id": "st-michael",
+      "name": "St. Michael the Archangel",
+      "feast": "09-29",
+      "patronage": ["police", "soldiers", "the sick"],
+      "summary": "Leader of the heavenly armies and protector against evil."
+    },
+    {
+      "id": "st-anthony-of-padua",
+      "name": "St. Anthony of Padua",
+      "feast": "06-13",
+      "patronage": ["lost things", "the poor", "travelers"],
+      "summary": "Franciscan preacher and Doctor of the Church."
+    },
+    {
+      "id": "st-therese-of-lisieux",
+      "name": "St. Thérèse of Lisieux",
+      "feast": "10-01",
+      "patronage": ["missionaries", "florists", "the sick"],
+      "summary": "Carmelite nun who taught the Little Way of trust and love."
+    },
+    {
+      "id": "st-francis-of-assisi",
+      "name": "St. Francis of Assisi",
+      "feast": "10-04",
+      "patronage": ["animals", "ecology", "merchants"],
+      "summary": "Founder of the Franciscans and lover of poverty and creation."
+    },
+    {
+      "id": "st-jude",
+      "name": "St. Jude Thaddeus",
+      "feast": "10-28",
+      "patronage": ["hopeless causes", "desperate situations"],
+      "summary": "Apostle and patron of difficult and desperate cases."
+    },
+    {
+      "id": "st-peregrine",
+      "name": "St. Peregrine Laziosi",
+      "feast": "05-01",
+      "patronage": ["cancer patients", "the sick"],
+      "summary": "Servite saint invoked for healing, especially from cancer."
+    },
+    {
+      "id": "st-rita-of-cascia",
+      "name": "St. Rita of Cascia",
+      "feast": "05-22",
+      "patronage": ["impossible causes", "marriage", "abused wives"],
+      "summary": "Augustinian nun known as the saint of the impossible."
+    },
+    {
+      "id": "st-gerard-majella",
+      "name": "St. Gerard Majella",
+      "feast": "10-16",
+      "patronage": ["expectant mothers", "families"],
+      "summary": "Redemptorist brother invoked for safe childbirth and motherhood."
+    },
+    {
+      "id": "st-padre-pio",
+      "name": "St. Pio of Pietrelcina",
+      "feast": "09-23",
+      "patronage": ["stress relief", "civil defense volunteers"],
+      "summary": "Capuchin friar known for his stigmata and ministry in the confessional."
+    },
+    {
+      "id": "st-joan-of-arc",
+      "name": "St. Joan of Arc",
+      "feast": "05-30",
+      "patronage": ["France", "soldiers", "prisoners"],
+      "summary": "Virgin and martyr who led France to victory and remained faithful unto death."
+    }
+  ]
+}

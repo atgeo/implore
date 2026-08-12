@@ -997,6 +997,30 @@
         }
       }
     },
+    "None" : {
+      "comment" : "No saint selected in the saint picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguno"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        }
+      }
+    },
     "Nothing set aside" : {
       "comment" : "Empty-state title when the Archived list has no intentions.",
       "extractionState" : "manual",
@@ -1089,6 +1113,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir Réglages"
+          }
+        }
+      }
+    },
+    "Optional. Ask this saint to pray with you." : {
+      "comment" : "Footer under the optional saint picker on add/edit intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional. Ask this saint to pray with you."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcional. Pida a este santo que ore con usted."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif. Demandez à ce saint de prier avec vous."
           }
         }
       }
@@ -1213,6 +1261,30 @@
         }
       }
     },
+    "Saint" : {
+      "comment" : "Section header and navigation title for saint association.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saint"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saint"
+          }
+        }
+      }
+    },
     "Save" : {
       "comment" : "Toolbar button that saves a new intention.",
       "extractionState" : "manual",
@@ -1257,6 +1329,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rythme"
+          }
+        }
+      }
+    },
+    "Search saints" : {
+      "comment" : "Search field placeholder in the saint picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search saints"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar santos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher un saint"
           }
         }
       }

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct AddIntentionView: View {
     @ObservedObject var core: Core
+    @ObservedObject private var saintsCatalog = SaintsCatalog.shared
     @Environment(\.dismiss) private var dismiss
 
     private let prayer: Prayer?
@@ -12,6 +13,7 @@ struct AddIntentionView: View {
     @State private var tags: [String]
     @State private var tagDraft: String = ""
     @State private var cadence: IntentionCadence
+    @State private var saintId: String?
 
     init(core: Core, prayer: Prayer? = nil) {
         self.core = core
@@ -20,12 +22,20 @@ struct AddIntentionView: View {
         _details = State(initialValue: prayer?.details ?? "")
         _tags = State(initialValue: prayer?.tags ?? [])
         _cadence = State(initialValue: prayer?.cadence ?? .unscheduled)
+        _saintId = State(initialValue: prayer?.saintId)
     }
 
     private var isEditing: Bool { prayer != nil }
 
     private var canSave: Bool {
         !intention.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    private var selectedSaintLabel: String {
+        if let saintId, let saint = saintsCatalog.saint(for: saintId) {
+            return saint.name
+        }
+        return String(localized: "None")
     }
 
     var body: some View {
@@ -53,6 +63,24 @@ struct AddIntentionView: View {
                 Text("Tags")
             } footer: {
                 Text("Optional. Type a tag and press return.")
+            }
+
+            Section {
+                NavigationLink {
+                    SaintPickerView(
+                        catalog: saintsCatalog,
+                        selection: $saintId
+                    )
+                } label: {
+                    HStack {
+                        Text("Saint")
+                        Spacer()
+                        Text(selectedSaintLabel)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            } footer: {
+                Text("Optional. Ask this saint to pray with you.")
             }
 
             if prayer?.status != .archived {
@@ -87,7 +115,8 @@ struct AddIntentionView: View {
                     intention: intention,
                     details: details,
                     tags: tags,
-                    cadence: cadence
+                    cadence: cadence,
+                    saintId: saintId ?? ""
                 )
             )
         } else {
@@ -96,7 +125,8 @@ struct AddIntentionView: View {
                     intention: intention,
                     details: details,
                     tags: tags,
-                    cadence: cadence
+                    cadence: cadence,
+                    saintId: saintId ?? ""
                 )
             )
         }
@@ -288,6 +318,7 @@ private struct FlowLayout: Layout {
                 tags: ["family", "sick"],
                 status: .active,
                 cadence: .daily,
+                saintId: "st-joseph",
                 prayedOn: []
             )
         )

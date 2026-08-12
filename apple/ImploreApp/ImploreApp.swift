@@ -14,7 +14,11 @@ struct ImploreApp: App {
                 .appLocale(language)
                 .task {
                     LocalTimeSync.sync(to: core)
+                    SaintsCatalog.shared.load(for: language)
                     await syncReminders()
+                }
+                .onChange(of: language) { _, newLanguage in
+                    SaintsCatalog.shared.load(for: newLanguage)
                 }
                 .onChange(of: core.view.reminderDigests) { _, _ in
                     Task { await syncReminders() }

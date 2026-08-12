@@ -3,6 +3,7 @@ import SwiftUI
 
 struct IntentionDetailView: View {
     @ObservedObject var core: Core
+    @ObservedObject private var saintsCatalog = SaintsCatalog.shared
 
     @Environment(\.locale) private var locale
 
@@ -41,6 +42,21 @@ struct IntentionDetailView: View {
                         .foregroundStyle(.secondary)
                 } header: {
                     Text("Tags")
+                }
+            }
+
+            if let saint = saintsCatalog.saint(for: prayer.saintId) {
+                Section {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(saint.name)
+                        if let summary = saint.summary, !summary.isEmpty {
+                            Text(summary)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                } header: {
+                    Text("Saint")
                 }
             }
 
@@ -248,6 +264,7 @@ private struct PrayerLogAction: View {
                 tags: ["family", "health"],
                 status: .active,
                 cadence: .daily,
+                saintId: "st-joseph",
                 prayedOn: [
                     PrayerLogEntry(year: 2025, month: 12, day: 24, hour: 22, minute: 5),
                     PrayerLogEntry(year: 2026, month: 8, day: 10, hour: 7, minute: 40),
@@ -270,6 +287,7 @@ private struct PrayerLogAction: View {
                 tags: ["family", "health"],
                 status: .active,
                 cadence: .daily,
+                saintId: nil,
                 prayedOn: []
             )
         )

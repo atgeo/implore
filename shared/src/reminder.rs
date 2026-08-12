@@ -184,6 +184,7 @@ mod tests {
             tags: vec![],
             status: PrayerStatus::Active,
             cadence,
+            saint_id: None,
             prayed_on: Vec::new(),
         }
     }

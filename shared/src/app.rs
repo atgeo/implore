@@ -42,6 +42,7 @@ impl App for Implore {
                 details,
                 tags,
                 cadence,
+                saint_id,
             } => {
                 let intention = intention.trim().to_string();
                 if intention.is_empty() {
@@ -49,6 +50,7 @@ impl App for Implore {
                 }
 
                 let details = trim_optional(details);
+                let saint_id = trim_optional(saint_id);
                 let tags = normalize_tags(tags);
                 let id = model.next_id;
                 model.next_id += 1;
@@ -59,6 +61,7 @@ impl App for Implore {
                     tags,
                     status: PrayerStatus::Active,
                     cadence,
+                    saint_id,
                     prayed_on: Vec::new(),
                 });
 
@@ -70,6 +73,7 @@ impl App for Implore {
                 details,
                 tags,
                 cadence,
+                saint_id,
             } => {
                 let intention = intention.trim().to_string();
                 if intention.is_empty() {
@@ -77,6 +81,7 @@ impl App for Implore {
                 }
 
                 let details = trim_optional(details);
+                let saint_id = trim_optional(saint_id);
                 let tags = normalize_tags(tags);
                 let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
                     return render();
@@ -85,6 +90,7 @@ impl App for Implore {
                     && prayer.details == details
                     && prayer.tags == tags
                     && prayer.cadence == cadence
+                    && prayer.saint_id == saint_id
                 {
                     return render();
                 }
@@ -93,6 +99,7 @@ impl App for Implore {
                 prayer.details = details;
                 prayer.tags = tags;
                 prayer.cadence = cadence;
+                prayer.saint_id = saint_id;
                 render().and(persist_prayers(model))
             }
             Event::RemovePrayer { id } => {
@@ -320,6 +327,7 @@ pub enum Event {
         details: String,
         tags: Vec<String>,
         cadence: IntentionCadence,
+        saint_id: String,
     },
     UpdatePrayer {
         id: u64,
@@ -327,6 +335,7 @@ pub enum Event {
         details: String,
         tags: Vec<String>,
         cadence: IntentionCadence,
+        saint_id: String,
     },
     RemovePrayer {
         id: u64,
@@ -414,6 +423,8 @@ pub struct Prayer {
     pub tags: Vec<String>,
     pub status: PrayerStatus,
     pub cadence: IntentionCadence,
+    #[serde(default)]
+    pub saint_id: Option<String>,
     pub prayed_on: Vec<PrayerLogEntry>,
 }
 
@@ -467,6 +478,7 @@ mod test {
             tags: tags.iter().map(|tag| (*tag).into()).collect(),
             status,
             cadence: IntentionCadence::Unscheduled,
+            saint_id: None,
             prayed_on: Vec::new(),
         }
     }
@@ -502,6 +514,7 @@ mod test {
                 details: details.into(),
                 tags: tags.iter().map(|tag| (*tag).into()).collect(),
                 cadence,
+                saint_id: String::new(),
             },
             model,
         )
@@ -553,6 +566,22 @@ mod test {
 
         assert!(app.view(&model).prayers.is_empty());
         assert_eq!(model.next_id, 0);
+    }
+
+    #[test]
+    fn loads_persisted_prayers_without_saint_id_field() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let legacy = r#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[],"status":"Active","cadence":"Unscheduled","prayed_on":[]}],"next_id":2,"reminder_settings":{"enabled":false,"hour":8,"minute":0}}"#;
+        app.update(
+            Event::PrayersLoaded(Ok(Some(legacy.as_bytes().to_vec()))),
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(app.view(&model).prayers.len(), 1);
+        assert_eq!(app.view(&model).prayers[0].saint_id, None);
     }
 
     #[test]
@@ -870,6 +899,7 @@ mod test {
                 details: "  recovery  ".into(),
                 tags: vec!["  health  ".into(), "  ".into()],
                 cadence: IntentionCadence::Weekly,
+                saint_id: "st-joseph".into(),
             },
             &mut model,
         )
@@ -884,6 +914,10 @@ mod test {
             assert_eq!(stored.prayers[0].tags, vec!["health".to_string()]);
             assert_eq!(stored.prayers[0].cadence, IntentionCadence::Weekly);
             assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
+            assert_eq!(
+                stored.prayers[0].saint_id.as_deref(),
+                Some("st-joseph")
+            );
         });
 
         assert_eq!(
@@ -895,6 +929,7 @@ mod test {
                 tags: vec!["health".into()],
                 status: PrayerStatus::Active,
                 cadence: IntentionCadence::Weekly,
+                saint_id: Some("st-joseph".into()),
                 prayed_on: Vec::new(),
             }
         );
@@ -1014,6 +1049,7 @@ mod test {
                 details: "note".into(),
                 tags: vec![],
                 cadence: IntentionCadence::Daily,
+                saint_id: String::new(),
             },
             &mut model,
         )
@@ -1026,6 +1062,7 @@ mod test {
                 details: String::new(),
                 tags: vec![],
                 cadence: IntentionCadence::Daily,
+                saint_id: String::new(),
             },
             &mut model,
         )
