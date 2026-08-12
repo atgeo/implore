@@ -337,26 +337,26 @@
         }
       }
     },
-    "family, sick, holy souls" : {
-      "comment" : "Placeholder example for the comma-separated tags field.",
+    "Add a tag" : {
+      "comment" : "Placeholder for the tag draft field.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "family, sick, holy souls"
+            "value" : "Add a tag"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "familia, enfermos, ánimas"
+            "value" : "Añadir una etiqueta"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "famille, malades, âmes du purgatoire"
+            "value" : "Ajouter une étiquette"
           }
         }
       }
@@ -625,26 +625,26 @@
         }
       }
     },
-    "Optional. Separate with commas." : {
-      "comment" : "Footer under the tags field.",
+    "Optional. Type a tag and press return." : {
+      "comment" : "Footer under the tags chip editor.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Optional. Separate with commas."
+            "value" : "Optional. Type a tag and press return."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opcional. Separe con comas."
+            "value" : "Opcional. Escriba una etiqueta y pulse retorno."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Facultatif. Séparez par des virgules."
+            "value" : "Facultatif. Saisissez une étiquette et appuyez sur retour."
           }
         }
       }
