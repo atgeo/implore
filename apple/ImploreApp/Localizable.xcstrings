@@ -97,6 +97,30 @@
         }
       }
     },
+    "Edit Intention" : {
+      "comment" : "Navigation title for the edit-intention form.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Intention"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar intención"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier l’intention"
+          }
+        }
+      }
+    },
     "Add someone you are carrying in prayer." : {
       "comment" : "Empty-state description when the Active or All list has no intentions.",
       "extractionState" : "manual",

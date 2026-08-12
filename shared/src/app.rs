@@ -56,6 +56,37 @@ impl App for Implore {
 
                 render().and(persist_prayers(model))
             }
+            Event::UpdatePrayer {
+                id,
+                intention,
+                details,
+                tags,
+                cadence,
+            } => {
+                let intention = intention.trim().to_string();
+                if intention.is_empty() {
+                    return render();
+                }
+
+                let details = trim_optional(details);
+                let tags = normalize_tags(tags);
+                let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
+                    return render();
+                };
+                if prayer.intention == intention
+                    && prayer.details == details
+                    && prayer.tags == tags
+                    && prayer.cadence == cadence
+                {
+                    return render();
+                }
+
+                prayer.intention = intention;
+                prayer.details = details;
+                prayer.tags = tags;
+                prayer.cadence = cadence;
+                render().and(persist_prayers(model))
+            }
             Event::RemovePrayer { id } => {
                 let before = model.prayers.len();
                 model.prayers.retain(|prayer| prayer.id != id);
@@ -167,6 +198,13 @@ pub enum Event {
     /// Load persisted prayers from the shell key-value store.
     Restore,
     AddPrayer {
+        intention: String,
+        details: String,
+        tags: Vec<String>,
+        cadence: IntentionCadence,
+    },
+    UpdatePrayer {
+        id: u64,
         intention: String,
         details: String,
         tags: Vec<String>,
@@ -608,5 +646,83 @@ mod test {
                 let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
                 assert_eq!(stored.prayers[1].cadence, IntentionCadence::Monthly);
             });
+    }
+
+    #[test]
+    fn updates_prayer_fields_and_cadence() {
+        let app = Implore;
+        let mut model = Model::default();
+        let _ = add(&app, &mut model, "Mom", "", &["family"]);
+
+        app.update(
+            Event::UpdatePrayer {
+                id: 0,
+                intention: "  Dad  ".into(),
+                details: "  recovery  ".into(),
+                tags: vec!["  health  ".into(), "  ".into()],
+                cadence: IntentionCadence::Weekly,
+            },
+            &mut model,
+        )
+        .expect_render()
+        .expect_key_value_with(|op| {
+            let KeyValueOperation::Set { value, .. } = op else {
+                panic!("expected KeyValue set effect");
+            };
+            let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+            assert_eq!(stored.prayers[0].intention, "Dad");
+            assert_eq!(stored.prayers[0].details.as_deref(), Some("recovery"));
+            assert_eq!(stored.prayers[0].tags, vec!["health".to_string()]);
+            assert_eq!(stored.prayers[0].cadence, IntentionCadence::Weekly);
+            assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
+        });
+
+        assert_eq!(
+            app.view(&model).prayers[0],
+            Prayer {
+                id: 0,
+                intention: "Dad".into(),
+                details: Some("recovery".into()),
+                tags: vec!["health".into()],
+                status: PrayerStatus::Active,
+                cadence: IntentionCadence::Weekly,
+            }
+        );
+    }
+
+    #[test]
+    fn update_empty_intention_or_unknown_id_is_noop() {
+        let app = Implore;
+        let mut model = Model::default();
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+
+        app.update(
+            Event::UpdatePrayer {
+                id: 0,
+                intention: "   ".into(),
+                details: "note".into(),
+                tags: vec![],
+                cadence: IntentionCadence::Daily,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        app.update(
+            Event::UpdatePrayer {
+                id: 99,
+                intention: "Dad".into(),
+                details: String::new(),
+                tags: vec![],
+                cadence: IntentionCadence::Daily,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(
+            app.view(&model).prayers,
+            vec![prayer(0, "Mom", None, &[], PrayerStatus::Active)]
+        );
     }
 }

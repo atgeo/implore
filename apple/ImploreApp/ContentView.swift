@@ -17,8 +17,12 @@ struct ContentView: View {
                     .listRowSeparator(.hidden)
                 } else {
                     ForEach(core.view.prayers, id: \.id) { prayer in
-                        IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        NavigationLink {
+                            AddIntentionView(core: core, prayer: prayer)
+                        } label: {
+                            IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
                                     core.update(.removePrayer(id: prayer.id))
                                 } label: {
@@ -136,11 +140,12 @@ struct IntentionRow: View {
     }
 
     private var cadenceLabel: LocalizedStringKey? {
+        guard prayer.status != .archived else { return nil }
         switch prayer.cadence {
-        case .unscheduled: nil
-        case .daily: "Daily"
-        case .weekly: "Weekly"
-        case .monthly: "Monthly"
+        case .unscheduled: return nil
+        case .daily: return "Daily"
+        case .weekly: return "Weekly"
+        case .monthly: return "Monthly"
         }
     }
 }

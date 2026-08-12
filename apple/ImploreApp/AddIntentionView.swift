@@ -5,10 +5,23 @@ struct AddIntentionView: View {
     @ObservedObject var core: Core
     @Environment(\.dismiss) private var dismiss
 
-    @State private var intention = ""
-    @State private var details = ""
-    @State private var tagsText = ""
-    @State private var cadence = IntentionCadence.unscheduled
+    private let prayer: Prayer?
+
+    @State private var intention: String
+    @State private var details: String
+    @State private var tagsText: String
+    @State private var cadence: IntentionCadence
+
+    init(core: Core, prayer: Prayer? = nil) {
+        self.core = core
+        self.prayer = prayer
+        _intention = State(initialValue: prayer?.intention ?? "")
+        _details = State(initialValue: prayer?.details ?? "")
+        _tagsText = State(initialValue: prayer?.tags.joined(separator: ", ") ?? "")
+        _cadence = State(initialValue: prayer?.cadence ?? .unscheduled)
+    }
+
+    private var isEditing: Bool { prayer != nil }
 
     private var canSave: Bool {
         !intention.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -43,18 +56,20 @@ struct AddIntentionView: View {
                 Text("Optional. Separate with commas.")
             }
 
-            Section {
-                Picker("Schedule", selection: $cadence) {
-                    Text("No schedule").tag(IntentionCadence.unscheduled)
-                    Text("Daily").tag(IntentionCadence.daily)
-                    Text("Weekly").tag(IntentionCadence.weekly)
-                    Text("Monthly").tag(IntentionCadence.monthly)
+            if prayer?.status != .archived {
+                Section {
+                    Picker("Schedule", selection: $cadence) {
+                        Text("No schedule").tag(IntentionCadence.unscheduled)
+                        Text("Daily").tag(IntentionCadence.daily)
+                        Text("Weekly").tag(IntentionCadence.weekly)
+                        Text("Monthly").tag(IntentionCadence.monthly)
+                    }
+                } footer: {
+                    Text("How often you hope to pray this.")
                 }
-            } footer: {
-                Text("How often you hope to pray this.")
             }
         }
-        .navigationTitle("Add Intention")
+        .navigationTitle(isEditing ? "Edit Intention" : "Add Intention")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save", action: save)
@@ -69,20 +84,48 @@ struct AddIntentionView: View {
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
 
-        core.update(
-            .addPrayer(
-                intention: intention,
-                details: details,
-                tags: tags,
-                cadence: cadence
+        if let prayer {
+            core.update(
+                .updatePrayer(
+                    id: prayer.id,
+                    intention: intention,
+                    details: details,
+                    tags: tags,
+                    cadence: cadence
+                )
             )
-        )
+        } else {
+            core.update(
+                .addPrayer(
+                    intention: intention,
+                    details: details,
+                    tags: tags,
+                    cadence: cadence
+                )
+            )
+        }
         dismiss()
     }
 }
 
-#Preview {
+#Preview("Add") {
     NavigationStack {
         AddIntentionView(core: Core())
+    }
+}
+
+#Preview("Edit") {
+    NavigationStack {
+        AddIntentionView(
+            core: Core(),
+            prayer: Prayer(
+                id: 0,
+                intention: "Mom",
+                details: "Surgery recovery",
+                tags: ["family", "sick"],
+                status: .active,
+                cadence: .daily
+            )
+        )
     }
 }
