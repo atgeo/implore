@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0551B0510554C64835B7A27E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC33549E306444FE996F54E /* SettingsView.swift */; };
 		171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */; };
+		1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */; };
+		3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
 		7B3EA9012A7B3313FC38DE5C /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */; };
 		8B3033F088C9C5A41B134E16 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 08AC2D01ADA7F6920CE288A4 /* Shared */; };
@@ -29,6 +31,8 @@
 		6919AFC91DCFABD766110A09 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
 		8C314023CD429346511CA770 /* core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = core.swift; sourceTree = "<group>"; };
+		9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterHourTimePicker.swift; sourceTree = "<group>"; };
+		AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerReminderScheduler.swift; sourceTree = "<group>"; };
 		AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIntentionView.swift; sourceTree = "<group>"; };
 		BF08D43EE2EA8AEB332BE687 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shared; path = generated/Shared; sourceTree = SOURCE_ROOT; };
 		DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
@@ -68,6 +72,8 @@
 				88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */,
 				01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */,
 				222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */,
+				AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */,
+				9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */,
 				1CC33549E306444FE996F54E /* SettingsView.swift */,
 			);
 			path = ImploreApp;
@@ -172,6 +178,8 @@
 				FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */,
 				BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */,
 				9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */,
+				1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */,
+				3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */,
 				0551B0510554C64835B7A27E /* SettingsView.swift in Sources */,
 				B732D0377E04819944429B06 /* core.swift in Sources */,
 			);

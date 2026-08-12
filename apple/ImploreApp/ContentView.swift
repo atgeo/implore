@@ -52,7 +52,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
-                        SettingsView()
+                        SettingsView(core: core)
                     } label: {
                         Image(systemName: "gearshape")
                     }

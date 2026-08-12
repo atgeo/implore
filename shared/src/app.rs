@@ -10,6 +10,8 @@ use crux_kv::{KeyValueError, KeyValueOperation, command::KeyValue};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
 
+use crate::reminder::{self, CivilDateTime, ReminderDigest, DIGEST_HORIZON_DAYS};
+
 const PRAYERS_KEY: &str = "prayers";
 
 impl App for Implore {
@@ -22,11 +24,15 @@ impl App for Implore {
         match event {
             Event::Restore => KeyValue::get(PRAYERS_KEY).then_send(Event::PrayersLoaded),
             Event::PrayersLoaded(result) => {
-                if let Ok(Some(bytes)) = result
-                    && let Ok(stored) = serde_json::from_slice::<StoredPrayers>(&bytes)
-                {
-                    model.prayers = stored.prayers;
-                    model.next_id = stored.next_id;
+                if let Ok(Some(bytes)) = result {
+                    if let Ok(stored) = serde_json::from_slice::<StoredState>(&bytes) {
+                        model.prayers = stored.prayers;
+                        model.next_id = stored.next_id;
+                        model.reminder_settings = stored.reminder_settings;
+                    } else if let Ok(stored) = serde_json::from_slice::<StoredPrayers>(&bytes) {
+                        model.prayers = stored.prayers;
+                        model.next_id = stored.next_id;
+                    }
                 }
                 render()
             }
@@ -102,11 +108,76 @@ impl App for Implore {
                 model.filter = filter;
                 render()
             }
+            Event::SetReminderSettings {
+                enabled,
+                hour,
+                minute,
+            } => {
+                let hour = hour.clamp(0, 23);
+                let minute = snap_minute(minute);
+                if model.reminder_settings.enabled == enabled
+                    && model.reminder_settings.hour == hour
+                    && model.reminder_settings.minute == minute
+                {
+                    return render();
+                }
+                model.reminder_settings = ReminderSettings {
+                    enabled,
+                    hour,
+                    minute,
+                };
+                render().and(persist_state(model))
+            }
+            Event::SyncLocalTime {
+                year,
+                month,
+                day,
+                hour,
+                minute,
+            } => {
+                model.local_now = Some(CivilDateTime {
+                    date: reminder::CivilDate {
+                        year: i32::from(year),
+                        month: u32::from(month),
+                        day: u32::from(day),
+                    },
+                    hour: u32::from(hour),
+                    minute: u32::from(minute),
+                });
+                render()
+            }
             Event::Persisted(_) => Command::done(),
         }
     }
 
     fn view(&self, model: &Model) -> ViewModel {
+        let reminder_prayers: Vec<Prayer> = model
+            .prayers
+            .iter()
+            .filter(|prayer| {
+                matches!(prayer.status, PrayerStatus::Active)
+                    && !matches!(prayer.cadence, IntentionCadence::Unscheduled)
+            })
+            .cloned()
+            .collect();
+
+        let reminder_digests = if model.reminder_settings.enabled {
+            model
+                .local_now
+                .map(|now| {
+                    reminder::plan_digests(
+                        &reminder_prayers,
+                        model.reminder_settings.hour,
+                        model.reminder_settings.minute,
+                        now,
+                        DIGEST_HORIZON_DAYS,
+                    )
+                })
+                .unwrap_or_default()
+        } else {
+            Vec::new()
+        };
+
         ViewModel {
             filter: model.filter,
             prayers: model
@@ -115,6 +186,9 @@ impl App for Implore {
                 .filter(|prayer| model.filter.matches(prayer.status))
                 .cloned()
                 .collect(),
+            reminder_prayers,
+            reminder_settings: model.reminder_settings,
+            reminder_digests,
         }
     }
 }
@@ -131,12 +205,22 @@ fn set_status(model: &mut Model, id: u64, status: PrayerStatus) -> Command<Effec
 }
 
 fn persist_prayers(model: &Model) -> Command<Effect, Event> {
-    let stored = StoredPrayers {
+    persist_state(model)
+}
+
+fn persist_state(model: &Model) -> Command<Effect, Event> {
+    let stored = StoredState {
         prayers: model.prayers.clone(),
         next_id: model.next_id,
+        reminder_settings: model.reminder_settings,
     };
     let bytes = serde_json::to_vec(&stored).unwrap_or_default();
     KeyValue::set(PRAYERS_KEY, bytes).then_send(Event::Persisted)
+}
+
+fn snap_minute(minute: u8) -> u8 {
+    let snapped = (minute / 15) * 15;
+    snapped.min(45)
 }
 
 fn trim_optional(value: String) -> Option<String> {
@@ -222,6 +306,19 @@ pub enum Event {
     SetFilter {
         filter: IntentionFilter,
     },
+    SetReminderSettings {
+        enabled: bool,
+        hour: u8,
+        minute: u8,
+    },
+    /// Shell reports the user's local date/time for digest planning.
+    SyncLocalTime {
+        year: u16,
+        month: u8,
+        day: u8,
+        hour: u8,
+        minute: u8,
+    },
     /// Internal: shell finished reading the prayers blob.
     #[serde(skip)]
     #[facet(skip)]
@@ -232,11 +329,39 @@ pub enum Event {
     Persisted(#[facet(opaque)] Result<Option<Vec<u8>>, KeyValueError>),
 }
 
-#[derive(Default, Serialize, Deserialize, Clone)]
+#[derive(Default, Clone)]
 pub struct Model {
     prayers: Vec<Prayer>,
     next_id: u64,
     filter: IntentionFilter,
+    reminder_settings: ReminderSettings,
+    local_now: Option<CivilDateTime>,
+}
+
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(C)]
+pub struct ReminderSettings {
+    pub enabled: bool,
+    pub hour: u8,
+    pub minute: u8,
+}
+
+impl Default for ReminderSettings {
+    fn default() -> Self {
+        Self {
+            enabled: false,
+            hour: 8,
+            minute: 0,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, Default)]
+struct StoredState {
+    prayers: Vec<Prayer>,
+    next_id: u64,
+    #[serde(default)]
+    reminder_settings: ReminderSettings,
 }
 
 #[derive(Serialize, Deserialize, Clone, Default)]
@@ -261,6 +386,10 @@ pub struct Prayer {
 pub struct ViewModel {
     pub filter: IntentionFilter,
     pub prayers: Vec<Prayer>,
+    /// Active intentions with a schedule, for local reminder digests (ignore list filter).
+    pub reminder_prayers: Vec<Prayer>,
+    pub reminder_settings: ReminderSettings,
+    pub reminder_digests: Vec<ReminderDigest>,
 }
 
 #[effect(facet_typegen)]
@@ -611,13 +740,63 @@ mod test {
                 };
                 assert_eq!(key, PRAYERS_KEY);
 
-                let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
                 assert_eq!(stored.next_id, 1);
                 assert_eq!(stored.prayers[0].intention, "Mom");
                 assert_eq!(stored.prayers[0].tags, vec!["family".to_string()]);
                 assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
                 assert_eq!(stored.prayers[0].cadence, IntentionCadence::Unscheduled);
+                assert!(!stored.reminder_settings.enabled);
             });
+    }
+
+    #[test]
+    fn set_reminder_settings_persists_and_plans_digests() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
+        let _ = app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 12,
+                hour: 7,
+                minute: 0,
+            },
+            &mut model,
+        );
+        let _ = app.update(
+            Event::SetReminderSettings {
+                enabled: true,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        );
+
+        let view = app.view(&model);
+        assert!(view.reminder_settings.enabled);
+        assert!(!view.reminder_digests.is_empty());
+        assert_eq!(view.reminder_digests[0].intentions, vec!["Mom".to_string()]);
+    }
+
+    #[test]
+    fn reminder_prayers_skip_unscheduled_archived_and_respect_filter_independence() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
+        let _ = add_with_cadence(&app, &mut model, "Dad", "", &[], IntentionCadence::Unscheduled);
+        let _ = add_with_cadence(&app, &mut model, "Parish", "", &[], IntentionCadence::Weekly);
+        let _ = app.update(Event::ArchivePrayer { id: 2 }, &mut model);
+        let _ = app.update(Event::SetFilter { filter: IntentionFilter::Archived }, &mut model);
+
+        let view = app.view(&model);
+        assert_eq!(view.filter, IntentionFilter::Archived);
+        assert_eq!(view.prayers.len(), 1);
+        assert_eq!(view.reminder_prayers.len(), 1);
+        assert_eq!(view.reminder_prayers[0].intention, "Mom");
     }
 
     #[test]
@@ -631,11 +810,16 @@ mod test {
                 let KeyValueOperation::Set { value, .. } = op else {
                     panic!("expected KeyValue set effect");
                 };
-                let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
                 assert_eq!(stored.prayers[0].cadence, IntentionCadence::Daily);
             });
 
         assert_eq!(app.view(&model).prayers[0].cadence, IntentionCadence::Daily);
+        assert_eq!(app.view(&model).reminder_prayers.len(), 1);
+        assert_eq!(
+            app.view(&model).reminder_prayers[0].cadence,
+            IntentionCadence::Daily
+        );
 
         add_with_cadence(&app, &mut model, "Dad", "", &[], IntentionCadence::Monthly)
             .expect_render()
@@ -643,7 +827,7 @@ mod test {
                 let KeyValueOperation::Set { value, .. } = op else {
                     panic!("expected KeyValue set effect");
                 };
-                let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
                 assert_eq!(stored.prayers[1].cadence, IntentionCadence::Monthly);
             });
     }
@@ -669,7 +853,7 @@ mod test {
             let KeyValueOperation::Set { value, .. } = op else {
                 panic!("expected KeyValue set effect");
             };
-            let stored: StoredPrayers = serde_json::from_slice(value).unwrap();
+            let stored: StoredState = serde_json::from_slice(value).unwrap();
             assert_eq!(stored.prayers[0].intention, "Dad");
             assert_eq!(stored.prayers[0].details.as_deref(), Some("recovery"));
             assert_eq!(stored.prayers[0].tags, vec!["health".to_string()]);
