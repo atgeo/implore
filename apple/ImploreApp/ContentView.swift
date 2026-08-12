@@ -117,12 +117,6 @@ struct IntentionRow: View {
                 }
             }
 
-            if let details = prayer.details, !details.isEmpty {
-                Text(details)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
             if !prayer.tags.isEmpty {
                 Text(prayer.tags.joined(separator: " · "))
                     .font(.caption)
