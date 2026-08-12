@@ -7,6 +7,11 @@ packages:
 options:
   bundleIdPrefix: com.atgeo.implore
   developmentLanguage: en
+  knownRegions:
+    - en
+    - fr
+    - es
+    - Base
 attributes:
   BuildIndependentTargetsInParallel: true
 
@@ -29,6 +34,10 @@ targets:
       path: ImploreApp/Info-iOS.plist
       properties:
         CFBundleDisplayName: Implore
+        CFBundleLocalizations:
+          - en
+          - fr
+          - es
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft

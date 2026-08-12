@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("appearance") private var appearance = Appearance.system
+    @AppStorage("language") private var language = AppLanguage.system
 
     var body: some View {
         Form {
@@ -9,6 +10,12 @@ struct SettingsView: View {
                 Picker("Appearance", selection: $appearance) {
                     ForEach(Appearance.allCases) { option in
                         Text(option.title).tag(option)
+                    }
+                }
+
+                Picker("Language", selection: $language) {
+                    ForEach(AppLanguage.allCases) { option in
+                        option.label.tag(option)
                     }
                 }
             }
