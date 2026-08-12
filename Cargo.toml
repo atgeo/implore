@@ -8,7 +8,7 @@ resolver = "3"
 version = "0.1.0"
 edition = "2024"
 repository = "https://github.com/atgeo/implore"
-license = "Apache-2.0"
+license = "NONE"
 keywords = ["catholic"]
 rust-version = "1.97"
 

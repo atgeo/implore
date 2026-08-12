@@ -4,7 +4,7 @@ crate = "shared"
 # Keep in sync with [workspace.package] version in the root Cargo.toml.
 version = "0.1.0"
 repository = "https://github.com/atgeo/implore"
-license = "Apache-2.0"
+license = "NONE"
 
 [targets.apple]
 output = "../apple/generated/Shared"
