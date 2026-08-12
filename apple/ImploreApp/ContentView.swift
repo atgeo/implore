@@ -18,7 +18,7 @@ struct ContentView: View {
                 } else {
                     ForEach(core.view.prayers, id: \.id) { prayer in
                         NavigationLink {
-                            AddIntentionView(core: core, prayer: prayer)
+                            IntentionDetailView(core: core, prayer: prayer)
                         } label: {
                             IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
                         }

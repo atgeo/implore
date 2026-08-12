@@ -5,7 +5,8 @@ use serde::{Deserialize, Serialize};
 pub const DIGEST_HORIZON_DAYS: u32 = 14;
 
 /// Calendar date in the user's local timezone (weekday 1 = Sunday, matching `Calendar`).
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(C)]
 pub struct CivilDate {
     pub year: i32,
     pub month: u32,
@@ -183,6 +184,7 @@ mod tests {
             tags: vec![],
             status: PrayerStatus::Active,
             cadence,
+            prayed_on: Vec::new(),
         }
     }
 

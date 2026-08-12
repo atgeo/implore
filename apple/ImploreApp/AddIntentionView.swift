@@ -287,7 +287,8 @@ private struct FlowLayout: Layout {
                 details: "Surgery recovery",
                 tags: ["family", "sick"],
                 status: .active,
-                cadence: .daily
+                cadence: .daily,
+                prayedOn: []
             )
         )
     }

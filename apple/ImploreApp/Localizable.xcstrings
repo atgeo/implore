@@ -1,6 +1,282 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ times" : {
+
+    },
+    "%@ times this month" : {
+
+    },
+    "%@ times this week" : {
+
+    },
+    "%@ times today" : {
+
+    },
+    "%lld intentions for today" : {
+      "comment" : "Notification body when more than three intentions are due.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld intentions for today"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld intenciones para hoy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld intentions pour aujourd’hui"
+          }
+        }
+      }
+    },
+    "%lld times" : {
+      "comment" : "Prayer log footer when entries span more than the current month.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld times this month" : {
+      "comment" : "Prayer log footer when every entry is in the current month.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time this month"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times this month"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez este mes"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces este mes"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois ce mois-ci"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois ce mois-ci"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld times this week" : {
+      "comment" : "Prayer log footer when every entry is in the current week.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time this week"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times this week"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez esta semana"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces esta semana"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois cette semaine"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois cette semaine"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld times today" : {
+      "comment" : "Prayer log footer when every entry is today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time today"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times today"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez hoy"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces hoy"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois aujourd’hui"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois aujourd’hui"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "A person, family, or cause to pray for." : {
       "comment" : "Footer under the intention name field.",
       "extractionState" : "manual",
@@ -73,6 +349,30 @@
         }
       }
     },
+    "Add a tag" : {
+      "comment" : "Placeholder for the tag draft field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a tag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir una etiqueta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une étiquette"
+          }
+        }
+      }
+    },
     "Add Intention" : {
       "comment" : "Navigation title for the add-intention form.",
       "extractionState" : "manual",
@@ -97,26 +397,26 @@
         }
       }
     },
-    "Edit Intention" : {
-      "comment" : "Navigation title for the edit-intention form.",
+    "Add prayer entry" : {
+      "comment" : "Primary action text to append a prayer log entry.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Intention"
+            "value" : "Add prayer entry"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Editar intención"
+            "value" : "Añadir entrada de oración"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifier l’intention"
+            "value" : "Ajouter une entrée de prière"
           }
         }
       }
@@ -337,26 +637,50 @@
         }
       }
     },
-    "Add a tag" : {
-      "comment" : "Placeholder for the tag draft field.",
+    "Edit" : {
+      "comment" : "Toolbar button to edit an intention from the detail screen.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a tag"
+            "value" : "Edit"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Añadir una etiqueta"
+            "value" : "Editar"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter une étiquette"
+            "value" : "Modifier"
+          }
+        }
+      }
+    },
+    "Edit Intention" : {
+      "comment" : "Navigation title for the edit-intention form.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Intention"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar intención"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier l’intention"
           }
         }
       }
@@ -405,6 +729,78 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "À quelle fréquence vous espérez prier pour cela."
+          }
+        }
+      }
+    },
+    "I prayed for them" : {
+      "comment" : "Primary action button to log prayer for this intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I prayed for them"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oré por ellos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai prié pour eux"
+          }
+        }
+      }
+    },
+    "I prayed today" : {
+      "comment" : "Row label to log prayer for today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I prayed today"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oré hoy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai prié aujourd’hui"
+          }
+        }
+      }
+    },
+    "Implore" : {
+      "comment" : "Notification title / app name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Implore"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Implore"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Implore"
           }
         }
       }
@@ -625,6 +1021,78 @@
         }
       }
     },
+    "Notifications are off for Implore. Turn them on in Settings to receive reminders." : {
+      "comment" : "Footer when notification permission is denied.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications are off for Implore. Turn them on in Settings to receive reminders."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las notificaciones están desactivadas para Implore. Actívalas en Ajustes para recibir recordatorios."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications sont désactivées pour Implore. Activez-les dans Réglages pour recevoir des rappels."
+          }
+        }
+      }
+    },
+    "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st." : {
+      "comment" : "Footer under reminder settings.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un resumen diario de las intenciones de ese día. Semanal los domingos, mensual el día 1."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un rappel quotidien pour les intentions du jour. Hebdomadaire le dimanche, mensuel le 1er."
+          }
+        }
+      }
+    },
+    "Open Settings" : {
+      "comment" : "Button that opens the system Settings app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Réglages"
+          }
+        }
+      }
+    },
     "Optional. Type a tag and press return." : {
       "comment" : "Footer under the tags chip editor.",
       "extractionState" : "manual",
@@ -645,6 +1113,102 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Facultatif. Saisissez une étiquette et appuyez sur retour."
+          }
+        }
+      }
+    },
+    "Prayed" : {
+      "comment" : "Action button that appends a prayer log entry.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oré"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai prié"
+          }
+        }
+      }
+    },
+    "Prayer" : {
+      "comment" : "Section header for prayer action controls.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prière"
+          }
+        }
+      }
+    },
+    "Prayer log" : {
+      "comment" : "Section header listing past prayer dates.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer log"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registro de oración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journal de prière"
+          }
+        }
+      }
+    },
+    "Reminders" : {
+      "comment" : "Settings toggle for prayer digest notifications.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatorios"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels"
           }
         }
       }
@@ -817,146 +1381,26 @@
         }
       }
     },
-    "Reminders" : {
-      "comment" : "Settings toggle for prayer digest notifications.",
+    "Today, %@" : {
+      "comment" : "Prayer log entry from today, followed by the time.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reminders"
+            "value" : "Today, %@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recordatorios"
+            "value" : "Hoy, %@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rappels"
-          }
-        }
-      }
-    },
-    "Implore" : {
-      "comment" : "Notification title / app name.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Implore"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Implore"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Implore"
-          }
-        }
-      }
-    },
-    "Notifications are off for Implore. Turn them on in Settings to receive reminders." : {
-      "comment" : "Footer when notification permission is denied.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications are off for Implore. Turn them on in Settings to receive reminders."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las notificaciones están desactivadas para Implore. Actívalas en Ajustes para recibir recordatorios."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les notifications sont désactivées pour Implore. Activez-les dans Réglages pour recevoir des rappels."
-          }
-        }
-      }
-    },
-    "Open Settings" : {
-      "comment" : "Button that opens the system Settings app.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Settings"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir Ajustes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir Réglages"
-          }
-        }
-      }
-    },
-    "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st." : {
-      "comment" : "Footer under reminder settings.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un resumen diario de las intenciones de ese día. Semanal los domingos, mensual el día 1."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un rappel quotidien pour les intentions du jour. Hebdomadaire le dimanche, mensuel le 1er."
-          }
-        }
-      }
-    },
-    "%lld intentions for today" : {
-      "comment" : "Notification body when more than three intentions are due.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld intentions for today"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld intenciones para hoy"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld intentions pour aujourd’hui"
+            "value" : "Aujourd’hui, %@"
           }
         }
       }
@@ -1029,6 +1473,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hebdomadaire"
+          }
+        }
+      }
+    },
+    "Yesterday, %@" : {
+      "comment" : "Prayer log entry from yesterday, followed by the time.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday, %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayer, %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier, %@"
           }
         }
       }

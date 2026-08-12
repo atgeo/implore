@@ -10,6 +10,7 @@ use crux_kv::{KeyValueError, KeyValueOperation, command::KeyValue};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
 
+use crate::prayer_log::{self, PrayerLogEntry};
 use crate::reminder::{self, CivilDateTime, ReminderDigest, DIGEST_HORIZON_DAYS};
 
 const PRAYERS_KEY: &str = "prayers";
@@ -29,9 +30,6 @@ impl App for Implore {
                         model.prayers = stored.prayers;
                         model.next_id = stored.next_id;
                         model.reminder_settings = stored.reminder_settings;
-                    } else if let Ok(stored) = serde_json::from_slice::<StoredPrayers>(&bytes) {
-                        model.prayers = stored.prayers;
-                        model.next_id = stored.next_id;
                     }
                 }
                 render()
@@ -58,6 +56,7 @@ impl App for Implore {
                     tags,
                     status: PrayerStatus::Active,
                     cadence,
+                    prayed_on: Vec::new(),
                 });
 
                 render().and(persist_prayers(model))
@@ -146,6 +145,10 @@ impl App for Implore {
                 });
                 render()
             }
+            Event::LogPrayer { id } => log_prayer(model, id),
+            Event::RemovePrayerLogEntry { id, index } => {
+                remove_prayer_log_entry(model, id, index as usize)
+            }
             Event::Persisted(_) => Command::done(),
         }
     }
@@ -190,6 +193,33 @@ impl App for Implore {
             reminder_settings: model.reminder_settings,
             reminder_digests,
         }
+    }
+}
+
+fn log_prayer(model: &mut Model, id: u64) -> Command<Effect, Event> {
+    let Some(now) = model.local_now else {
+        return render();
+    };
+    let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
+        return render();
+    };
+    if prayer.status != PrayerStatus::Active {
+        return render();
+    }
+
+    prayer_log::append_entry(&mut prayer.prayed_on, PrayerLogEntry::from_local(now));
+    render().and(persist_state(model))
+}
+
+fn remove_prayer_log_entry(model: &mut Model, id: u64, index: usize) -> Command<Effect, Event> {
+    let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
+        return render();
+    };
+
+    if prayer_log::remove_entry(&mut prayer.prayed_on, index) {
+        render().and(persist_state(model))
+    } else {
+        render()
     }
 }
 
@@ -319,6 +349,15 @@ pub enum Event {
         hour: u8,
         minute: u8,
     },
+    /// Append a prayer log entry for this intention (today's local date).
+    LogPrayer {
+        id: u64,
+    },
+    /// Remove one prayer log entry by index in `prayed_on`.
+    RemovePrayerLogEntry {
+        id: u64,
+        index: u64,
+    },
     /// Internal: shell finished reading the prayers blob.
     #[serde(skip)]
     #[facet(skip)]
@@ -360,14 +399,7 @@ impl Default for ReminderSettings {
 struct StoredState {
     prayers: Vec<Prayer>,
     next_id: u64,
-    #[serde(default)]
     reminder_settings: ReminderSettings,
-}
-
-#[derive(Serialize, Deserialize, Clone, Default)]
-struct StoredPrayers {
-    prayers: Vec<Prayer>,
-    next_id: u64,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
@@ -376,10 +408,9 @@ pub struct Prayer {
     pub intention: String,
     pub details: Option<String>,
     pub tags: Vec<String>,
-    #[serde(default)]
     pub status: PrayerStatus,
-    #[serde(default)]
     pub cadence: IntentionCadence,
+    pub prayed_on: Vec<PrayerLogEntry>,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Default)]
@@ -417,6 +448,7 @@ mod test {
             tags: tags.iter().map(|tag| (*tag).into()).collect(),
             status,
             cadence: IntentionCadence::Unscheduled,
+            prayed_on: Vec::new(),
         }
     }
 
@@ -475,9 +507,10 @@ mod test {
         let app = Implore;
         let mut model = Model::default();
 
-        let stored = StoredPrayers {
+        let stored = StoredState {
             prayers: vec![prayer(3, "Mom", None, &[], PrayerStatus::Active)],
             next_id: 4,
+            reminder_settings: ReminderSettings::default(),
         };
         let bytes = serde_json::to_vec(&stored).unwrap();
 
@@ -489,34 +522,6 @@ mod test {
             app.view(&model).prayers,
             vec![prayer(3, "Mom", None, &[], PrayerStatus::Active)]
         );
-    }
-
-    #[test]
-    fn loads_missing_status_as_active() {
-        let app = Implore;
-        let mut model = Model::default();
-
-        let bytes =
-            br#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[]}],"next_id":2}"#;
-
-        app.update(Event::PrayersLoaded(Ok(Some(bytes.to_vec()))), &mut model)
-            .expect_only_render();
-
-        assert_eq!(model.prayers[0].status, PrayerStatus::Active);
-        assert_eq!(model.prayers[0].cadence, IntentionCadence::Unscheduled);
-    }
-
-    #[test]
-    fn loads_missing_cadence_as_unscheduled() {
-        let app = Implore;
-        let mut model = Model::default();
-
-        let bytes = br#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[],"status":"Active"}],"next_id":2}"#;
-
-        app.update(Event::PrayersLoaded(Ok(Some(bytes.to_vec()))), &mut model)
-            .expect_only_render();
-
-        assert_eq!(model.prayers[0].cadence, IntentionCadence::Unscheduled);
     }
 
     #[test]
@@ -870,8 +875,110 @@ mod test {
                 tags: vec!["health".into()],
                 status: PrayerStatus::Active,
                 cadence: IntentionCadence::Weekly,
+                prayed_on: Vec::new(),
             }
         );
+    }
+
+    #[test]
+    fn log_prayer_persists_and_allows_multiple_entries_same_day() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 12,
+                hour: 9,
+                minute: 0,
+            },
+            &mut model,
+        );
+
+        app.update(Event::LogPrayer { id: 0 }, &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.prayers[0].prayed_on.len(), 1);
+                assert_eq!(
+                    stored.prayers[0].prayed_on[0],
+                    PrayerLogEntry {
+                        year: 2026,
+                        month: 8,
+                        day: 12,
+                        hour: 9,
+                        minute: 0,
+                    }
+                );
+            });
+
+        app.update(Event::LogPrayer { id: 0 }, &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.prayers[0].prayed_on.len(), 2);
+            });
+
+        assert_eq!(app.view(&model).prayers[0].prayed_on.len(), 2);
+    }
+
+    #[test]
+    fn remove_prayer_log_entry_removes_one() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 12,
+                hour: 9,
+                minute: 0,
+            },
+            &mut model,
+        );
+        let _ = app.update(Event::LogPrayer { id: 0 }, &mut model);
+        let _ = app.update(Event::LogPrayer { id: 0 }, &mut model);
+        assert_eq!(app.view(&model).prayers[0].prayed_on.len(), 2);
+
+        app.update(
+            Event::RemovePrayerLogEntry { id: 0, index: 0 },
+            &mut model,
+        )
+        .expect_render()
+        .expect_key_value_with(|op| {
+            let KeyValueOperation::Set { value, .. } = op else {
+                panic!("expected KeyValue set effect");
+            };
+            let stored: StoredState = serde_json::from_slice(value).unwrap();
+            assert_eq!(stored.prayers[0].prayed_on.len(), 1);
+        });
+    }
+
+    #[test]
+    fn log_prayer_ignored_for_archived_or_without_local_time() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = app.update(Event::ArchivePrayer { id: 0 }, &mut model);
+
+        app.update(Event::LogPrayer { id: 0 }, &mut model)
+            .expect_only_render();
+
+        let _ = app.update(Event::UnarchivePrayer { id: 0 }, &mut model);
+        app.update(Event::LogPrayer { id: 0 }, &mut model)
+            .expect_only_render();
+        assert!(app.view(&model).prayers[0].prayed_on.is_empty());
     }
 
     #[test]
