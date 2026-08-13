@@ -116,6 +116,14 @@ impl App for Implore {
                     render().and(persist_prayers(model))
                 }
             }
+            Event::RemoveAllPrayers => {
+                if model.prayers.is_empty() {
+                    render()
+                } else {
+                    model.prayers.clear();
+                    render().and(persist_prayers(model))
+                }
+            }
             Event::ArchivePrayer { id } => set_status(model, id, PrayerStatus::Archived),
             Event::UnarchivePrayer { id } => set_status(model, id, PrayerStatus::Active),
             Event::SetFilter { filter } => {
@@ -199,6 +207,7 @@ impl App for Implore {
         ViewModel {
             version: VERSION.to_string(),
             filter: model.filter,
+            has_prayers: !model.prayers.is_empty(),
             prayers: model
                 .prayers
                 .iter()
@@ -361,6 +370,8 @@ pub enum Event {
     RemovePrayer {
         id: u64,
     },
+    /// Delete every intention (active and archived).
+    RemoveAllPrayers,
     ArchivePrayer {
         id: u64,
     },
@@ -456,6 +467,8 @@ pub struct ViewModel {
     /// Workspace crate version (`CARGO_PKG_VERSION`).
     pub version: String,
     pub filter: IntentionFilter,
+    /// True when any intention exists (ignores list filter).
+    pub has_prayers: bool,
     pub prayers: Vec<Prayer>,
     /// Active intentions with a schedule, for local reminder digests (ignore list filter).
     pub reminder_prayers: Vec<Prayer>,
@@ -468,6 +481,7 @@ impl Default for ViewModel {
         Self {
             version: VERSION.to_string(),
             filter: IntentionFilter::default(),
+            has_prayers: false,
             prayers: Vec::new(),
             reminder_prayers: Vec::new(),
             reminder_settings: ReminderSettings::default(),
@@ -736,6 +750,44 @@ mod test {
             app.view(&model).prayers,
             vec![prayer(0, "Mom", None, &[], PrayerStatus::Active)]
         );
+    }
+
+    #[test]
+    fn removes_all_prayers_and_persists() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add(&app, &mut model, "Mom", "", &[]);
+        let _ = add(&app, &mut model, "Dad", "", &[]);
+        let _ = app.update(Event::ArchivePrayer { id: 0 }, &mut model);
+
+        assert!(app.view(&model).has_prayers);
+
+        app.update(Event::RemoveAllPrayers, &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
+                assert!(stored.prayers.is_empty());
+                assert_eq!(stored.next_id, 2);
+            });
+
+        let view = app.view(&model);
+        assert!(!view.has_prayers);
+        assert!(view.prayers.is_empty());
+        assert_eq!(model.next_id, 2);
+    }
+
+    #[test]
+    fn remove_all_prayers_when_empty_is_noop() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        app.update(Event::RemoveAllPrayers, &mut model)
+            .expect_only_render();
+        assert!(!app.view(&model).has_prayers);
     }
 
     #[test]

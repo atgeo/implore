@@ -6,6 +6,7 @@ struct SettingsView: View {
     @AppStorage("appearance") private var appearance = Appearance.system
     @AppStorage("language") private var language = AppLanguage.system
     @State private var notificationsDenied = false
+    @State private var confirmRemoveAll = false
 
     var body: some View {
         Form {
@@ -49,10 +50,30 @@ struct SettingsView: View {
             }
 
             Section {
+                Button("Remove All Intentions", role: .destructive) {
+                    confirmRemoveAll = true
+                }
+                .disabled(!core.view.hasPrayers)
+            } footer: {
+                Text("Permanently deletes every intention, including archived ones.")
+            }
+
+            Section {
                 LabeledContent("Version", value: appVersion)
             }
         }
         .navigationTitle("Settings")
+        .alert(
+            "Remove All Intentions?",
+            isPresented: $confirmRemoveAll
+        ) {
+            Button("Remove All Intentions", role: .destructive) {
+                core.update(.removeAllPrayers)
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This cannot be undone.")
+        }
         .task {
             await refreshAuthorizationStatus()
         }
