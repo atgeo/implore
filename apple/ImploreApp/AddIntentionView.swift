@@ -14,6 +14,7 @@ struct AddIntentionView: View {
     @State private var tagDraft: String = ""
     @State private var cadence: IntentionCadence
     @State private var saintId: String?
+    @State private var color: IntentionColor
 
     init(core: Core, prayer: Prayer? = nil) {
         self.core = core
@@ -23,6 +24,7 @@ struct AddIntentionView: View {
         _tags = State(initialValue: prayer?.tags ?? [])
         _cadence = State(initialValue: prayer?.cadence ?? .unscheduled)
         _saintId = State(initialValue: prayer?.saintId)
+        _color = State(initialValue: prayer?.color ?? .none)
     }
 
     private var isEditing: Bool { prayer != nil }
@@ -83,6 +85,14 @@ struct AddIntentionView: View {
                 Text("Optional. Ask this saint to pray with you.")
             }
 
+            Section {
+                IntentionColorPicker(selection: $color)
+            } header: {
+                Text("Color")
+            } footer: {
+                Text("Optional. A quiet accent on the list.")
+            }
+
             if prayer?.status != .archived {
                 Section {
                     Picker("Schedule", selection: $cadence) {
@@ -116,7 +126,8 @@ struct AddIntentionView: View {
                     details: details,
                     tags: tags,
                     cadence: cadence,
-                    saintId: saintId ?? ""
+                    saintId: saintId ?? "",
+                    color: color
                 )
             )
         } else {
@@ -126,7 +137,8 @@ struct AddIntentionView: View {
                     details: details,
                     tags: tags,
                     cadence: cadence,
-                    saintId: saintId ?? ""
+                    saintId: saintId ?? "",
+                    color: color
                 )
             )
         }
@@ -319,6 +331,7 @@ private struct FlowLayout: Layout {
                 status: .active,
                 cadence: .daily,
                 saintId: "st-joseph",
+                color: .sage,
                 prayedOn: []
             )
         )

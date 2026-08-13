@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0551B0510554C64835B7A27E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC33549E306444FE996F54E /* SettingsView.swift */; };
+		1676BFD570D93F2A5078F9DA /* IntentionColor+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */; };
 		171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */; };
 		1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */; };
 		25173897BB93CC95D57F46EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		251E98733EC880B827C7660A /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; name = App; path = generated/App; sourceTree = SOURCE_ROOT; };
 		2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentionDetailView.swift; sourceTree = "<group>"; };
+		41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentionColor+UI.swift"; sourceTree = "<group>"; };
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6919AFC91DCFABD766110A09 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */,
 				8C314023CD429346511CA770 /* core.swift */,
 				88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */,
+				41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */,
 				2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */,
 				01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */,
 				222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */,
@@ -194,6 +197,7 @@
 				9676580860F1F3269772EF02 /* Appearance.swift in Sources */,
 				FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */,
 				BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */,
+				1676BFD570D93F2A5078F9DA /* IntentionColor+UI.swift in Sources */,
 				66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */,
 				9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */,
 				1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */,

@@ -8,21 +8,28 @@ struct ContentView: View {
         NavigationStack {
             List {
                 if core.view.prayers.isEmpty {
-                    ContentUnavailableView(
-                        emptyTitle,
-                        systemImage: "heart",
-                        description: Text(emptyDescription)
-                    )
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
+                    Section {
+                        ContentUnavailableView(
+                            emptyTitle,
+                            systemImage: "heart",
+                            description: Text(emptyDescription)
+                        )
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                    }
                 } else {
+                    // One section per intention so each row is its own inset card;
+                    // the top accent can then follow continuous corners correctly.
                     ForEach(core.view.prayers, id: \.id) { prayer in
-                        NavigationLink {
-                            IntentionDetailView(core: core, prayer: prayer)
-                        } label: {
-                            IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Section {
+                            NavigationLink {
+                                IntentionDetailView(core: core, prayer: prayer)
+                            } label: {
+                                IntentionRow(prayer: prayer, showStatus: core.view.filter == .all)
+                            }
+                            .listRowBackground(IntentionRowBackground(color: prayer.color))
+                            .listRowSeparator(.hidden)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
                                     core.update(.removePrayer(id: prayer.id))
                                 } label: {
@@ -45,9 +52,12 @@ struct ContentView: View {
                                     .tint(.blue)
                                 }
                             }
+                        }
                     }
                 }
             }
+            .listStyle(.insetGrouped)
+            .listSectionSpacing(12)
             .navigationTitle("Intentions")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

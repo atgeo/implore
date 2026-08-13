@@ -174,7 +174,7 @@ fn is_leap_year(year: i32) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::Prayer;
+    use crate::{IntentionColor, Prayer};
 
     fn scheduled_prayer(intention: &str, cadence: IntentionCadence) -> Prayer {
         Prayer {
@@ -185,6 +185,7 @@ mod tests {
             status: PrayerStatus::Active,
             cadence,
             saint_id: None,
+            color: IntentionColor::None,
             prayed_on: Vec::new(),
         }
     }

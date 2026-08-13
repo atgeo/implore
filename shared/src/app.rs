@@ -43,6 +43,7 @@ impl App for Implore {
                 tags,
                 cadence,
                 saint_id,
+                color,
             } => {
                 let intention = intention.trim().to_string();
                 if intention.is_empty() {
@@ -62,6 +63,7 @@ impl App for Implore {
                     status: PrayerStatus::Active,
                     cadence,
                     saint_id,
+                    color,
                     prayed_on: Vec::new(),
                 });
 
@@ -74,6 +76,7 @@ impl App for Implore {
                 tags,
                 cadence,
                 saint_id,
+                color,
             } => {
                 let intention = intention.trim().to_string();
                 if intention.is_empty() {
@@ -91,6 +94,7 @@ impl App for Implore {
                     && prayer.tags == tags
                     && prayer.cadence == cadence
                     && prayer.saint_id == saint_id
+                    && prayer.color == color
                 {
                     return render();
                 }
@@ -100,6 +104,7 @@ impl App for Implore {
                 prayer.tags = tags;
                 prayer.cadence = cadence;
                 prayer.saint_id = saint_id;
+                prayer.color = color;
                 render().and(persist_prayers(model))
             }
             Event::RemovePrayer { id } => {
@@ -317,6 +322,20 @@ pub enum IntentionCadence {
     Monthly,
 }
 
+/// Preset accent colors for intention rows (shell maps to platform colors).
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[repr(C)]
+pub enum IntentionColor {
+    #[default]
+    None,
+    Sky,
+    Sage,
+    Sand,
+    Rose,
+    Slate,
+    Gold,
+}
+
 #[derive(Facet, Serialize, Deserialize, Clone, Debug)]
 #[repr(C)]
 pub enum Event {
@@ -328,6 +347,7 @@ pub enum Event {
         tags: Vec<String>,
         cadence: IntentionCadence,
         saint_id: String,
+        color: IntentionColor,
     },
     UpdatePrayer {
         id: u64,
@@ -336,6 +356,7 @@ pub enum Event {
         tags: Vec<String>,
         cadence: IntentionCadence,
         saint_id: String,
+        color: IntentionColor,
     },
     RemovePrayer {
         id: u64,
@@ -425,6 +446,8 @@ pub struct Prayer {
     pub cadence: IntentionCadence,
     #[serde(default)]
     pub saint_id: Option<String>,
+    #[serde(default)]
+    pub color: IntentionColor,
     pub prayed_on: Vec<PrayerLogEntry>,
 }
 
@@ -479,6 +502,7 @@ mod test {
             status,
             cadence: IntentionCadence::Unscheduled,
             saint_id: None,
+            color: IntentionColor::None,
             prayed_on: Vec::new(),
         }
     }
@@ -515,6 +539,7 @@ mod test {
                 tags: tags.iter().map(|tag| (*tag).into()).collect(),
                 cadence,
                 saint_id: String::new(),
+                color: IntentionColor::None,
             },
             model,
         )
@@ -582,6 +607,7 @@ mod test {
 
         assert_eq!(app.view(&model).prayers.len(), 1);
         assert_eq!(app.view(&model).prayers[0].saint_id, None);
+        assert_eq!(app.view(&model).prayers[0].color, IntentionColor::None);
     }
 
     #[test]
@@ -900,6 +926,7 @@ mod test {
                 tags: vec!["  health  ".into(), "  ".into()],
                 cadence: IntentionCadence::Weekly,
                 saint_id: "st-joseph".into(),
+                color: IntentionColor::Sage,
             },
             &mut model,
         )
@@ -918,6 +945,7 @@ mod test {
                 stored.prayers[0].saint_id.as_deref(),
                 Some("st-joseph")
             );
+            assert_eq!(stored.prayers[0].color, IntentionColor::Sage);
         });
 
         assert_eq!(
@@ -930,6 +958,7 @@ mod test {
                 status: PrayerStatus::Active,
                 cadence: IntentionCadence::Weekly,
                 saint_id: Some("st-joseph".into()),
+                color: IntentionColor::Sage,
                 prayed_on: Vec::new(),
             }
         );
@@ -1050,6 +1079,7 @@ mod test {
                 tags: vec![],
                 cadence: IntentionCadence::Daily,
                 saint_id: String::new(),
+                color: IntentionColor::Sky,
             },
             &mut model,
         )
@@ -1063,6 +1093,7 @@ mod test {
                 tags: vec![],
                 cadence: IntentionCadence::Daily,
                 saint_id: String::new(),
+                color: IntentionColor::Sky,
             },
             &mut model,
         )
