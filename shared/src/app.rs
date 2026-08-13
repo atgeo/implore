@@ -2,16 +2,17 @@
 pub struct Implore;
 
 use crux_core::{
-    App, Command,
     macros::effect,
-    render::{RenderOperation, render},
+    render::{render, RenderOperation},
+    App, Command,
 };
-use crux_kv::{KeyValueError, KeyValueOperation, command::KeyValue};
+use crux_kv::{command::KeyValue, KeyValueError, KeyValueOperation};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
 
 use crate::prayer_log::{self, PrayerLogEntry};
 use crate::reminder::{self, CivilDateTime, ReminderDigest, DIGEST_HORIZON_DAYS};
+use crate::{liturgical_day_for, LiturgicalDay};
 
 const PRAYERS_KEY: &str = "prayers";
 
@@ -223,6 +224,7 @@ impl App for Implore {
             reminder_prayers,
             reminder_settings: model.reminder_settings,
             reminder_digests,
+            liturgical_day: model.local_now.map(|now| liturgical_day_for(now.date)),
         }
     }
 }
@@ -482,6 +484,8 @@ pub struct ViewModel {
     pub reminder_prayers: Vec<Prayer>,
     pub reminder_settings: ReminderSettings,
     pub reminder_digests: Vec<ReminderDigest>,
+    /// Temporal cycle for the shell's local date; set after `SyncLocalTime`.
+    pub liturgical_day: Option<LiturgicalDay>,
 }
 
 impl Default for ViewModel {
@@ -495,6 +499,7 @@ impl Default for ViewModel {
             reminder_prayers: Vec::new(),
             reminder_settings: ReminderSettings::default(),
             reminder_digests: Vec::new(),
+            liturgical_day: None,
         }
     }
 }
@@ -932,10 +937,29 @@ mod test {
         let mut model = Model::default();
 
         let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
-        let _ = add_with_cadence(&app, &mut model, "Dad", "", &[], IntentionCadence::Unscheduled);
-        let _ = add_with_cadence(&app, &mut model, "Parish", "", &[], IntentionCadence::Weekly);
+        let _ = add_with_cadence(
+            &app,
+            &mut model,
+            "Dad",
+            "",
+            &[],
+            IntentionCadence::Unscheduled,
+        );
+        let _ = add_with_cadence(
+            &app,
+            &mut model,
+            "Parish",
+            "",
+            &[],
+            IntentionCadence::Weekly,
+        );
         let _ = app.update(Event::ArchivePrayer { id: 2 }, &mut model);
-        let _ = app.update(Event::SetFilter { filter: IntentionFilter::Archived }, &mut model);
+        let _ = app.update(
+            Event::SetFilter {
+                filter: IntentionFilter::Archived,
+            },
+            &mut model,
+        );
 
         let view = app.view(&model);
         assert_eq!(view.filter, IntentionFilter::Archived);
@@ -1006,10 +1030,7 @@ mod test {
             assert_eq!(stored.prayers[0].tags, vec!["health".to_string()]);
             assert_eq!(stored.prayers[0].cadence, IntentionCadence::Weekly);
             assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
-            assert_eq!(
-                stored.prayers[0].saint_id.as_deref(),
-                Some("st-joseph")
-            );
+            assert_eq!(stored.prayers[0].saint_id.as_deref(), Some("st-joseph"));
             assert_eq!(stored.prayers[0].color, IntentionColor::Sage);
         });
 
@@ -1099,18 +1120,15 @@ mod test {
         let _ = app.update(Event::LogPrayer { id: 0 }, &mut model);
         assert_eq!(app.view(&model).prayers[0].prayed_on.len(), 2);
 
-        app.update(
-            Event::RemovePrayerLogEntry { id: 0, index: 0 },
-            &mut model,
-        )
-        .expect_render()
-        .expect_key_value_with(|op| {
-            let KeyValueOperation::Set { value, .. } = op else {
-                panic!("expected KeyValue set effect");
-            };
-            let stored: StoredState = serde_json::from_slice(value).unwrap();
-            assert_eq!(stored.prayers[0].prayed_on.len(), 1);
-        });
+        app.update(Event::RemovePrayerLogEntry { id: 0, index: 0 }, &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.prayers[0].prayed_on.len(), 1);
+            });
     }
 
     #[test]
@@ -1167,6 +1185,33 @@ mod test {
         assert_eq!(
             app.view(&model).prayers,
             vec![prayer(0, "Mom", None, &[], PrayerStatus::Active)]
+        );
+    }
+
+    #[test]
+    fn liturgical_day_follows_synced_local_date() {
+        let app = Implore;
+        let mut model = Model::default();
+        assert_eq!(app.view(&model).liturgical_day, None);
+
+        app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 13,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(
+            app.view(&model).liturgical_day,
+            Some(LiturgicalDay::OrdinaryTime {
+                week: 19,
+                weekday: 5
+            })
         );
     }
 }

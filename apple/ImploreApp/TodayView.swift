@@ -3,6 +3,7 @@ import SwiftUI
 
 struct TodayView: View {
     @ObservedObject var core: Core
+    @Environment(\.locale) private var locale
 
     private var todayPrayers: [Prayer] {
         TodaySelection.prayers(from: core.view.reminderPrayers)
@@ -11,40 +12,53 @@ struct TodayView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if todayPrayers.isEmpty {
-                    ContentUnavailableView {
-                        Label(emptyTitle, systemImage: "sun.max")
-                    } description: {
-                        Text(emptyDescription)
+                VStack(alignment: .leading, spacing: 0) {
+                    if let day = core.view.liturgicalDay {
+                        Text(day.title(locale: locale))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 4)
+                            .padding(.bottom, 8)
+                            .accessibilityAddTraits(.isHeader)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    List {
-                        ForEach(todayPrayers, id: \.id) { prayer in
-                            Section {
-                                HStack(spacing: 12) {
-                                    PrayerToggle(
-                                        prayed: TodaySelection.prayedToday(prayer)
-                                    ) {
-                                        logPrayer(prayer.id)
-                                    }
 
-                                    NavigationLink {
-                                        IntentionDetailView(core: core, prayer: prayer)
-                                    } label: {
-                                        TodayIntentionRow(
-                                            prayer: prayer,
-                                            prayedToday: TodaySelection.prayedToday(prayer)
-                                        )
+                    if todayPrayers.isEmpty {
+                        ContentUnavailableView {
+                            Label(emptyTitle, systemImage: "sun.max")
+                        } description: {
+                            Text(emptyDescription)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else {
+                        List {
+                            ForEach(todayPrayers, id: \.id) { prayer in
+                                Section {
+                                    HStack(spacing: 12) {
+                                        PrayerToggle(
+                                            prayed: TodaySelection.prayedToday(prayer)
+                                        ) {
+                                            logPrayer(prayer.id)
+                                        }
+
+                                        NavigationLink {
+                                            IntentionDetailView(core: core, prayer: prayer)
+                                        } label: {
+                                            TodayIntentionRow(
+                                                prayer: prayer,
+                                                prayedToday: TodaySelection.prayedToday(prayer)
+                                            )
+                                        }
                                     }
+                                    .listRowBackground(IntentionRowBackground(color: prayer.color))
+                                    .listRowSeparator(.hidden)
                                 }
-                                .listRowBackground(IntentionRowBackground(color: prayer.color))
-                                .listRowSeparator(.hidden)
                             }
                         }
+                        .listStyle(.insetGrouped)
+                        .listSectionSpacing(12)
                     }
-                    .listStyle(.insetGrouped)
-                    .listSectionSpacing(12)
                 }
             }
             .background(Color(.systemGroupedBackground))

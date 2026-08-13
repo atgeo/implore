@@ -2044,6 +2044,375 @@
           }
         }
       }
+    },
+    "%@ Sunday in Ordinary Time": {
+      "comment": "Ordinary Time Sunday, e.g. 19th Sunday in Ordinary Time.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sunday in Ordinary Time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ domingo del Tiempo Ordinario"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dimanche du Temps ordinaire"
+          }
+        }
+      }
+    },
+    "%@ of the %@ Week in Ordinary Time": {
+      "comment": "Ordinary Time weekday, e.g. Thursday of the 19th Week in Ordinary Time.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of the %@ Week in Ordinary Time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semana del Tiempo Ordinario"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semaine du Temps ordinaire"
+          }
+        }
+      }
+    },
+    "%@ Sunday of Advent": {
+      "comment": "Advent Sunday, e.g. 1st Sunday of Advent.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sunday of Advent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ domingo de Adviento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dimanche de l’Avent"
+          }
+        }
+      }
+    },
+    "%@ of the %@ Week of Advent": {
+      "comment": "Advent weekday, e.g. Monday of the 1st Week of Advent.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of the %@ Week of Advent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semana de Adviento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semaine de l’Avent"
+          }
+        }
+      }
+    },
+    "%@ Sunday of Lent": {
+      "comment": "Lent Sunday, e.g. 1st Sunday of Lent.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sunday of Lent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ domingo de Cuaresma"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dimanche de Carême"
+          }
+        }
+      }
+    },
+    "%@ of the %@ Week of Lent": {
+      "comment": "Lent weekday, e.g. Wednesday of the 1st Week of Lent.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of the %@ Week of Lent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semana de Cuaresma"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semaine de Carême"
+          }
+        }
+      }
+    },
+    "%@ Sunday of Easter": {
+      "comment": "Easter season Sunday after Easter Sunday itself.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sunday of Easter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ domingo de Pascua"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dimanche de Pâques"
+          }
+        }
+      }
+    },
+    "%@ of the %@ Week of Easter": {
+      "comment": "Easter season weekday, e.g. Monday of the 1st Week of Easter.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of the %@ Week of Easter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semana de Pascua"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la %@ semaine de Pâques"
+          }
+        }
+      }
+    },
+    "%@ after Ash Wednesday": {
+      "comment": "Thursday, Friday, or Saturday after Ash Wednesday.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ after Ash Wednesday"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ después de Ceniza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ après les Cendres"
+          }
+        }
+      }
+    },
+    "%@ of Holy Week": {
+      "comment": "Monday–Wednesday of Holy Week.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of Holy Week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la Semana Santa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de la Semaine sainte"
+          }
+        }
+      }
+    },
+    "Ash Wednesday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Ash Wednesday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Miércoles de Ceniza" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Mercredi des Cendres" } }
+      }
+    },
+    "Christmas": {
+      "comment": "Liturgical Today heading for December 25.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Christmas" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Navidad" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Noël" } }
+      }
+    },
+    "Christmas Weekday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Christmas Weekday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Feria de Navidad" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Férie de Noël" } }
+      }
+    },
+    "Easter Sunday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Easter Sunday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Domingo de Pascua" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Dimanche de Pâques" } }
+      }
+    },
+    "Good Friday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Good Friday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Viernes Santo" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Vendredi saint" } }
+      }
+    },
+    "Holy Saturday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Holy Saturday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Sábado Santo" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Samedi saint" } }
+      }
+    },
+    "Holy Thursday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Holy Thursday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Jueves Santo" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Jeudi saint" } }
+      }
+    },
+    "Our Lord Jesus Christ, King of the Universe": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Our Lord Jesus Christ, King of the Universe" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Jesucristo, Rey del Universo" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Le Christ, Roi de l’univers" } }
+      }
+    },
+    "Palm Sunday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Palm Sunday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Domingo de Ramos" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Dimanche des Rameaux" } }
+      }
+    },
+    "Pentecost Sunday": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Pentecost Sunday" } },
+        "es": { "stringUnit": { "state": "translated", "value": "Domingo de Pentecostés" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Dimanche de Pentecôte" } }
+      }
+    },
+    "The Baptism of the Lord": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The Baptism of the Lord" } },
+        "es": { "stringUnit": { "state": "translated", "value": "El Bautismo del Señor" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Le Baptême du Seigneur" } }
+      }
+    },
+    "The Epiphany of the Lord": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The Epiphany of the Lord" } },
+        "es": { "stringUnit": { "state": "translated", "value": "La Epifanía del Señor" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "L’Épiphanie du Seigneur" } }
+      }
+    },
+    "The Holy Family": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The Holy Family" } },
+        "es": { "stringUnit": { "state": "translated", "value": "La Sagrada Familia" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "La Sainte Famille" } }
+      }
+    },
+    "The Most Holy Body and Blood of Christ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The Most Holy Body and Blood of Christ" } },
+        "es": { "stringUnit": { "state": "translated", "value": "El Santísimo Cuerpo y Sangre de Cristo" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Le Très Saint Corps et Sang du Christ" } }
+      }
+    },
+    "The Most Holy Trinity": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The Most Holy Trinity" } },
+        "es": { "stringUnit": { "state": "translated", "value": "La Santísima Trinidad" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "La Sainte Trinité" } }
+      }
+    },
+    "The Most Sacred Heart of Jesus": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The Most Sacred Heart of Jesus" } },
+        "es": { "stringUnit": { "state": "translated", "value": "El Sagrado Corazón de Jesús" } },
+        "fr": { "stringUnit": { "state": "translated", "value": "Le Sacré-Cœur de Jésus" } }
+      }
     }
   },
   "version": "1.0"

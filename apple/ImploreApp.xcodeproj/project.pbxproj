@@ -23,6 +23,7 @@
 		8B3033F088C9C5A41B134E16 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 08AC2D01ADA7F6920CE288A4 /* Shared */; };
 		9676580860F1F3269772EF02 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6919AFC91DCFABD766110A09 /* Appearance.swift */; };
 		9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */; };
+		B043510AD9DC2010BBFFE6C8 /* LiturgicalDay+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */; };
 		B732D0377E04819944429B06 /* core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C314023CD429346511CA770 /* core.swift */; };
 		BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */; };
 		D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */; };
@@ -36,6 +37,7 @@
 		222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		251E98733EC880B827C7660A /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; name = App; path = generated/App; sourceTree = SOURCE_ROOT; };
 		2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentionDetailView.swift; sourceTree = "<group>"; };
+		415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiturgicalDay+Label.swift"; sourceTree = "<group>"; };
 		41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentionColor+UI.swift"; sourceTree = "<group>"; };
 		4C063053B92EB5DBF3FC18EC /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */,
 				2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */,
 				01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */,
+				415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */,
 				222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */,
 				AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */,
 				9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */,
@@ -210,6 +213,7 @@
 				1676BFD570D93F2A5078F9DA /* IntentionColor+UI.swift in Sources */,
 				66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */,
 				9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */,
+				B043510AD9DC2010BBFFE6C8 /* LiturgicalDay+Label.swift in Sources */,
 				1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */,
 				3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */,
 				F97E546352BAE2FFD29C4425 /* SaintPickerView.swift in Sources */,
