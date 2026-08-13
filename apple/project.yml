@@ -30,6 +30,11 @@ targets:
     settings:
       MARKETING_VERSION: ${CARGO_PKG_VERSION}
       CURRENT_PROJECT_VERSION: 1
+      PRODUCT_BUNDLE_IDENTIFIER: com.atgeo.implore
+      TARGETED_DEVICE_FAMILY: "1"
+      CODE_SIGN_STYLE: Automatic
+      DEVELOPMENT_TEAM: GN6M9254RZ
+      CODE_SIGN_IDENTITY: Apple Development
     dependencies:
       - package: Shared
       - package: App
@@ -37,6 +42,10 @@ targets:
       path: ImploreApp/Info-iOS.plist
       properties:
         CFBundleDisplayName: Implore
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        ITSAppUsesNonExemptEncryption: false
+        NSHumanReadableCopyright: "Copyright © 2026 Georges Kmeid. All rights reserved."
         CFBundleLocalizations:
           - en
           - fr

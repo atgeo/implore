@@ -72,6 +72,6 @@ This requires the [AWS CLI](https://aws.amazon.com/cli/) configured with credent
 
 ## License
 
-Copyright © 2026 atgeo. All rights reserved.
+Copyright © 2026 Georges Kmeid. All rights reserved.
 
 This repository is public for viewing only. No license is granted to use, copy, modify, or distribute the source code or content without explicit permission.
