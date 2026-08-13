@@ -12,53 +12,52 @@ struct TodayView: View {
     var body: some View {
         NavigationStack {
             Group {
-                VStack(alignment: .leading, spacing: 0) {
-                    if let day = core.view.liturgicalDay {
-                        Text(day.title(locale: locale))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 20)
-                            .padding(.top, 4)
-                            .padding(.bottom, 8)
-                            .accessibilityAddTraits(.isHeader)
-                    }
-
-                    if todayPrayers.isEmpty {
+                if todayPrayers.isEmpty {
+                    VStack(alignment: .leading, spacing: 0) {
+                        liturgicalHeading
                         ContentUnavailableView {
                             Label(emptyTitle, systemImage: "sun.max")
                         } description: {
                             Text(emptyDescription)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
-                        List {
-                            ForEach(todayPrayers, id: \.id) { prayer in
-                                Section {
-                                    HStack(spacing: 12) {
-                                        PrayerToggle(
-                                            prayed: TodaySelection.prayedToday(prayer)
-                                        ) {
-                                            logPrayer(prayer.id)
-                                        }
+                    }
+                } else {
+                    List {
+                        if core.view.liturgicalDay != nil {
+                            liturgicalHeading
+                                // Match the large navigation title’s leading edge
+                                // (insetGrouped already supplies the outer margin).
+                                .listRowInsets(EdgeInsets(top: 2, leading: 0, bottom: 6, trailing: 0))
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                        }
 
-                                        NavigationLink {
-                                            IntentionDetailView(core: core, prayer: prayer)
-                                        } label: {
-                                            TodayIntentionRow(
-                                                prayer: prayer,
-                                                prayedToday: TodaySelection.prayedToday(prayer)
-                                            )
-                                        }
+                        ForEach(todayPrayers, id: \.id) { prayer in
+                            Section {
+                                HStack(spacing: 12) {
+                                    PrayerToggle(
+                                        prayed: TodaySelection.prayedToday(prayer)
+                                    ) {
+                                        logPrayer(prayer.id)
                                     }
-                                    .listRowBackground(IntentionRowBackground(color: prayer.color))
-                                    .listRowSeparator(.hidden)
+
+                                    NavigationLink {
+                                        IntentionDetailView(core: core, prayer: prayer)
+                                    } label: {
+                                        TodayIntentionRow(
+                                            prayer: prayer,
+                                            prayedToday: TodaySelection.prayedToday(prayer)
+                                        )
+                                    }
                                 }
+                                .listRowBackground(IntentionRowBackground(color: prayer.color))
+                                .listRowSeparator(.hidden)
                             }
                         }
-                        .listStyle(.insetGrouped)
-                        .listSectionSpacing(12)
                     }
+                    .listStyle(.insetGrouped)
+                    .listSectionSpacing(12)
                 }
             }
             .background(Color(.systemGroupedBackground))
@@ -73,6 +72,20 @@ struct TodayView: View {
                     .accessibilityLabel("Settings")
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private var liturgicalHeading: some View {
+        if let day = core.view.liturgicalDay {
+            Text(day.title(locale: locale))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, todayPrayers.isEmpty ? 16 : 0)
+                .padding(.top, todayPrayers.isEmpty ? 4 : 0)
+                .padding(.bottom, todayPrayers.isEmpty ? 8 : 0)
+                .accessibilityAddTraits(.isHeader)
         }
     }
 
