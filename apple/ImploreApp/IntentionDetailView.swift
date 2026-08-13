@@ -31,14 +31,14 @@ struct IntentionDetailView: View {
             Section {
                 Text(prayer.intention)
             } header: {
-                Text("Intention")
+                FormSectionHeader("Intention")
             }
 
             if let details = prayer.details, !details.isEmpty {
                 Section {
                     Text(details)
                 } header: {
-                    Text("Details")
+                    FormSectionHeader("Details")
                 }
             }
 
@@ -47,7 +47,7 @@ struct IntentionDetailView: View {
                     Text(prayer.tags.joined(separator: " · "))
                         .foregroundStyle(.secondary)
                 } header: {
-                    Text("Tags")
+                    FormSectionHeader("Tags")
                 }
             }
 
@@ -62,7 +62,7 @@ struct IntentionDetailView: View {
                         }
                     }
                 } header: {
-                    Text("Saint")
+                    FormSectionHeader("Saint")
                 }
             }
 
@@ -75,7 +75,7 @@ struct IntentionDetailView: View {
                 Section {
                     Text(cadenceTitle)
                 } header: {
-                    Text("Schedule")
+                    FormSectionHeader("Schedule")
                 }
             }
 
@@ -83,7 +83,7 @@ struct IntentionDetailView: View {
                 Section {
                     PrayerLogAction(action: addPrayerLogEntry)
                 } header: {
-                    Text("Prayer")
+                    FormSectionHeader("Prayer")
                 }
 
                 prayerLogSection(allowDelete: true)
@@ -125,7 +125,7 @@ struct IntentionDetailView: View {
                         }
                 }
             } header: {
-                Text("Prayer log")
+                FormSectionHeader("Prayer log")
             } footer: {
                 prayerLogFooter
             }

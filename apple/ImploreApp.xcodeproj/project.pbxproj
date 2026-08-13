@@ -12,6 +12,7 @@
 		171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */; };
 		1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */; };
 		25173897BB93CC95D57F46EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */; };
+		360DA44C38731A4205091E4E /* FormSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */; };
 		3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */; };
 		389DF26533FF689BD74F64D1 /* SaintsCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7936D1F6A777C1833B00DCC /* SaintsCatalog.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
@@ -38,6 +39,7 @@
 		41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentionColor+UI.swift"; sourceTree = "<group>"; };
 		4C063053B92EB5DBF3FC18EC /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionHeader.swift; sourceTree = "<group>"; };
 		6919AFC91DCFABD766110A09 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6EAF73DC58567A1DDAA75AC4 /* TodaySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySelection.swift; sourceTree = "<group>"; };
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */,
 				61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */,
 				8C314023CD429346511CA770 /* core.swift */,
+				660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */,
 				88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */,
 				41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */,
 				2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */,
@@ -202,6 +205,7 @@
 				7B3EA9012A7B3313FC38DE5C /* AppLanguage.swift in Sources */,
 				9676580860F1F3269772EF02 /* Appearance.swift in Sources */,
 				FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */,
+				360DA44C38731A4205091E4E /* FormSectionHeader.swift in Sources */,
 				BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */,
 				1676BFD570D93F2A5078F9DA /* IntentionColor+UI.swift in Sources */,
 				66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */,

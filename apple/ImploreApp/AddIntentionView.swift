@@ -45,7 +45,7 @@ struct AddIntentionView: View {
             Section {
                 TextField("Someone you are carrying", text: $intention)
             } header: {
-                Text("Intention")
+                FormSectionHeader("Intention")
             } footer: {
                 Text("A person, family, or cause to pray for.")
             }
@@ -54,7 +54,7 @@ struct AddIntentionView: View {
                 TextField("Details", text: $details, axis: .vertical)
                     .lineLimit(3...6)
             } header: {
-                Text("Details")
+                FormSectionHeader("Details")
             } footer: {
                 Text("A private note for this prayer.")
             }
@@ -62,7 +62,7 @@ struct AddIntentionView: View {
             Section {
                 TagEditor(tags: $tags, draft: $tagDraft)
             } header: {
-                Text("Tags")
+                FormSectionHeader("Tags")
             } footer: {
                 Text("Optional. Type a tag and press return.")
             }
@@ -88,7 +88,7 @@ struct AddIntentionView: View {
             Section {
                 IntentionColorPicker(selection: $color)
             } header: {
-                Text("Color")
+                FormSectionHeader("Color")
             } footer: {
                 Text("Optional. A quiet accent on the list.")
             }
