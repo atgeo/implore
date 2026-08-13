@@ -63,6 +63,7 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Settings")
+        .toolbar(.hidden, for: .tabBar)
         .alert(
             "Remove All Intentions?",
             isPresented: $confirmRemoveAll

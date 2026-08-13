@@ -17,7 +17,13 @@ struct IntentionDetailView: View {
     }
 
     private var prayer: Prayer {
-        core.view.prayers.first { $0.id == prayerId } ?? fallback
+        if let match = core.view.prayers.first(where: { $0.id == prayerId }) {
+            return match
+        }
+        if let match = core.view.archivedPrayers.first(where: { $0.id == prayerId }) {
+            return match
+        }
+        return fallback
     }
 
     var body: some View {

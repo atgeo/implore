@@ -3,11 +3,29 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var core: Core
-    @State private var showArchived = false
 
     var body: some View {
-        NavigationStack {
-            IntentionsList(core: core, mode: .active)
+        TabView {
+            TodayView(core: core)
+                .tabItem {
+                    Label("Today", systemImage: "sun.max")
+                }
+
+            IntentionsView(core: core)
+                .tabItem {
+                    Label("Intentions", systemImage: "heart")
+                }
+        }
+    }
+}
+
+struct IntentionsView: View {
+    @ObservedObject var core: Core
+    @State private var path = NavigationPath()
+
+    var body: some View {
+        NavigationStack(path: $path) {
+            IntentionsList(core: core, mode: .active, onAdd: { path.append(IntentionsRoute.add) })
                 .navigationTitle("Intentions")
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -21,37 +39,43 @@ struct ContentView: View {
 
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
-                            showArchived = true
+                            path.append(IntentionsRoute.archived)
                         } label: {
                             Image(systemName: "archivebox")
+                                .foregroundStyle(.primary)
                         }
                         .accessibilityLabel("Archived")
                     }
 
                     ToolbarItem(placement: .primaryAction) {
-                        NavigationLink {
-                            AddIntentionView(core: core)
+                        Button {
+                            path.append(IntentionsRoute.add)
                         } label: {
                             Image(systemName: "plus")
                         }
                         .accessibilityLabel("Add Intention")
                     }
                 }
-                .navigationDestination(isPresented: $showArchived) {
-                    ArchivedIntentionsView(core: core)
-                }
-                .onChange(of: showArchived) { _, presented in
-                    if !presented {
-                        core.update(.setFilter(filter: .active))
+                .navigationDestination(for: IntentionsRoute.self) { route in
+                    switch route {
+                    case .archived:
+                        ArchivedIntentionsView(core: core)
+                    case .add:
+                        AddIntentionView(core: core)
                     }
                 }
                 .onAppear {
-                    if !showArchived, core.view.filter != .active {
+                    if core.view.filter != .active {
                         core.update(.setFilter(filter: .active))
                     }
                 }
         }
     }
+}
+
+private enum IntentionsRoute: Hashable {
+    case archived
+    case add
 }
 
 /// Archived list pushed from the toolbar archive button.
@@ -61,11 +85,8 @@ private struct ArchivedIntentionsView: View {
     var body: some View {
         IntentionsList(core: core, mode: .archived)
             .navigationTitle("Archived")
-            .onAppear {
-                if core.view.filter != .archived {
-                    core.update(.setFilter(filter: .archived))
-                }
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.systemGroupedBackground))
     }
 }
 
@@ -77,60 +98,76 @@ private enum IntentionsListMode {
 private struct IntentionsList: View {
     @ObservedObject var core: Core
     let mode: IntentionsListMode
+    var onAdd: (() -> Void)?
+
+    private var prayers: [Prayer] {
+        switch mode {
+        case .active: core.view.prayers
+        case .archived: core.view.archivedPrayers
+        }
+    }
 
     var body: some View {
-        List {
-            if core.view.prayers.isEmpty {
-                Section {
-                    ContentUnavailableView(
-                        emptyTitle,
-                        systemImage: "heart",
-                        description: Text(emptyDescription)
-                    )
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                }
-            } else {
-                // One section per intention so each row is its own inset card;
-                // the top accent can then follow continuous corners correctly.
-                ForEach(core.view.prayers, id: \.id) { prayer in
-                    Section {
-                        NavigationLink {
-                            IntentionDetailView(core: core, prayer: prayer)
-                        } label: {
-                            IntentionRow(prayer: prayer)
+        Group {
+            if prayers.isEmpty {
+                ContentUnavailableView {
+                    Label(emptyTitle, systemImage: "heart")
+                } description: {
+                    Text(emptyDescription)
+                } actions: {
+                    if mode == .active, let onAdd {
+                        Button("Add Intention", systemImage: "plus") {
+                            onAdd()
                         }
-                        .listRowBackground(IntentionRowBackground(color: prayer.color))
-                        .listRowSeparator(.hidden)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                core.update(.removePrayer(id: prayer.id))
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                List {
+                    // One section per intention so each row is its own inset card;
+                    // the top accent can then follow continuous corners correctly.
+                    ForEach(prayers, id: \.id) { prayer in
+                        Section {
+                            NavigationLink {
+                                IntentionDetailView(core: core, prayer: prayer)
                             } label: {
-                                Label("Delete", systemImage: "trash")
+                                IntentionRow(prayer: prayer)
                             }
+                            .listRowBackground(IntentionRowBackground(color: prayer.color))
+                            .listRowSeparator(.hidden)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    core.update(.removePrayer(id: prayer.id))
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
 
-                            if mode == .active {
-                                Button {
-                                    core.update(.archivePrayer(id: prayer.id))
-                                } label: {
-                                    Label("Archive", systemImage: "archivebox")
+                                if mode == .active {
+                                    Button {
+                                        core.update(.archivePrayer(id: prayer.id))
+                                    } label: {
+                                        Label("Archive", systemImage: "archivebox")
+                                    }
+                                    .tint(.orange)
+                                } else {
+                                    Button {
+                                        core.update(.unarchivePrayer(id: prayer.id))
+                                    } label: {
+                                        Label("Unarchive", systemImage: "tray.and.arrow.up")
+                                    }
+                                    .tint(.blue)
                                 }
-                                .tint(.orange)
-                            } else {
-                                Button {
-                                    core.update(.unarchivePrayer(id: prayer.id))
-                                } label: {
-                                    Label("Unarchive", systemImage: "tray.and.arrow.up")
-                                }
-                                .tint(.blue)
                             }
                         }
                     }
                 }
+                .listStyle(.insetGrouped)
+                .listSectionSpacing(12)
             }
         }
-        .listStyle(.insetGrouped)
-        .listSectionSpacing(12)
+        .background(Color(.systemGroupedBackground))
     }
 
     private var emptyTitle: LocalizedStringKey {

@@ -214,6 +214,12 @@ impl App for Implore {
                 .filter(|prayer| model.filter.matches(prayer.status))
                 .cloned()
                 .collect(),
+            archived_prayers: model
+                .prayers
+                .iter()
+                .filter(|prayer| matches!(prayer.status, PrayerStatus::Archived))
+                .cloned()
+                .collect(),
             reminder_prayers,
             reminder_settings: model.reminder_settings,
             reminder_digests,
@@ -470,6 +476,8 @@ pub struct ViewModel {
     /// True when any intention exists (ignores list filter).
     pub has_prayers: bool,
     pub prayers: Vec<Prayer>,
+    /// Archived intentions (ignores list filter) for the Archived screen.
+    pub archived_prayers: Vec<Prayer>,
     /// Active intentions with a schedule, for local reminder digests (ignore list filter).
     pub reminder_prayers: Vec<Prayer>,
     pub reminder_settings: ReminderSettings,
@@ -483,6 +491,7 @@ impl Default for ViewModel {
             filter: IntentionFilter::default(),
             has_prayers: false,
             prayers: Vec::new(),
+            archived_prayers: Vec::new(),
             reminder_prayers: Vec::new(),
             reminder_settings: ReminderSettings::default(),
             reminder_digests: Vec::new(),
@@ -804,6 +813,10 @@ mod test {
         assert_eq!(
             app.view(&model).prayers,
             vec![prayer(1, "Dad", None, &[], PrayerStatus::Active)]
+        );
+        assert_eq!(
+            app.view(&model).archived_prayers,
+            vec![prayer(0, "Mom", None, &[], PrayerStatus::Archived)]
         );
         assert_eq!(model.prayers[0].status, PrayerStatus::Archived);
     }
