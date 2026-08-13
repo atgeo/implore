@@ -10,6 +10,7 @@
 		0551B0510554C64835B7A27E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC33549E306444FE996F54E /* SettingsView.swift */; };
 		171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */; };
 		1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */; };
+		25173897BB93CC95D57F46EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */; };
 		3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */; };
 		389DF26533FF689BD74F64D1 /* SaintsCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7936D1F6A777C1833B00DCC /* SaintsCatalog.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
@@ -42,6 +43,7 @@
 		D1D3C646D12BD2AFA50041E1 /* SaintPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintPickerView.swift; sourceTree = "<group>"; };
 		DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		E34EB11125ADB78C27A5BDB1 /* ImploreApp-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "ImploreApp-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7936D1F6A777C1833B00DCC /* SaintsCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintsCatalog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */,
 				6919AFC91DCFABD766110A09 /* Appearance.swift */,
 				DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */,
+				E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */,
 				61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */,
 				8C314023CD429346511CA770 /* core.swift */,
 				88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */,
@@ -174,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25173897BB93CC95D57F46EF /* Assets.xcassets in Resources */,
 				171C8604FD06085E5A421E64 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
