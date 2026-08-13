@@ -68,7 +68,7 @@ struct TodayView: View {
 
     private var emptyDescription: LocalizedStringKey {
         core.view.hasPrayers
-            ? "Scheduled intentions due today will appear here. Add a daily schedule from Intentions."
+            ? "Nothing is due today. Set a schedule on an intention to see it here."
             : "Add someone you are carrying in prayer from the Intentions tab."
     }
 

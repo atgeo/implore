@@ -1157,6 +1157,30 @@
         }
       }
     },
+    "Nothing is due today. Set a schedule on an intention to see it here.": {
+      "comment": "Empty-state description when intentions exist but none are due today.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing is due today. Set a schedule on an intention to see it here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada corresponde hoy. Programa una intención para verla aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n’est prévu aujourd’hui. Ajoutez un horaire à une intention pour la voir ici."
+          }
+        }
+      }
+    },
     "Nothing set aside": {
       "comment": "Empty-state title when the Archived list has no intentions.",
       "extractionState": "manual",
@@ -1657,30 +1681,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rythme"
-          }
-        }
-      }
-    },
-    "Scheduled intentions due today will appear here. Add a daily schedule from Intentions.": {
-      "comment": "Empty-state description when intentions exist but none are due today.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scheduled intentions due today will appear here. Add a daily schedule from Intentions."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las intenciones programadas para hoy aparecerán aquí. Añade un horario diario desde Intenciones."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les intentions prévues pour aujourd’hui apparaîtront ici. Ajoutez une récurrence quotidienne depuis Intentions."
           }
         }
       }
