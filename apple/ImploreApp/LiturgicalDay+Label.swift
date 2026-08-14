@@ -2,7 +2,7 @@ import App
 import SwiftUI
 
 extension LiturgicalDay {
-    /// Localized temporal-cycle title for Today. Saint feasts are separate.
+    /// Localized temporal-cycle title for Today. Named observances come from the catalog.
     func title(locale: Locale) -> LocalizedStringKey {
         switch self {
         case let .ordinaryTime(week, weekday):

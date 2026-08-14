@@ -1,0 +1,1324 @@
+{
+  "version": 1,
+  "locale": "es",
+  "observances": [
+    {
+      "id": "st-mary",
+      "name": "María, Madre de Dios",
+      "companion": true,
+      "date": "01-01",
+      "patronage": [
+        "toda la humanidad",
+        "madres",
+        "la Iglesia"
+      ],
+      "summary": "Solemnidad de María, Madre de Dios; octava de Navidad.",
+      "rank": "solemnity"
+    },
+    {
+      "id": "st-basil-the-great",
+      "name": "San Basilio Magno",
+      "companion": true,
+      "date": "01-02",
+      "patronage": [
+        "monjes",
+        "personal hospitalario",
+        "reformadores"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia; padre del monacato oriental.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-gregory-nazianzen",
+      "name": "San Gregorio Nacianceno",
+      "companion": true,
+      "date": "01-02",
+      "patronage": [
+        "teólogos",
+        "poetas"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, llamado el Teólogo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-hilary-of-poitiers",
+      "name": "San Hilario de Poitiers",
+      "companion": true,
+      "date": "01-13",
+      "patronage": [
+        "teólogos",
+        "contra la herejía"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia que defendió la divinidad de Cristo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-agnes",
+      "name": "Santa Inés",
+      "companion": true,
+      "date": "01-21",
+      "patronage": [
+        "jóvenes",
+        "castidad",
+        "jardineros"
+      ],
+      "summary": "Virgen y mártir de Roma, firme en la fe.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-francis-de-sales",
+      "name": "San Francisco de Sales",
+      "companion": true,
+      "date": "01-24",
+      "patronage": [
+        "escritores",
+        "sordos",
+        "periodistas"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, dulce guía de la vida devota.",
+      "rank": "memorial"
+    },
+    {
+      "id": "conversion-st-paul",
+      "name": "Conversión de san Pablo apóstol",
+      "date": "01-25",
+      "rank": "feast",
+      "companion": false,
+      "summary": "El apóstol Pablo pasó de perseguidor a predicador de Cristo."
+    },
+    {
+      "id": "st-thomas-aquinas",
+      "name": "Santo Tomás de Aquino",
+      "companion": true,
+      "date": "01-28",
+      "patronage": [
+        "estudiantes",
+        "teólogos",
+        "universidades"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia, el Doctor Angélico.",
+      "rank": "memorial"
+    },
+    {
+      "id": "presentation-of-the-lord",
+      "name": "Presentación del Señor",
+      "date": "02-02",
+      "rank": "feast",
+      "companion": false,
+      "summary": "Jesús presentado en el Templo; Candelaria."
+    },
+    {
+      "id": "st-blaise",
+      "name": "San Blas",
+      "companion": true,
+      "date": "02-03",
+      "patronage": [
+        "enfermedades de la garganta",
+        "animales",
+        "cardadores"
+      ],
+      "summary": "Obispo y mártir invocado por las dolencias de la garganta.",
+      "rank": "memorial"
+    },
+    {
+      "id": "our-lady-of-lourdes",
+      "name": "Nuestra Señora de Lourdes",
+      "companion": true,
+      "date": "02-11",
+      "patronage": [
+        "enfermos",
+        "sanación",
+        "peregrinos"
+      ],
+      "summary": "María bajo el título de Lourdes, patrona de los enfermos y de la sanación.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-peter-damian",
+      "name": "San Pedro Damián",
+      "companion": true,
+      "date": "02-21",
+      "patronage": [
+        "reformadores",
+        "renovación de la Iglesia"
+      ],
+      "summary": "Obispo, cardenal y Doctor de la Iglesia que trabajó por la reforma eclesial.",
+      "rank": "memorial"
+    },
+    {
+      "id": "chair-of-st-peter",
+      "name": "Cátedra de san Pedro apóstol",
+      "date": "02-22",
+      "rank": "feast",
+      "companion": false,
+      "summary": "Fiesta del oficio pastoral de Pedro y de sus sucesores."
+    },
+    {
+      "id": "st-gregory-of-narek",
+      "name": "San Gregorio de Narek",
+      "companion": true,
+      "date": "02-27",
+      "patronage": [
+        "Armenia",
+        "místicos",
+        "poetas"
+      ],
+      "summary": "Abad y Doctor de la Iglesia, poeta místico de Armenia.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-patrick",
+      "name": "San Patricio",
+      "companion": true,
+      "date": "03-17",
+      "patronage": [
+        "Irlanda",
+        "ingenieros",
+        "excluidos"
+      ],
+      "summary": "Obispo que llevó el Evangelio a Irlanda.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-cyril-of-jerusalem",
+      "name": "San Cirilo de Jerusalén",
+      "companion": true,
+      "date": "03-18",
+      "patronage": [
+        "catequistas",
+        "maestros de la fe"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, maestro de la catequesis.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-joseph",
+      "name": "San José, esposo de la Virgen María",
+      "companion": true,
+      "date": "03-19",
+      "patronage": [
+        "trabajadores",
+        "padres",
+        "la Iglesia"
+      ],
+      "summary": "Solemnidad de san José, custodio del Redentor.",
+      "rank": "solemnity"
+    },
+    {
+      "id": "annunciation",
+      "name": "Anunciación del Señor",
+      "date": "03-25",
+      "rank": "solemnity",
+      "companion": false,
+      "summary": "El ángel Gabriel anuncia a María que concebirá al Hijo de Dios."
+    },
+    {
+      "id": "st-isidore-of-seville",
+      "name": "San Isidoro de Sevilla",
+      "companion": true,
+      "date": "04-04",
+      "patronage": [
+        "internet",
+        "estudiantes",
+        "informática"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, maestro enciclopédico de Occidente.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-anselm",
+      "name": "San Anselmo de Canterbury",
+      "companion": true,
+      "date": "04-21",
+      "patronage": [
+        "filósofos",
+        "teólogos"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, padre de la escolástica.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-catherine-of-siena",
+      "name": "Santa Catalina de Siena",
+      "companion": true,
+      "date": "04-29",
+      "patronage": [
+        "Italia",
+        "enfermeras",
+        "prevención de incendios"
+      ],
+      "summary": "Terciaria dominica y Doctora de la Iglesia al servicio de la unidad.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-joseph-the-worker",
+      "name": "San José Obrero",
+      "companion": true,
+      "date": "05-01",
+      "patronage": [
+        "trabajadores",
+        "obreros",
+        "justicia social"
+      ],
+      "summary": "José honrado como patrón del trabajo humano.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-peregrine",
+      "name": "San Peregrino Laziosi",
+      "companion": true,
+      "date": "05-01",
+      "patronage": [
+        "personas con cáncer",
+        "enfermos"
+      ],
+      "summary": "Santo servita invocado por la sanación, especialmente del cáncer.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-athanasius",
+      "name": "San Atanasio",
+      "companion": true,
+      "date": "05-02",
+      "patronage": [
+        "ortodoxia",
+        "contra el arrianismo"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia que defendió la divinidad de Cristo en Nicea.",
+      "rank": "memorial"
+    },
+    {
+      "id": "sts-philip-and-james",
+      "name": "Santos Felipe y Santiago, apóstoles",
+      "companion": true,
+      "date": "05-03",
+      "patronage": [
+        "apóstoles",
+        "misioneros"
+      ],
+      "summary": "Apóstoles recordados juntos en el calendario romano general.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-john-of-avila",
+      "name": "San Juan de Ávila",
+      "companion": true,
+      "date": "05-10",
+      "patronage": [
+        "España",
+        "clero diocesano",
+        "directores espirituales"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia, apóstol de Andalucía.",
+      "rank": "memorial"
+    },
+    {
+      "id": "our-lady-of-fatima",
+      "name": "Nuestra Señora de Fátima",
+      "companion": true,
+      "date": "05-13",
+      "patronage": [
+        "paz",
+        "conversión",
+        "el Rosario"
+      ],
+      "summary": "María que se apareció en Fátima llamando a la oración, la penitencia y la paz.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-matthias",
+      "name": "San Matías, apóstol",
+      "companion": true,
+      "date": "05-14",
+      "patronage": [
+        "sastres",
+        "alcohólicos",
+        "carpinteros"
+      ],
+      "summary": "Apóstol elegido para ocupar el lugar de Judas.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-rita-of-cascia",
+      "name": "Santa Rita de Casia",
+      "companion": true,
+      "date": "05-22",
+      "patronage": [
+        "causas imposibles",
+        "matrimonio",
+        "esposas maltratadas"
+      ],
+      "summary": "Monja agustina conocida como la santa de lo imposible.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-bede-the-venerable",
+      "name": "San Beda el Venerable",
+      "companion": true,
+      "date": "05-25",
+      "patronage": [
+        "historiadores",
+        "escritores ingleses",
+        "eruditos"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia, historiador de la Iglesia de Inglaterra.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-joan-of-arc",
+      "name": "Santa Juana de Arco",
+      "companion": true,
+      "date": "05-30",
+      "patronage": [
+        "Francia",
+        "soldados",
+        "prisioneros"
+      ],
+      "summary": "Virgen y mártir que condujo a Francia a la victoria y permaneció fiel hasta la muerte.",
+      "rank": "memorial"
+    },
+    {
+      "id": "visitation-bvm",
+      "name": "Visitación de la Virgen María",
+      "date": "05-31",
+      "rank": "feast",
+      "companion": false,
+      "summary": "María visita a Isabel, llevando a Cristo y proclamando el Magníficat."
+    },
+    {
+      "id": "st-ephrem",
+      "name": "San Efrén el Sirio",
+      "companion": true,
+      "date": "06-09",
+      "patronage": [
+        "escritores espirituales",
+        "diáconos"
+      ],
+      "summary": "Diácono y Doctor de la Iglesia, el Arpa del Espíritu Santo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-anthony-of-padua",
+      "name": "San Antonio de Padua",
+      "companion": true,
+      "date": "06-13",
+      "patronage": [
+        "cosas perdidas",
+        "pobres",
+        "viajeros"
+      ],
+      "summary": "Predicador franciscano y Doctor de la Iglesia.",
+      "rank": "memorial"
+    },
+    {
+      "id": "nativity-john-baptist",
+      "name": "Natividad de san Juan Bautista",
+      "date": "06-24",
+      "rank": "solemnity",
+      "companion": false,
+      "summary": "El nacimiento del Precursor que preparó el camino del Señor."
+    },
+    {
+      "id": "st-cyril-of-alexandria",
+      "name": "San Cirilo de Alejandría",
+      "companion": true,
+      "date": "06-27",
+      "patronage": [
+        "defensores de María",
+        "teólogos"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia que defendió a María como Madre de Dios.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-irenaeus",
+      "name": "San Ireneo de Lyon",
+      "companion": true,
+      "date": "06-28",
+      "patronage": [
+        "contra la herejía",
+        "unidad de la Iglesia"
+      ],
+      "summary": "Obispo, mártir y Doctor de la Iglesia que enseñó la fe de los apóstoles.",
+      "rank": "memorial"
+    },
+    {
+      "id": "sts-peter-and-paul",
+      "name": "Santos Pedro y Pablo, apóstoles",
+      "companion": true,
+      "date": "06-29",
+      "patronage": [
+        "Roma",
+        "la Iglesia",
+        "misioneros"
+      ],
+      "summary": "Solemnidad de los príncipes de los apóstoles.",
+      "rank": "solemnity"
+    },
+    {
+      "id": "st-thomas-apostle",
+      "name": "Santo Tomás, apóstol",
+      "companion": true,
+      "date": "07-03",
+      "patronage": [
+        "India",
+        "arquitectos",
+        "quien duda"
+      ],
+      "summary": "Apóstol que confesó: «Señor mío y Dios mío.»",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-benedict",
+      "name": "San Benito",
+      "companion": true,
+      "date": "07-11",
+      "patronage": [
+        "Europa",
+        "monjes",
+        "contra el veneno"
+      ],
+      "summary": "Abad y patrón de Europa; padre del monacato occidental.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-bonaventure",
+      "name": "San Buenaventura",
+      "companion": true,
+      "date": "07-15",
+      "patronage": [
+        "franciscanos",
+        "teólogos"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, el Doctor Seráfico.",
+      "rank": "memorial"
+    },
+    {
+      "id": "our-lady-of-mount-carmel",
+      "name": "Nuestra Señora del Carmen",
+      "companion": true,
+      "date": "07-16",
+      "patronage": [
+        "carmelitas",
+        "el escapulario",
+        "contemplativos"
+      ],
+      "summary": "María, patrona de la Orden del Carmen y de quienes llevan su escapulario.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-lawrence-of-brindisi",
+      "name": "San Lorenzo de Brindis",
+      "companion": true,
+      "date": "07-21",
+      "patronage": [
+        "predicadores",
+        "capuchinos"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia, predicador capuchino y exegeta.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-mary-magdalene",
+      "name": "Santa María Magdalena",
+      "companion": true,
+      "date": "07-22",
+      "patronage": [
+        "penitentes",
+        "conversos",
+        "boticarios"
+      ],
+      "summary": "Apóstol de los apóstoles y primera testigo de la Resurrección.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-james",
+      "name": "Santiago el Mayor, apóstol",
+      "companion": true,
+      "date": "07-25",
+      "patronage": [
+        "peregrinos",
+        "España",
+        "obreros"
+      ],
+      "summary": "Apóstol y santo peregrino de Compostela.",
+      "rank": "memorial"
+    },
+    {
+      "id": "sts-joachim-and-anne",
+      "name": "Santos Joaquín y Ana",
+      "companion": true,
+      "date": "07-26",
+      "patronage": [
+        "abuelos",
+        "padres",
+        "madres"
+      ],
+      "summary": "Padres de la Virgen María.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-martha-mary-lazarus",
+      "name": "Santos Marta, María y Lázaro",
+      "companion": true,
+      "date": "07-29",
+      "patronage": [
+        "hospitalidad",
+        "hermanos",
+        "anfitriones"
+      ],
+      "summary": "Amigos de Jesús en Betania; memoria de la hospitalidad cristiana.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-peter-chrysologus",
+      "name": "San Pedro Crisólogo",
+      "companion": true,
+      "date": "07-30",
+      "patronage": [
+        "predicadores",
+        "obispos"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, de la palabra de oro.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-ignatius-of-loyola",
+      "name": "San Ignacio de Loyola",
+      "companion": true,
+      "date": "07-31",
+      "patronage": [
+        "jesuitas",
+        "ejercicios",
+        "soldados"
+      ],
+      "summary": "Fundador de la Compañía de Jesús y maestro del discernimiento.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-alphonsus-liguori",
+      "name": "San Alfonso María de Ligorio",
+      "companion": true,
+      "date": "08-01",
+      "patronage": [
+        "teólogos morales",
+        "confesores",
+        "artritis"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, fundador de los Redentoristas.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-john-vianney",
+      "name": "San Juan María Vianney",
+      "companion": true,
+      "date": "08-04",
+      "patronage": [
+        "párrocos",
+        "confesores"
+      ],
+      "summary": "Cura de Ars, patrón de los sacerdotes parroquiales.",
+      "rank": "memorial"
+    },
+    {
+      "id": "dedication-st-mary-major",
+      "name": "Dedicación de la basílica de Santa María la Mayor",
+      "date": "08-05",
+      "rank": "feast",
+      "companion": false,
+      "summary": "Fiesta de la dedicación de Santa María la Mayor, iglesia madre de la devoción mariana en Roma."
+    },
+    {
+      "id": "transfiguration",
+      "name": "Transfiguración del Señor",
+      "date": "08-06",
+      "rank": "feast",
+      "companion": false,
+      "summary": "Cristo revelado en gloria en el monte."
+    },
+    {
+      "id": "st-dominic",
+      "name": "Santo Domingo de Guzmán",
+      "companion": true,
+      "date": "08-08",
+      "patronage": [
+        "dominicos",
+        "astrónomos",
+        "el Rosario"
+      ],
+      "summary": "Fundador de la Orden de Predicadores.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-clare",
+      "name": "Santa Clara de Asís",
+      "companion": true,
+      "date": "08-11",
+      "patronage": [
+        "televisión",
+        "enfermedades de los ojos",
+        "bordadoras"
+      ],
+      "summary": "Fundadora de las Clarisas y compañera de san Francisco.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-maximilian-kolbe",
+      "name": "San Maximiliano Kolbe",
+      "companion": true,
+      "date": "08-14",
+      "patronage": [
+        "prisioneros",
+        "drogadictos",
+        "periodistas"
+      ],
+      "summary": "Sacerdote franciscano y mártir que dio su vida por otro en Auschwitz.",
+      "rank": "memorial"
+    },
+    {
+      "id": "assumption-bvm",
+      "name": "Asunción de la Virgen María",
+      "date": "08-15",
+      "rank": "solemnity",
+      "companion": false,
+      "summary": "María asunta en cuerpo y alma a la gloria del cielo."
+    },
+    {
+      "id": "st-bernard-of-clairvaux",
+      "name": "San Bernardo de Claraval",
+      "companion": true,
+      "date": "08-20",
+      "patronage": [
+        "cistercienses",
+        "apicultores",
+        "predicadores"
+      ],
+      "summary": "Abad y Doctor de la Iglesia, el Doctor Melifluo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "queenship-of-mary",
+      "name": "Realeza de la Virgen María",
+      "date": "08-22",
+      "rank": "memorial",
+      "companion": false,
+      "summary": "María honrada como Reina del cielo y de la tierra."
+    },
+    {
+      "id": "st-monica",
+      "name": "Santa Mónica",
+      "companion": true,
+      "date": "08-27",
+      "patronage": [
+        "madres",
+        "alcohólicos",
+        "esposas"
+      ],
+      "summary": "Madre de san Agustín, modelo de oración perseverante.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-augustine",
+      "name": "San Agustín de Hipona",
+      "companion": true,
+      "date": "08-28",
+      "patronage": [
+        "teólogos",
+        "cerveceros",
+        "impresores"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, el Doctor de la Gracia.",
+      "rank": "memorial"
+    },
+    {
+      "id": "beheading-john-baptist",
+      "name": "Pasión de san Juan Bautista",
+      "date": "08-29",
+      "rank": "memorial",
+      "companion": false,
+      "summary": "El martirio del Precursor que testimonió la verdad."
+    },
+    {
+      "id": "st-gregory-the-great",
+      "name": "San Gregorio Magno",
+      "companion": true,
+      "date": "09-03",
+      "patronage": [
+        "maestros",
+        "músicos",
+        "papas"
+      ],
+      "summary": "Papa y Doctor de la Iglesia que configuró la liturgia y la pastoral de Occidente.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-teresa-of-calcutta",
+      "name": "Santa Teresa de Calcuta",
+      "companion": true,
+      "date": "09-05",
+      "patronage": [
+        "los más pobres",
+        "Misioneras de la Caridad"
+      ],
+      "summary": "Fundadora que sirvió a Cristo en los más pobres de los pobres.",
+      "rank": "memorial"
+    },
+    {
+      "id": "nativity-of-mary",
+      "name": "Natividad de la Virgen María",
+      "date": "09-08",
+      "rank": "feast",
+      "companion": false,
+      "summary": "El nacimiento de María, aurora de la salvación."
+    },
+    {
+      "id": "holy-name-of-mary",
+      "name": "Santísimo Nombre de María",
+      "date": "09-12",
+      "rank": "memorial",
+      "companion": false,
+      "summary": "En honor del santo nombre de la Madre de Dios."
+    },
+    {
+      "id": "st-john-chrysostom",
+      "name": "San Juan Crisóstomo",
+      "companion": true,
+      "date": "09-13",
+      "patronage": [
+        "predicadores",
+        "oradores",
+        "epilepsia"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, de la boca de oro.",
+      "rank": "memorial"
+    },
+    {
+      "id": "exaltation-of-the-holy-cross",
+      "name": "Exaltación de la Santa Cruz",
+      "date": "09-14",
+      "rank": "feast",
+      "companion": false,
+      "summary": "La Cruz levantada como signo de salvación."
+    },
+    {
+      "id": "our-lady-of-sorrows",
+      "name": "Nuestra Señora de los Dolores",
+      "companion": true,
+      "date": "09-15",
+      "patronage": [
+        "afligidos",
+        "padres",
+        "compasión"
+      ],
+      "summary": "María que compartió la Pasión de su Hijo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-robert-bellarmine",
+      "name": "San Roberto Belarmino",
+      "companion": true,
+      "date": "09-17",
+      "patronage": [
+        "catequistas",
+        "canonistas"
+      ],
+      "summary": "Obispo, cardenal y Doctor de la Iglesia, defensor de la fe.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-hildegard-of-bingen",
+      "name": "Santa Hildegarda de Bingen",
+      "companion": true,
+      "date": "09-17",
+      "patronage": [
+        "músicos",
+        "escritores",
+        "naturalistas"
+      ],
+      "summary": "Abadesa, virgen y Doctora de la Iglesia, visionaria y compositora.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-padre-pio",
+      "name": "San Pío de Pietrelcina",
+      "companion": true,
+      "date": "09-23",
+      "patronage": [
+        "confesores",
+        "voluntarios de protección civil"
+      ],
+      "summary": "Fraile capuchino conocido por sus estigmas y su ministerio en el confesionario.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-vincent-de-paul",
+      "name": "San Vicente de Paúl",
+      "companion": true,
+      "date": "09-27",
+      "patronage": [
+        "obras de caridad",
+        "hospitales",
+        "voluntarios"
+      ],
+      "summary": "Sacerdote que organizó la caridad por los pobres y abandonados.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-gabriel",
+      "name": "San Gabriel Arcángel",
+      "companion": true,
+      "date": "09-29",
+      "patronage": [
+        "mensajeros",
+        "comunicaciones",
+        "empleados de correos"
+      ],
+      "summary": "Arcángel que anunció la Encarnación a María.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-michael",
+      "name": "San Miguel Arcángel",
+      "companion": true,
+      "date": "09-29",
+      "patronage": [
+        "policías",
+        "soldados",
+        "la Iglesia"
+      ],
+      "summary": "Jefe de los ejércitos celestiales y protector contra el mal.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-raphael",
+      "name": "San Rafael Arcángel",
+      "companion": true,
+      "date": "09-29",
+      "patronage": [
+        "viajeros",
+        "ciegos",
+        "encuentros felices"
+      ],
+      "summary": "Arcángel de la sanación y del viaje de Tobías.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-jerome",
+      "name": "San Jerónimo",
+      "companion": true,
+      "date": "09-30",
+      "patronage": [
+        "exegetas",
+        "bibliotecarios",
+        "traductores"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia que tradujo la Biblia al latín (la Vulgata).",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-therese-of-lisieux",
+      "name": "Santa Teresa de Lisieux",
+      "companion": true,
+      "date": "10-01",
+      "patronage": [
+        "misioneros",
+        "floristas",
+        "enfermos"
+      ],
+      "summary": "Monja carmelita y Doctora de la Iglesia que enseñó el Caminito de confianza y amor.",
+      "rank": "memorial"
+    },
+    {
+      "id": "holy-guardian-angels",
+      "name": "Santos Ángeles Custodios",
+      "companion": true,
+      "date": "10-02",
+      "patronage": [
+        "niños",
+        "protección",
+        "viajeros"
+      ],
+      "summary": "Los ángeles que Dios da para guardar a cada persona.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-francis-of-assisi",
+      "name": "San Francisco de Asís",
+      "companion": true,
+      "date": "10-04",
+      "patronage": [
+        "animales",
+        "ecología",
+        "comerciantes"
+      ],
+      "summary": "Fundador de los franciscanos y amante de la pobreza y la creación.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-faustina",
+      "name": "Santa Faustina Kowalska",
+      "companion": true,
+      "date": "10-05",
+      "patronage": [
+        "Divina Misericordia",
+        "místicos"
+      ],
+      "summary": "Apóstol de la Divina Misericordia.",
+      "rank": "memorial"
+    },
+    {
+      "id": "our-lady-of-the-rosary",
+      "name": "Nuestra Señora del Rosario",
+      "companion": true,
+      "date": "10-07",
+      "patronage": [
+        "el Rosario",
+        "paz",
+        "familias"
+      ],
+      "summary": "María que guía a la Iglesia por la oración del Rosario.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-john-henry-newman",
+      "name": "San John Henry Newman",
+      "companion": true,
+      "date": "10-09",
+      "patronage": [
+        "conversos",
+        "educadores",
+        "teólogos"
+      ],
+      "summary": "Cardenal y Doctor de la Iglesia que guió a los buscadores hacia la plenitud de la fe.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-teresa-of-avila",
+      "name": "Santa Teresa de Jesús",
+      "companion": true,
+      "date": "10-15",
+      "patronage": [
+        "España",
+        "religiosos",
+        "dolores de cabeza"
+      ],
+      "summary": "Reformadora del Carmelo y Doctora de la Iglesia, maestra de oración.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-gerard-majella",
+      "name": "San Gerardo Maiella",
+      "companion": true,
+      "date": "10-16",
+      "patronage": [
+        "embarazadas",
+        "familias"
+      ],
+      "summary": "Hermano redentorista invocado por un parto seguro y la maternidad.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-luke",
+      "name": "San Lucas, evangelista",
+      "companion": true,
+      "date": "10-18",
+      "patronage": [
+        "médicos",
+        "artistas",
+        "carniceros"
+      ],
+      "summary": "Evangelista y compañero de san Pablo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-jude",
+      "name": "Santos Simón y Judas, apóstoles",
+      "companion": true,
+      "date": "10-28",
+      "patronage": [
+        "causas desesperadas",
+        "situaciones desesperadas"
+      ],
+      "summary": "Apóstoles; Judas es patrón de los casos difíciles (también listado solo).",
+      "rank": "feast"
+    },
+    {
+      "id": "all-saints",
+      "name": "Todos los Santos",
+      "date": "11-01",
+      "rank": "solemnity",
+      "companion": false,
+      "summary": "Solemnidad de todos los santos del cielo."
+    },
+    {
+      "id": "all-souls",
+      "name": "Conmemoración de todos los fieles difuntos",
+      "date": "11-02",
+      "rank": "commemoration",
+      "companion": false,
+      "summary": "Día de los Fieles Difuntos; oración por los muertos."
+    },
+    {
+      "id": "st-martin-de-porres",
+      "name": "San Martín de Porres",
+      "companion": true,
+      "date": "11-03",
+      "patronage": [
+        "armonía racial",
+        "justicia social",
+        "barberos"
+      ],
+      "summary": "Hermano dominico de Lima, conocido por su caridad y humildad.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-charles-borromeo",
+      "name": "San Carlos Borromeo",
+      "companion": true,
+      "date": "11-04",
+      "patronage": [
+        "obispos",
+        "catequistas",
+        "úlceras"
+      ],
+      "summary": "Obispo y reformador de la Iglesia después de Trento.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-leo-the-great",
+      "name": "San León Magno",
+      "companion": true,
+      "date": "11-10",
+      "patronage": [
+        "papas",
+        "confesores"
+      ],
+      "summary": "Papa y Doctor de la Iglesia que enseñó el misterio de la Encarnación.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-martin-of-tours",
+      "name": "San Martín de Tours",
+      "companion": true,
+      "date": "11-11",
+      "patronage": [
+        "soldados",
+        "mendigos",
+        "viticultores"
+      ],
+      "summary": "Obispo que compartió su capa con un mendigo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-albert-the-great",
+      "name": "San Alberto Magno",
+      "companion": true,
+      "date": "11-15",
+      "patronage": [
+        "científicos",
+        "filósofos",
+        "estudiantes"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia, maestro de santo Tomás de Aquino.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-elizabeth-of-hungary",
+      "name": "Santa Isabel de Hungría",
+      "companion": true,
+      "date": "11-17",
+      "patronage": [
+        "panaderos",
+        "viudas",
+        "sin techo"
+      ],
+      "summary": "Princesa que sirvió a los pobres con caridad heroica.",
+      "rank": "memorial"
+    },
+    {
+      "id": "presentation-of-mary",
+      "name": "Presentación de la Virgen María",
+      "date": "11-21",
+      "rank": "memorial",
+      "companion": false,
+      "summary": "María presentada en el Templo, toda entregada a Dios."
+    },
+    {
+      "id": "st-cecilia",
+      "name": "Santa Cecilia",
+      "companion": true,
+      "date": "11-22",
+      "patronage": [
+        "músicos",
+        "compositores",
+        "poetas"
+      ],
+      "summary": "Virgen y mártir, patrona de los músicos.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-andrew",
+      "name": "San Andrés, apóstol",
+      "companion": true,
+      "date": "11-30",
+      "patronage": [
+        "Escocia",
+        "pescadores",
+        "cantantes"
+      ],
+      "summary": "Apóstol y hermano de san Pedro.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-francis-xavier",
+      "name": "San Francisco Javier",
+      "companion": true,
+      "date": "12-03",
+      "patronage": [
+        "misiones",
+        "navegantes",
+        "India"
+      ],
+      "summary": "Misionero jesuita, apóstol de las Indias.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-john-damascene",
+      "name": "San Juan Damasceno",
+      "companion": true,
+      "date": "12-04",
+      "patronage": [
+        "iconógrafos",
+        "teólogos",
+        "farmacéuticos"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia que defendió las sagradas imágenes.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-nicholas",
+      "name": "San Nicolás",
+      "companion": true,
+      "date": "12-06",
+      "patronage": [
+        "niños",
+        "marineros",
+        "panaderos"
+      ],
+      "summary": "Obispo de Mira, querido patrón de los niños y de los regalos.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-ambrose",
+      "name": "San Ambrosio",
+      "companion": true,
+      "date": "12-07",
+      "patronage": [
+        "apicultores",
+        "obispos",
+        "sabiduría"
+      ],
+      "summary": "Obispo y Doctor de la Iglesia que bautizó a san Agustín.",
+      "rank": "memorial"
+    },
+    {
+      "id": "immaculate-conception",
+      "name": "Inmaculada Concepción de la Virgen María",
+      "companion": true,
+      "date": "12-08",
+      "patronage": [
+        "pureza",
+        "esperanza",
+        "España"
+      ],
+      "summary": "María concebida sin pecado original.",
+      "rank": "solemnity"
+    },
+    {
+      "id": "our-lady-of-guadalupe",
+      "name": "Nuestra Señora de Guadalupe",
+      "companion": true,
+      "date": "12-12",
+      "patronage": [
+        "las Américas",
+        "no nacidos",
+        "evangelización"
+      ],
+      "summary": "María, madre de las Américas.",
+      "rank": "feast"
+    },
+    {
+      "id": "st-lucy",
+      "name": "Santa Lucía",
+      "companion": true,
+      "date": "12-13",
+      "patronage": [
+        "ciegos",
+        "enfermedades de los ojos",
+        "escritores"
+      ],
+      "summary": "Virgen y mártir de Siracusa, portadora de luz.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-john-of-the-cross",
+      "name": "San Juan de la Cruz",
+      "companion": true,
+      "date": "12-14",
+      "patronage": [
+        "místicos",
+        "contemplativos",
+        "poetas"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia, maestro místico de la noche oscura.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-peter-canisius",
+      "name": "San Pedro Canisio",
+      "companion": true,
+      "date": "12-21",
+      "patronage": [
+        "Alemania",
+        "catequistas",
+        "prensa católica"
+      ],
+      "summary": "Presbítero y Doctor de la Iglesia, jesuita apóstol de Alemania.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-stephen",
+      "name": "San Esteban",
+      "companion": true,
+      "date": "12-26",
+      "patronage": [
+        "diáconos",
+        "albañiles",
+        "dolores de cabeza"
+      ],
+      "summary": "Primer mártir de la Iglesia, lleno del Espíritu Santo.",
+      "rank": "memorial"
+    },
+    {
+      "id": "st-john-apostle",
+      "name": "San Juan, apóstol y evangelista",
+      "companion": true,
+      "date": "12-27",
+      "patronage": [
+        "escritores",
+        "amistad",
+        "Turquía"
+      ],
+      "summary": "Discípulo amado y evangelista del Verbo hecho carne.",
+      "rank": "memorial"
+    },
+    {
+      "id": "holy-innocents",
+      "name": "Santos Inocentes",
+      "date": "12-28",
+      "rank": "feast",
+      "companion": false,
+      "summary": "Niños muertos por Herodes; primicias del martirio."
+    }
+  ]
+}

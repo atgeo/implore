@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SaintPickerView: View {
-    @ObservedObject var catalog: SaintsCatalog
+    @ObservedObject var catalog: ObservancesCatalog
     @Binding var selection: String?
     @State private var search = ""
 
@@ -21,22 +21,22 @@ struct SaintPickerView: View {
             }
             .foregroundStyle(.primary)
 
-            ForEach(filteredSaints) { saint in
+            ForEach(filteredCompanions) { companion in
                 Button {
-                    selection = saint.id
+                    selection = companion.id
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(saint.name)
+                        Text(companion.name)
                             .font(.body)
-                        if let feast = saint.feast, !feast.isEmpty {
-                            Text(feastLabel(feast))
+                        if let date = companion.date, !date.isEmpty {
+                            Text(feastLabel(date))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .overlay(alignment: .trailing) {
-                        if selection == saint.id {
+                        if selection == companion.id {
                             Image(systemName: "checkmark")
                                 .foregroundStyle(Color.accentColor)
                         }
@@ -49,12 +49,12 @@ struct SaintPickerView: View {
         .searchable(text: $search, prompt: "Search saints")
     }
 
-    private var filteredSaints: [Saint] {
+    private var filteredCompanions: [Observance] {
         let query = search.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !query.isEmpty else { return catalog.saints }
-        return catalog.saints.filter { saint in
-            saint.name.localizedCaseInsensitiveContains(query)
-                || (saint.patronage?.contains { $0.localizedCaseInsensitiveContains(query) } ?? false)
+        guard !query.isEmpty else { return catalog.companions }
+        return catalog.companions.filter { companion in
+            companion.name.localizedCaseInsensitiveContains(query)
+                || (companion.patronage?.contains { $0.localizedCaseInsensitiveContains(query) } ?? false)
         }
     }
 

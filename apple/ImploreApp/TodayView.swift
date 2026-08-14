@@ -3,10 +3,19 @@ import SwiftUI
 
 struct TodayView: View {
     @ObservedObject var core: Core
+    @ObservedObject private var observancesCatalog = ObservancesCatalog.shared
     @Environment(\.locale) private var locale
 
     private var todayPrayers: [Prayer] {
         TodaySelection.prayers(from: core.view.reminderPrayers)
+    }
+
+    private var todayObservances: [Observance] {
+        observancesCatalog.observances(onMonthDay: Self.todayMonthDay())
+    }
+
+    private var showsDayHeading: Bool {
+        core.view.liturgicalDay != nil || !todayObservances.isEmpty
     }
 
     var body: some View {
@@ -14,7 +23,7 @@ struct TodayView: View {
             Group {
                 if todayPrayers.isEmpty {
                     VStack(alignment: .leading, spacing: 0) {
-                        liturgicalHeading
+                        dayHeading(horizontalPadding: 16)
                         ContentUnavailableView {
                             Label(emptyTitle, systemImage: "sun.max")
                         } description: {
@@ -24,16 +33,7 @@ struct TodayView: View {
                     }
                 } else {
                     List {
-                        if core.view.liturgicalDay != nil {
-                            liturgicalHeading
-                                // Match the large navigation title’s leading edge
-                                // (insetGrouped already supplies the outer margin).
-                                .listRowInsets(EdgeInsets(top: 2, leading: 0, bottom: 6, trailing: 0))
-                                .listRowBackground(Color.clear)
-                                .listRowSeparator(.hidden)
-                        }
-
-                        ForEach(todayPrayers, id: \.id) { prayer in
+                        ForEach(Array(todayPrayers.enumerated()), id: \.element.id) { index, prayer in
                             Section {
                                 HStack(spacing: 12) {
                                     PrayerToggle(
@@ -53,6 +53,11 @@ struct TodayView: View {
                                 }
                                 .listRowBackground(IntentionRowBackground(color: prayer.color))
                                 .listRowSeparator(.hidden)
+                            } header: {
+                                if index == 0 {
+                                    dayHeading(horizontalPadding: 0)
+                                        .textCase(nil)
+                                }
                             }
                         }
                     }
@@ -76,17 +81,36 @@ struct TodayView: View {
     }
 
     @ViewBuilder
-    private var liturgicalHeading: some View {
-        if let day = core.view.liturgicalDay {
-            Text(day.title(locale: locale))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, todayPrayers.isEmpty ? 16 : 0)
-                .padding(.top, todayPrayers.isEmpty ? 4 : 0)
-                .padding(.bottom, todayPrayers.isEmpty ? 8 : 0)
-                .accessibilityAddTraits(.isHeader)
+    private func dayHeading(horizontalPadding: CGFloat) -> some View {
+        if showsDayHeading {
+            VStack(alignment: .leading, spacing: 4) {
+                if let day = core.view.liturgicalDay {
+                    Text(day.title(locale: locale))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                ForEach(todayObservances) { observance in
+                    Text(observance.name)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, horizontalPadding)
+            .padding(.top, 4)
+            .padding(.bottom, 4)
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
         }
+    }
+
+    private static func todayMonthDay() -> String {
+        let comps = Calendar.current.dateComponents([.month, .day], from: Date())
+        let month = comps.month ?? 1
+        let day = comps.day ?? 1
+        return String(format: "%02d-%02d", month, day)
     }
 
     private var emptyTitle: LocalizedStringKey {

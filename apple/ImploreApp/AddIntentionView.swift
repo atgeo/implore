@@ -3,7 +3,7 @@ import SwiftUI
 
 struct AddIntentionView: View {
     @ObservedObject var core: Core
-    @ObservedObject private var saintsCatalog = SaintsCatalog.shared
+    @ObservedObject private var observancesCatalog = ObservancesCatalog.shared
     @Environment(\.dismiss) private var dismiss
 
     private let prayer: Prayer?
@@ -34,8 +34,8 @@ struct AddIntentionView: View {
     }
 
     private var selectedSaintLabel: String {
-        if let saintId, let saint = saintsCatalog.saint(for: saintId) {
-            return saint.name
+        if let saintId, let companion = observancesCatalog.companion(for: saintId) {
+            return companion.name
         }
         return String(localized: "None")
     }
@@ -70,7 +70,7 @@ struct AddIntentionView: View {
             Section {
                 NavigationLink {
                     SaintPickerView(
-                        catalog: saintsCatalog,
+                        catalog: observancesCatalog,
                         selection: $saintId
                     )
                 } label: {

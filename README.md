@@ -2,18 +2,24 @@
 
 A small Catholic app for the people you quietly carry in prayer.
 
-Add prayer intentions with optional details, tags, and an optional saint association. Shared logic lives in Rust ([Crux](https://redbadger.github.io/crux/)); the iOS shell is SwiftUI.
+Add prayer intentions with optional details, tags, color, schedule, and an optional saint association. Shared logic lives in Rust ([Crux](https://redbadger.github.io/crux/)); the iOS shell is SwiftUI.
 
 ## Status
 
-Early scaffold: add/remove/archive intentions on iOS with local persistence and Active/Archived/All filters; optional saint picker backed by a remote catalog. iCloud sync and daily rotation are not built yet.
+iOS app with local persistence:
+
+- **Today** — intentions due today (daily / weekly / monthly cadence), mark as prayed, temporal-cycle liturgical day heading (US calendar, computed in Rust), and named observances from the remote catalog
+- **Intentions** — add / edit / remove / archive; optional saint companion from the same catalog (`companion: true`)
+- **Settings** — daily reminder digest, appearance, language (en / fr / es)
+
+Not built yet: iCloud sync.
 
 ## Layout
 
 ```
-shared/          # Rust Crux core (events, model, view model) + BoltFFI
-apple/           # SwiftUI iOS app (XcodeGen + generated bindings)
-content/saints/  # Saints catalog source JSON (en, fr, es)
+shared/                 # Rust Crux core (events, model, view model, liturgical) + BoltFFI
+apple/                  # SwiftUI iOS app (XcodeGen + generated bindings)
+content/observances/    # Unified calendar + companions (en, fr, es)
 ```
 
 ## Prerequisites
@@ -30,10 +36,10 @@ content/saints/  # Saints catalog source JSON (en, fr, es)
 cargo test -p shared
 ```
 
-Regenerate Swift types after changing `Event` / `ViewModel` / `Prayer`:
+Regenerate Swift types after changing `Event` / `ViewModel` / `Prayer` (or from `apple/`, use `just typegen`):
 
 ```bash
-cargo run -p shared --features codegen --bin codegen -- \
+cargo run -p shared --features codegen,facet_typegen --bin codegen -- \
   --language swift --output-dir apple/generated
 ```
 
@@ -54,21 +60,31 @@ just build
 
 Use the **ImploreApp-iOS** scheme. Generated packages under `apple/generated/` are gitignored; run `just generate` after a fresh clone.
 
-## Saints catalog
+## Content catalog
 
-The saints list is maintained as locale JSON files in `content/saints/` (for example `en.json`, `fr.json`, `es.json`). Each file contains a versioned catalog with saint id, name, feast day, patronage, and summary.
+Locale JSON in `content/observances/` (`en.json`, `fr.json`, `es.json`). One list drives both Today and the saint picker:
 
-At runtime the iOS app downloads the catalog from a public S3 bucket (`saints/{locale}.json`) and caches it locally under Application Support. On first launch or when offline, the app uses the cached copy; if a locale is missing, it falls back to English.
+| Field | Role |
+|-------|------|
+| `id`, `name`, `date` (`MM-DD`), `rank`, `summary` | Today named feast / memorial |
+| `companion: true` | Intention picker (+ patronage) |
+| `companion: false` | Calendar-only (e.g. Transfiguration, Assumption) |
 
-To publish catalog changes, edit the JSON in `content/saints/` and upload to S3 from `apple/`:
+Movable temporal-cycle days (Easter, Pentecost, Ordinary Time weeks, …) come from Rust (`shared/src/liturgical.rs`), not this JSON.
+
+At runtime the iOS app downloads `observances/{locale}.json` from S3 and caches it under Application Support. On first launch or when offline, the app uses the cached copy; if a locale is missing, it falls back to English.
+
+### Publishing
+
+From `apple/`:
 
 ```bash
-just publish-saints
+just publish-observances
 ```
 
-This requires the [AWS CLI](https://aws.amazon.com/cli/) configured with credentials that can write to the bucket. The app reads from:
+Requires the [AWS CLI](https://aws.amazon.com/cli/) with write access to the bucket. Base URL:
 
-`https://atgeo-intercede-app-090552655796-us-east-2-an.s3.us-east-2.amazonaws.com/saints/{locale}.json`
+`https://atgeo-intercede-app-090552655796-us-east-2-an.s3.us-east-2.amazonaws.com/`
 
 ## License
 

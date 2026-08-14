@@ -30,13 +30,13 @@ build: generate
 # local development workflow
 dev: build
 
-# publish saints catalog to S3
-publish-saints:
+# publish unified observances catalog to S3
+publish-observances:
     #!/usr/bin/env bash
     set -euo pipefail
-    bucket="s3://atgeo-intercede-app-090552655796-us-east-2-an/saints"
+    bucket="s3://atgeo-intercede-app-090552655796-us-east-2-an/observances"
     for locale in en fr es; do
-        aws s3 cp "../content/saints/${locale}.json" \
+        aws s3 cp "../content/observances/${locale}.json" \
             "${bucket}/${locale}.json" \
             --content-type application/json
     done

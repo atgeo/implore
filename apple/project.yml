@@ -24,6 +24,11 @@ targets:
       - path: ImploreApp
         excludes:
           - "Info-*.plist"
+      - path: ../content/observances
+        type: folder
+        buildPhase: resources
+        headerVisibility: project
+
     scheme:
       management:
         shared: true

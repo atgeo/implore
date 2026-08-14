@@ -3,7 +3,7 @@ import SwiftUI
 
 struct IntentionDetailView: View {
     @ObservedObject var core: Core
-    @ObservedObject private var saintsCatalog = SaintsCatalog.shared
+    @ObservedObject private var observancesCatalog = ObservancesCatalog.shared
 
     @Environment(\.locale) private var locale
 
@@ -51,11 +51,11 @@ struct IntentionDetailView: View {
                 }
             }
 
-            if let saint = saintsCatalog.saint(for: prayer.saintId) {
+            if let companion = observancesCatalog.companion(for: prayer.saintId) {
                 Section {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(saint.name)
-                        if let summary = saint.summary, !summary.isEmpty {
+                        Text(companion.name)
+                        if let summary = companion.summary, !summary.isEmpty {
                             Text(summary)
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
