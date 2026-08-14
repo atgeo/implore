@@ -1,8 +1,23 @@
 import SwiftUI
 
+private enum SaintSort: String, CaseIterable, Identifiable {
+    case name
+    case date
+
+    var id: String { rawValue }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .name: "Name"
+        case .date: "Date"
+        }
+    }
+}
+
 struct SaintPickerView: View {
     @ObservedObject var catalog: ObservancesCatalog
     @Binding var selection: String?
+    @AppStorage("saintSort") private var sort = SaintSort.name
     @State private var search = ""
 
     var body: some View {
@@ -50,15 +65,61 @@ struct SaintPickerView: View {
         .paperBackground()
         .navigationTitle("Saint")
         .searchable(text: $search, prompt: "Search saints")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Picker("Sort", selection: $sort) {
+                        ForEach(SaintSort.allCases) { option in
+                            Text(option.title).tag(option)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+                .accessibilityLabel("Sort")
+            }
+        }
     }
 
     private var filteredCompanions: [Observance] {
         let query = search.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !query.isEmpty else { return catalog.companions }
-        return catalog.companions.filter { companion in
-            companion.name.localizedCaseInsensitiveContains(query)
-                || (companion.patronage?.contains { $0.localizedCaseInsensitiveContains(query) } ?? false)
+        let matches = query.isEmpty
+            ? catalog.companions
+            : catalog.companions.filter { companion in
+                companion.name.localizedCaseInsensitiveContains(query)
+                    || (companion.patronage?.contains { $0.localizedCaseInsensitiveContains(query) } ?? false)
+            }
+        return sorted(matches)
+    }
+
+    private func sorted(_ companions: [Observance]) -> [Observance] {
+        switch sort {
+        case .name:
+            companions
+        case .date:
+            companions.sorted { lhs, rhs in
+                switch (monthDay(lhs.date), monthDay(rhs.date)) {
+                case let (left?, right?) where left != right:
+                    left < right
+                case (_?, nil):
+                    true
+                case (nil, _?):
+                    false
+                default:
+                    lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
+                }
+            }
         }
+    }
+
+    private func monthDay(_ date: String?) -> (Int, Int)? {
+        guard let date, !date.isEmpty else { return nil }
+        let parts = date.split(separator: "-")
+        guard parts.count == 2,
+              let month = Int(parts[0]),
+              let day = Int(parts[1])
+        else { return nil }
+        return (month, day)
     }
 
     private func feastLabel(_ feast: String) -> String {

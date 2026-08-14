@@ -971,6 +971,30 @@
         }
       }
     },
+    "Date" : {
+      "comment" : "Saint picker sort option that orders by feast date.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        }
+      }
+    },
     "Dark" : {
       "comment" : "Appearance option that always uses dark mode.",
       "extractionState" : "manual",
@@ -1491,6 +1515,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mensuelle"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "comment" : "Saint picker sort option that orders by saint name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
           }
         }
       }
@@ -2331,6 +2379,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quelqu’un que vous portez"
+          }
+        }
+      }
+    },
+    "Sort" : {
+      "comment" : "Saint picker toolbar control for name vs date order.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordenar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trier"
           }
         }
       }
