@@ -79,8 +79,8 @@ struct SettingsView: View {
 
                 LabeledContent("Version", value: appVersion)
                     .paperCardRow()
-            } header: {
-                Text("About")
+            } footer: {
+                Text("© 2026 Implore")
             }
         }
         .paperBackground()

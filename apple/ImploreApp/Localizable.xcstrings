@@ -565,26 +565,26 @@
         }
       }
     },
-    "About" : {
-      "comment" : "Settings section header for privacy, terms, and version.",
+    "© 2026 Implore" : {
+      "comment" : "Settings About footer with copyright year and app name.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "About"
+            "value" : "© 2026 Implore"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Acerca de"
+            "value" : "© 2026 Implore"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "À propos"
+            "value" : "© 2026 Implore"
           }
         }
       }
