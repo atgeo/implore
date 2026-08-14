@@ -13,6 +13,7 @@
 		1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */; };
 		225BED6B00705BD20D8BF9DA /* observances in Resources */ = {isa = PBXBuildFile; fileRef = 76B0A5092C9E7AE18E2C554A /* observances */; };
 		25173897BB93CC95D57F46EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */; };
+		2CB6967B2837C13AB595BB41 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D7FBE1F5251153AA96EEE /* SafariView.swift */; };
 		360DA44C38731A4205091E4E /* FormSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */; };
 		3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
@@ -43,6 +44,7 @@
 		415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiturgicalDay+Label.swift"; sourceTree = "<group>"; };
 		41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentionColor+UI.swift"; sourceTree = "<group>"; };
 		4C063053B92EB5DBF3FC18EC /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		522D7FBE1F5251153AA96EEE /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionHeader.swift; sourceTree = "<group>"; };
 		6919AFC91DCFABD766110A09 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				72884BE51EC193019E354D6E /* ObservancesCatalog.swift */,
 				AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */,
 				9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */,
+				522D7FBE1F5251153AA96EEE /* SafariView.swift */,
 				D1D3C646D12BD2AFA50041E1 /* SaintPickerView.swift */,
 				1CC33549E306444FE996F54E /* SettingsView.swift */,
 				24AA3D2FA59759775B89B801 /* Theme.swift */,
@@ -224,6 +227,7 @@
 				792C7945B52FD4D2C5A3CCE0 /* ObservancesCatalog.swift in Sources */,
 				1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */,
 				3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */,
+				2CB6967B2837C13AB595BB41 /* SafariView.swift in Sources */,
 				F97E546352BAE2FFD29C4425 /* SaintPickerView.swift in Sources */,
 				0551B0510554C64835B7A27E /* SettingsView.swift in Sources */,
 				9B55579D358FA5E5236B661B /* Theme.swift in Sources */,
@@ -251,7 +255,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = "${CARGO_PKG_VERSION}";
 				PRODUCT_BUNDLE_IDENTIFIER = com.atgeo.implore;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -273,7 +277,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = "${CARGO_PKG_VERSION}";
 				PRODUCT_BUNDLE_IDENTIFIER = com.atgeo.implore;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

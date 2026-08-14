@@ -7,6 +7,7 @@ struct SettingsView: View {
     @AppStorage("language") private var language = AppLanguage.system
     @State private var notificationsDenied = false
     @State private var confirmRemoveAll = false
+    @State private var showPrivacyPolicy = false
 
     var body: some View {
         Form {
@@ -64,13 +65,25 @@ struct SettingsView: View {
             }
 
             Section {
+                Button("Privacy Policy") {
+                    showPrivacyPolicy = true
+                }
+                .foregroundStyle(.primary)
+                .paperCardRow()
+
                 LabeledContent("Version", value: appVersion)
                     .paperCardRow()
+            } header: {
+                Text("About")
             }
         }
         .paperBackground()
         .navigationTitle("Settings")
         .toolbar(.hidden, for: .tabBar)
+        .sheet(isPresented: $showPrivacyPolicy) {
+            SafariView(url: Self.privacyPolicyURL)
+                .ignoresSafeArea()
+        }
         .alert(
             "Remove All Intentions?",
             isPresented: $confirmRemoveAll
@@ -86,6 +99,8 @@ struct SettingsView: View {
             await refreshAuthorizationStatus()
         }
     }
+
+    private static let privacyPolicyURL = URL(string: "https://atgeo.github.io/implore/privacy")!
 
     private var remindersEnabledBinding: Binding<Bool> {
         Binding(
