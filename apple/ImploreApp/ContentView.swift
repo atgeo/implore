@@ -13,7 +13,7 @@ struct ContentView: View {
 
             IntentionsView(core: core)
                 .tabItem {
-                    Label("Intentions", systemImage: "heart")
+                    Label("Intentions", systemImage: "hands.sparkles")
                 }
         }
         .background(Color.paper)
