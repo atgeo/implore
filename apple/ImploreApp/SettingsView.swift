@@ -7,7 +7,7 @@ struct SettingsView: View {
     @AppStorage("language") private var language = AppLanguage.system
     @State private var notificationsDenied = false
     @State private var confirmRemoveAll = false
-    @State private var showPrivacyPolicy = false
+    @State private var presentedLegal: LegalDocument?
 
     var body: some View {
         Form {
@@ -66,7 +66,13 @@ struct SettingsView: View {
 
             Section {
                 Button("Privacy Policy") {
-                    showPrivacyPolicy = true
+                    presentedLegal = .privacy
+                }
+                .foregroundStyle(.primary)
+                .paperCardRow()
+
+                Button("Terms of Use") {
+                    presentedLegal = .terms
                 }
                 .foregroundStyle(.primary)
                 .paperCardRow()
@@ -80,8 +86,8 @@ struct SettingsView: View {
         .paperBackground()
         .navigationTitle("Settings")
         .toolbar(.hidden, for: .tabBar)
-        .sheet(isPresented: $showPrivacyPolicy) {
-            SafariView(url: Self.privacyPolicyURL)
+        .sheet(item: $presentedLegal) { document in
+            SafariView(url: document.url)
                 .ignoresSafeArea()
         }
         .alert(
@@ -100,7 +106,21 @@ struct SettingsView: View {
         }
     }
 
-    private static let privacyPolicyURL = URL(string: "https://atgeo.github.io/implore/privacy")!
+    private enum LegalDocument: String, Identifiable {
+        case privacy
+        case terms
+
+        var id: String { rawValue }
+
+        var url: URL {
+            switch self {
+            case .privacy:
+                URL(string: "https://atgeo.github.io/implore/privacy")!
+            case .terms:
+                URL(string: "https://atgeo.github.io/implore/terms")!
+            }
+        }
+    }
 
     private var remindersEnabledBinding: Binding<Bool> {
         Binding(
