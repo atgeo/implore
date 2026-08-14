@@ -1759,26 +1759,29 @@
         }
       }
     },
-    "Optional. Type a tag and press return." : {
-      "comment" : "Footer under the tags chip editor.",
+    "Optional. Up to %@ tags." : {
+
+    },
+    "Optional. Up to %lld tags." : {
+      "comment" : "Footer under the tags chip editor. Argument is the max tag count from the core.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Optional. Type a tag and press return."
+            "value" : "Optional. Up to %lld tags."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opcional. Escriba una etiqueta y pulse retorno."
+            "value" : "Opcional. Hasta %lld etiquetas."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Facultatif. Saisissez une étiquette et appuyez sur retour."
+            "value" : "Facultatif. Jusqu’à %lld étiquettes."
           }
         }
       }

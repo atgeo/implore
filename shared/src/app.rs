@@ -15,6 +15,10 @@ use crate::reminder::{self, CivilDateTime, ReminderDigest, DIGEST_HORIZON_DAYS};
 use crate::{liturgical_day_for, LiturgicalDay};
 
 const PRAYERS_KEY: &str = "prayers";
+/// Max tags stored on one intention (also exposed on [`ViewModel`]).
+pub const MAX_TAGS: usize = 8;
+/// Max characters per tag (also exposed on [`ViewModel`]).
+pub const MAX_TAG_LEN: usize = 32;
 
 /// Marketing version from the workspace package (`CARGO_PKG_VERSION`).
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -225,6 +229,8 @@ impl App for Implore {
             reminder_settings: model.reminder_settings,
             reminder_digests,
             liturgical_day: model.local_now.map(|now| liturgical_day_for(now.date)),
+            max_tags: MAX_TAGS as u8,
+            max_tag_len: MAX_TAG_LEN as u8,
         }
     }
 }
@@ -297,8 +303,14 @@ fn trim_optional(value: String) -> Option<String> {
 
 fn normalize_tags(tags: Vec<String>) -> Vec<String> {
     tags.into_iter()
-        .map(|tag| tag.trim().to_string())
+        .map(|tag| {
+            tag.trim()
+                .chars()
+                .take(MAX_TAG_LEN)
+                .collect::<String>()
+        })
         .filter(|tag| !tag.is_empty())
+        .take(MAX_TAGS)
         .collect()
 }
 
@@ -486,6 +498,10 @@ pub struct ViewModel {
     pub reminder_digests: Vec<ReminderDigest>,
     /// Temporal cycle for the shell's local date; set after `SyncLocalTime`.
     pub liturgical_day: Option<LiturgicalDay>,
+    /// Max tags per intention (shell UX + [`normalize_tags`]).
+    pub max_tags: u8,
+    /// Max characters per tag (shell UX + [`normalize_tags`]).
+    pub max_tag_len: u8,
 }
 
 impl Default for ViewModel {
@@ -500,6 +516,8 @@ impl Default for ViewModel {
             reminder_settings: ReminderSettings::default(),
             reminder_digests: Vec::new(),
             liturgical_day: None,
+            max_tags: MAX_TAGS as u8,
+            max_tag_len: MAX_TAG_LEN as u8,
         }
     }
 }
@@ -731,6 +749,39 @@ mod test {
                 PrayerStatus::Active,
             )]
         );
+    }
+
+    #[test]
+    fn caps_tag_count_and_length() {
+        let app = Implore;
+        let mut model = Model::default();
+        let long = "a".repeat(40);
+        let tags = [
+            long.as_str(),
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5",
+            "t6",
+            "t7",
+            "t8",
+            "t9",
+            "t10",
+            "t11",
+        ];
+
+        let _ = add(&app, &mut model, "Mom", "", &tags);
+
+        let saved = &app.view(&model).prayers[0].tags;
+        assert_eq!(saved.len(), MAX_TAGS);
+        assert_eq!(saved[0].chars().count(), MAX_TAG_LEN);
+        assert_eq!(saved[1], "t1");
+        assert_eq!(saved.last().unwrap(), "t7");
+
+        let view = app.view(&model);
+        assert_eq!(view.max_tags as usize, MAX_TAGS);
+        assert_eq!(view.max_tag_len as usize, MAX_TAG_LEN);
     }
 
     #[test]

@@ -62,12 +62,17 @@ struct AddIntentionView: View {
             }
 
             Section {
-                TagEditor(tags: $tags, draft: $tagDraft)
+                TagEditor(
+                    tags: $tags,
+                    draft: $tagDraft,
+                    maxTags: Int(core.view.maxTags),
+                    maxTagLength: Int(core.view.maxTagLen)
+                )
                     .paperCardRow()
             } header: {
                 FormSectionHeader("Tags")
             } footer: {
-                Text("Optional. Type a tag and press return.")
+                Text("Optional. Up to \(Int(core.view.maxTags)) tags.")
             }
 
             Section {
@@ -155,14 +160,28 @@ struct AddIntentionView: View {
     private func commitDraft() {
         let trimmed = tagDraft.trimmingCharacters(in: .whitespacesAndNewlines)
         tagDraft = ""
-        guard !trimmed.isEmpty, !tags.contains(trimmed) else { return }
-        tags.append(trimmed)
+        addTag(trimmed)
     }
+
+    private func addTag(_ raw: String) {
+        let maxTags = Int(core.view.maxTags)
+        let tag = normalizedTag(raw, maxLength: Int(core.view.maxTagLen))
+        guard !tag.isEmpty, tags.count < maxTags, !tags.contains(tag) else { return }
+        tags.append(tag)
+    }
+}
+
+private func normalizedTag(_ raw: String, maxLength: Int) -> String {
+    String(raw.trimmingCharacters(in: .whitespacesAndNewlines).prefix(maxLength))
 }
 
 private struct TagEditor: View {
     @Binding var tags: [String]
     @Binding var draft: String
+    var maxTags: Int
+    var maxTagLength: Int
+
+    private var canAddMore: Bool { tags.count < maxTags }
 
     var body: some View {
         FlowLayout(spacing: 8) {
@@ -172,31 +191,41 @@ private struct TagEditor: View {
                 }
             }
 
-            TextField("Add a tag", text: $draft)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-                .submitLabel(.done)
-                .onSubmit(commitDraft)
-                .onChange(of: draft) { _, newValue in
-                    commitCommas(in: newValue)
-                }
-                .onKeyPress(.delete, phases: .down) { _ in
-                    guard draft.isEmpty, !tags.isEmpty else {
-                        return .ignored
+            if canAddMore {
+                TextField("Add a tag", text: $draft)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .submitLabel(.done)
+                    .onSubmit(commitDraft)
+                    .onChange(of: draft) { _, newValue in
+                        if newValue.count > maxTagLength {
+                            draft = String(newValue.prefix(maxTagLength))
+                        }
+                        commitCommas(in: draft)
                     }
-                    tags.removeLast()
-                    return .handled
-                }
-                .frame(minWidth: 120)
+                    .onKeyPress(.delete, phases: .down) { _ in
+                        guard draft.isEmpty, !tags.isEmpty else {
+                            return .ignored
+                        }
+                        tags.removeLast()
+                        return .handled
+                    }
+                    .frame(minWidth: 120)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func addTag(_ raw: String) {
+        let tag = normalizedTag(raw, maxLength: maxTagLength)
+        guard !tag.isEmpty, canAddMore, !tags.contains(tag) else { return }
+        tags.append(tag)
     }
 
     private func commitDraft() {
         let trimmed = draft.trimmingCharacters(in: .whitespacesAndNewlines)
         draft = ""
-        guard !trimmed.isEmpty, !tags.contains(trimmed) else { return }
-        tags.append(trimmed)
+        addTag(trimmed)
     }
 
     private func commitCommas(in value: String) {
@@ -204,12 +233,9 @@ private struct TagEditor: View {
         let parts = value.split(separator: ",", omittingEmptySubsequences: false)
         guard let last = parts.last else { return }
         for part in parts.dropLast() {
-            let trimmed = part.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !trimmed.isEmpty, !tags.contains(trimmed) {
-                tags.append(trimmed)
-            }
+            addTag(String(part))
         }
-        draft = String(last)
+        draft = canAddMore ? String(last.prefix(maxTagLength)) : ""
     }
 }
 
