@@ -19,6 +19,10 @@ const PRAYERS_KEY: &str = "prayers";
 pub const MAX_TAGS: usize = 8;
 /// Max characters per tag (also exposed on [`ViewModel`]).
 pub const MAX_TAG_LEN: usize = 32;
+/// Max characters in an intention title (also exposed on [`ViewModel`]).
+pub const MAX_INTENTION_LEN: usize = 64;
+/// Max characters in optional details (also exposed on [`ViewModel`]).
+pub const MAX_DETAILS_LEN: usize = 512;
 
 /// Marketing version from the workspace package (`CARGO_PKG_VERSION`).
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -50,12 +54,12 @@ impl App for Implore {
                 saint_id,
                 color,
             } => {
-                let intention = intention.trim().to_string();
+                let intention = normalize_intention(intention);
                 if intention.is_empty() {
                     return render();
                 }
 
-                let details = trim_optional(details);
+                let details = normalize_details(details);
                 let saint_id = trim_optional(saint_id);
                 let tags = normalize_tags(tags);
                 let id = model.next_id;
@@ -83,12 +87,12 @@ impl App for Implore {
                 saint_id,
                 color,
             } => {
-                let intention = intention.trim().to_string();
+                let intention = normalize_intention(intention);
                 if intention.is_empty() {
                     return render();
                 }
 
-                let details = trim_optional(details);
+                let details = normalize_details(details);
                 let saint_id = trim_optional(saint_id);
                 let tags = normalize_tags(tags);
                 let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
@@ -231,6 +235,8 @@ impl App for Implore {
             liturgical_day: model.local_now.map(|now| liturgical_day_for(now.date)),
             max_tags: MAX_TAGS as u8,
             max_tag_len: MAX_TAG_LEN as u8,
+            max_intention_len: MAX_INTENTION_LEN as u8,
+            max_details_len: MAX_DETAILS_LEN as u16,
         }
     }
 }
@@ -298,6 +304,27 @@ fn trim_optional(value: String) -> Option<String> {
         None
     } else {
         Some(trimmed.to_string())
+    }
+}
+
+fn normalize_intention(value: String) -> String {
+    value
+        .trim()
+        .chars()
+        .take(MAX_INTENTION_LEN)
+        .collect()
+}
+
+fn normalize_details(value: String) -> Option<String> {
+    let trimmed = value
+        .trim()
+        .chars()
+        .take(MAX_DETAILS_LEN)
+        .collect::<String>();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(trimmed)
     }
 }
 
@@ -502,6 +529,10 @@ pub struct ViewModel {
     pub max_tags: u8,
     /// Max characters per tag (shell UX + [`normalize_tags`]).
     pub max_tag_len: u8,
+    /// Max characters in an intention title (shell UX + [`normalize_intention`]).
+    pub max_intention_len: u8,
+    /// Max characters in optional details (shell UX + [`normalize_details`]).
+    pub max_details_len: u16,
 }
 
 impl Default for ViewModel {
@@ -518,6 +549,8 @@ impl Default for ViewModel {
             liturgical_day: None,
             max_tags: MAX_TAGS as u8,
             max_tag_len: MAX_TAG_LEN as u8,
+            max_intention_len: MAX_INTENTION_LEN as u8,
+            max_details_len: MAX_DETAILS_LEN as u16,
         }
     }
 }
@@ -782,6 +815,30 @@ mod test {
         let view = app.view(&model);
         assert_eq!(view.max_tags as usize, MAX_TAGS);
         assert_eq!(view.max_tag_len as usize, MAX_TAG_LEN);
+    }
+
+    #[test]
+    fn caps_intention_and_details_length() {
+        let app = Implore;
+        let mut model = Model::default();
+        let long_intention = "i".repeat(MAX_INTENTION_LEN + 20);
+        let long_details = "d".repeat(MAX_DETAILS_LEN + 100);
+
+        let _ = add(
+            &app,
+            &mut model,
+            format!("  {long_intention}  ").as_str(),
+            long_details.as_str(),
+            &[],
+        );
+
+        let saved = &app.view(&model).prayers[0];
+        assert_eq!(saved.intention.chars().count(), MAX_INTENTION_LEN);
+        assert_eq!(saved.details.as_ref().unwrap().chars().count(), MAX_DETAILS_LEN);
+
+        let view = app.view(&model);
+        assert_eq!(view.max_intention_len as usize, MAX_INTENTION_LEN);
+        assert_eq!(view.max_details_len as usize, MAX_DETAILS_LEN);
     }
 
     #[test]

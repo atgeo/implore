@@ -44,6 +44,12 @@ struct AddIntentionView: View {
         Form {
             Section {
                 TextField("Someone you are carrying", text: $intention)
+                    .onChange(of: intention) { _, newValue in
+                        let maxLength = Int(core.view.maxIntentionLen)
+                        if newValue.count > maxLength {
+                            intention = String(newValue.prefix(maxLength))
+                        }
+                    }
                     .paperCardRow()
             } header: {
                 FormSectionHeader("Intention")
@@ -54,6 +60,12 @@ struct AddIntentionView: View {
             Section {
                 TextField("Details", text: $details, axis: .vertical)
                     .lineLimit(3...6)
+                    .onChange(of: details) { _, newValue in
+                        let maxLength = Int(core.view.maxDetailsLen)
+                        if newValue.count > maxLength {
+                            details = String(newValue.prefix(maxLength))
+                        }
+                    }
                     .paperCardRow()
             } header: {
                 FormSectionHeader("Details")
