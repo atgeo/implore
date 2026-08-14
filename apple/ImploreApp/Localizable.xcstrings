@@ -566,7 +566,28 @@
       }
     },
     "About" : {
-
+      "comment" : "Settings section header for privacy, terms, and version.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
+          }
+        }
+      }
     },
     "Active" : {
       "comment" : "Filter segment for active intentions.",
@@ -1951,6 +1972,30 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "comment" : "Settings About row that opens the privacy policy.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
+          }
+        }
+      }
+    },
     "Reminders" : {
       "comment" : "Settings toggle for prayer digest notifications.",
       "extractionState" : "manual",
@@ -2331,6 +2376,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Étiquettes"
+          }
+        }
+      }
+    },
+    "Terms of Use" : {
+      "comment" : "Settings About row that opens the terms of use.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Use"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condiciones de uso"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conditions d’utilisation"
           }
         }
       }
