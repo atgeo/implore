@@ -44,6 +44,7 @@ struct AddIntentionView: View {
         Form {
             Section {
                 TextField("Someone you are carrying", text: $intention)
+                    .paperCardRow()
             } header: {
                 FormSectionHeader("Intention")
             } footer: {
@@ -53,6 +54,7 @@ struct AddIntentionView: View {
             Section {
                 TextField("Details", text: $details, axis: .vertical)
                     .lineLimit(3...6)
+                    .paperCardRow()
             } header: {
                 FormSectionHeader("Details")
             } footer: {
@@ -61,6 +63,7 @@ struct AddIntentionView: View {
 
             Section {
                 TagEditor(tags: $tags, draft: $tagDraft)
+                    .paperCardRow()
             } header: {
                 FormSectionHeader("Tags")
             } footer: {
@@ -81,12 +84,14 @@ struct AddIntentionView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
+                .paperCardRow()
             } footer: {
                 Text("Optional. Ask this saint to pray with you.")
             }
 
             Section {
                 IntentionColorPicker(selection: $color)
+                    .paperCardRow()
             } header: {
                 FormSectionHeader("Color")
             } footer: {
@@ -101,11 +106,13 @@ struct AddIntentionView: View {
                         Text("Weekly").tag(IntentionCadence.weekly)
                         Text("Monthly").tag(IntentionCadence.monthly)
                     }
+                    .paperCardRow()
                 } footer: {
                     Text("How often you hope to pray this.")
                 }
             }
         }
+        .paperBackground()
         .navigationTitle(isEditing ? "Edit Intention" : "Add Intention")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {

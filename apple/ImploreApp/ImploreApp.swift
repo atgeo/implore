@@ -10,6 +10,7 @@ struct ImploreApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(core: core)
+                .tint(.brandAccent)
                 .preferredColorScheme(appearance.colorScheme)
                 .appLocale(language)
                 .task {

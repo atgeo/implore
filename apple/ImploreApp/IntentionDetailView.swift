@@ -30,6 +30,7 @@ struct IntentionDetailView: View {
         Form {
             Section {
                 Text(prayer.intention)
+                    .paperCardRow()
             } header: {
                 FormSectionHeader("Intention")
             }
@@ -37,6 +38,7 @@ struct IntentionDetailView: View {
             if let details = prayer.details, !details.isEmpty {
                 Section {
                     Text(details)
+                        .paperCardRow()
                 } header: {
                     FormSectionHeader("Details")
                 }
@@ -46,6 +48,7 @@ struct IntentionDetailView: View {
                 Section {
                     Text(prayer.tags.joined(separator: " · "))
                         .foregroundStyle(.secondary)
+                        .paperCardRow()
                 } header: {
                     FormSectionHeader("Tags")
                 }
@@ -61,6 +64,7 @@ struct IntentionDetailView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+                    .paperCardRow()
                 } header: {
                     FormSectionHeader("Saint")
                 }
@@ -70,10 +74,12 @@ struct IntentionDetailView: View {
                 Section {
                     Text("Archived")
                         .foregroundStyle(.secondary)
+                        .paperCardRow()
                 }
             } else {
                 Section {
                     Text(cadenceTitle)
+                        .paperCardRow()
                 } header: {
                     FormSectionHeader("Schedule")
                 }
@@ -82,6 +88,7 @@ struct IntentionDetailView: View {
             if prayer.status == .active {
                 Section {
                     PrayerLogAction(action: addPrayerLogEntry)
+                        .paperCardRow()
                 } header: {
                     FormSectionHeader("Prayer")
                 }
@@ -91,6 +98,7 @@ struct IntentionDetailView: View {
                 prayerLogSection(allowDelete: true)
             }
         }
+        .paperBackground()
         .navigationTitle(prayer.intention)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
@@ -114,6 +122,7 @@ struct IntentionDetailView: View {
                 ForEach(prayerLogEntries, id: \.index) { entry in
                     prayerLogLabel(for: entry.entry)
                         .foregroundStyle(.secondary)
+                        .paperCardRow()
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             if allowDelete {
                                 Button(role: .destructive) {
@@ -121,6 +130,7 @@ struct IntentionDetailView: View {
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
+                                .tint(.red)
                             }
                         }
                 }
@@ -250,7 +260,7 @@ private struct PrayerLogAction: View {
 
                 Spacer(minLength: 0)
             }
-            .foregroundStyle(Color.accentColor)
+            .foregroundStyle(Color.brandAccent)
             .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
             .contentShape(Rectangle())
         }

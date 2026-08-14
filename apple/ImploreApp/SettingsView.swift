@@ -12,6 +12,7 @@ struct SettingsView: View {
         Form {
             Section {
                 Toggle("Reminders", isOn: remindersEnabledBinding)
+                    .paperCardRow()
 
                 if core.view.reminderSettings.enabled {
                     HStack {
@@ -19,6 +20,7 @@ struct SettingsView: View {
                         Spacer()
                         QuarterHourTimePicker(date: reminderTimeBinding)
                     }
+                    .paperCardRow()
                 }
             } footer: {
                 if notificationsDenied {
@@ -41,12 +43,14 @@ struct SettingsView: View {
                         Text(option.title).tag(option)
                     }
                 }
+                .paperCardRow()
 
                 Picker("Language", selection: $language) {
                     ForEach(AppLanguage.allCases) { option in
                         option.label.tag(option)
                     }
                 }
+                .paperCardRow()
             }
 
             Section {
@@ -54,14 +58,17 @@ struct SettingsView: View {
                     confirmRemoveAll = true
                 }
                 .disabled(!core.view.hasPrayers)
+                .paperCardRow()
             } footer: {
                 Text("Permanently deletes every intention, including archived ones.")
             }
 
             Section {
                 LabeledContent("Version", value: appVersion)
+                    .paperCardRow()
             }
         }
+        .paperBackground()
         .navigationTitle("Settings")
         .toolbar(.hidden, for: .tabBar)
         .alert(

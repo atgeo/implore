@@ -65,7 +65,7 @@ struct TodayView: View {
                     .listSectionSpacing(12)
                 }
             }
-            .background(Color(.systemGroupedBackground))
+            .paperBackground()
             .navigationTitle("Today")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -148,7 +148,7 @@ private struct PrayerToggle: View {
             Image(systemName: prayed ? "checkmark.circle.fill" : "circle")
                 .font(.title2)
                 .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(prayed ? Color.accentColor : Color.secondary)
+                .foregroundStyle(prayed ? Color.brandAccent : Color.secondary)
                 .symbolEffect(.bounce, value: bounce)
                 .frame(width: 32, height: 32)
                 .contentShape(Rectangle())

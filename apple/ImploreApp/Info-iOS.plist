@@ -31,7 +31,10 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Georges Kmeid. All rights reserved.</string>
 	<key>UILaunchScreen</key>
-	<dict/>
+	<dict>
+		<key>UIColorName</key>
+		<string>Paper</string>
+	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

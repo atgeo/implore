@@ -15,11 +15,12 @@ struct SaintPickerView: View {
                     Spacer()
                     if selection == nil {
                         Image(systemName: "checkmark")
-                            .foregroundStyle(Color.accentColor)
+                            .foregroundStyle(Color.brandAccent)
                     }
                 }
             }
             .foregroundStyle(.primary)
+            .paperCardRow()
 
             ForEach(filteredCompanions) { companion in
                 Button {
@@ -38,13 +39,15 @@ struct SaintPickerView: View {
                     .overlay(alignment: .trailing) {
                         if selection == companion.id {
                             Image(systemName: "checkmark")
-                                .foregroundStyle(Color.accentColor)
+                                .foregroundStyle(Color.brandAccent)
                         }
                     }
                 }
                 .foregroundStyle(.primary)
+                .paperCardRow()
             }
         }
+        .paperBackground()
         .navigationTitle("Saint")
         .searchable(text: $search, prompt: "Search saints")
     }

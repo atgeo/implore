@@ -16,6 +16,7 @@ struct ContentView: View {
                     Label("Intentions", systemImage: "heart")
                 }
         }
+        .background(Color.paper)
     }
 }
 
@@ -86,7 +87,7 @@ private struct ArchivedIntentionsView: View {
         IntentionsList(core: core, mode: .archived)
             .navigationTitle("Archived")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.systemGroupedBackground))
+            .paperBackground()
     }
 }
 
@@ -143,6 +144,7 @@ private struct IntentionsList: View {
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
+                                .tint(.red)
 
                                 if mode == .active {
                                     Button {
@@ -150,14 +152,14 @@ private struct IntentionsList: View {
                                     } label: {
                                         Label("Archive", systemImage: "archivebox")
                                     }
-                                    .tint(.orange)
+                                    .tint(.gray)
                                 } else {
                                     Button {
                                         core.update(.unarchivePrayer(id: prayer.id))
                                     } label: {
                                         Label("Unarchive", systemImage: "tray.and.arrow.up")
                                     }
-                                    .tint(.blue)
+                                    .tint(.brandAccent)
                                 }
                             }
                         }
@@ -167,7 +169,7 @@ private struct IntentionsList: View {
                 .listSectionSpacing(12)
             }
         }
-        .background(Color(.systemGroupedBackground))
+        .paperBackground()
     }
 
     private var emptyTitle: LocalizedStringKey {

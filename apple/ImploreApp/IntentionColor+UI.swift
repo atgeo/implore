@@ -77,7 +77,7 @@ struct IntentionRowBackground: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            Color(.secondarySystemGroupedBackground)
+            Color.paperCard
 
             if let accent = color.accent {
                 accent
