@@ -6,8 +6,8 @@ struct TodayView: View {
     @ObservedObject private var observancesCatalog = ObservancesCatalog.shared
     @Environment(\.locale) private var locale
 
-    private var todayPrayers: [Prayer] {
-        TodaySelection.prayers(from: core.view.reminderPrayers)
+    private var todayPrayers: [TodayPrayer] {
+        core.view.todayPrayers
     }
 
     private var todayObservances: [Observance] {
@@ -33,25 +33,25 @@ struct TodayView: View {
                     }
                 } else {
                     List {
-                        ForEach(Array(todayPrayers.enumerated()), id: \.element.id) { index, prayer in
+                        ForEach(Array(todayPrayers.enumerated()), id: \.element.prayer.id) { index, item in
                             Section {
                                 HStack(spacing: 12) {
                                     PrayerToggle(
-                                        prayed: TodaySelection.prayedToday(prayer)
+                                        prayed: item.prayedToday
                                     ) {
-                                        logPrayer(prayer.id)
+                                        logPrayer(item.prayer.id)
                                     }
 
                                     NavigationLink {
-                                        IntentionDetailView(core: core, prayer: prayer)
+                                        IntentionDetailView(core: core, prayer: item.prayer)
                                     } label: {
                                         TodayIntentionRow(
-                                            prayer: prayer,
-                                            prayedToday: TodaySelection.prayedToday(prayer)
+                                            prayer: item.prayer,
+                                            prayedToday: item.prayedToday
                                         )
                                     }
                                 }
-                                .listRowBackground(IntentionRowBackground(color: prayer.color))
+                                .listRowBackground(IntentionRowBackground(color: item.prayer.color))
                                 .listRowSeparator(.hidden)
                             } header: {
                                 if index == 0 {
@@ -124,10 +124,10 @@ struct TodayView: View {
     }
 
     private func logPrayer(_ id: UInt64) {
-        guard let prayer = todayPrayers.first(where: { $0.id == id }),
-              !TodaySelection.prayedToday(prayer)
-        else { return }
         LocalTimeSync.sync(to: core)
+        guard let item = todayPrayers.first(where: { $0.prayer.id == id }),
+              !item.prayedToday
+        else { return }
         core.update(.logPrayer(id: id))
     }
 }

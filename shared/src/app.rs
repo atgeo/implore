@@ -230,6 +230,23 @@ impl App for Implore {
                 .cloned()
                 .collect(),
             reminder_prayers,
+            today_prayers: model
+                .local_now
+                .map(|now| {
+                    reminder::select_today(&model.prayers, now.date)
+                        .into_iter()
+                        .map(|prayer| {
+                            let prayed_today =
+                                prayer_log::prayed_on_date(&prayer.prayed_on, now.date);
+                            TodayPrayer {
+                                prayer,
+                                prayed_today,
+                            }
+                        })
+                        .collect()
+                })
+                .unwrap_or_default(),
+            local_date: model.local_now.map(|now| now.date),
             reminder_settings: model.reminder_settings,
             reminder_digests,
             liturgical_day: model.local_now.map(|now| liturgical_day_for(now.date)),
@@ -509,6 +526,13 @@ pub struct Prayer {
     pub prayed_on: Vec<PrayerLogEntry>,
 }
 
+#[derive(Facet, Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
+#[repr(C)]
+pub struct TodayPrayer {
+    pub prayer: Prayer,
+    pub prayed_today: bool,
+}
+
 #[derive(Facet, Serialize, Deserialize, Clone)]
 pub struct ViewModel {
     /// Workspace crate version (`CARGO_PKG_VERSION`).
@@ -521,6 +545,10 @@ pub struct ViewModel {
     pub archived_prayers: Vec<Prayer>,
     /// Active intentions with a schedule, for local reminder digests (ignore list filter).
     pub reminder_prayers: Vec<Prayer>,
+    /// Intentions due on the shell's local date (never-prayed first, then least-recently-prayed).
+    pub today_prayers: Vec<TodayPrayer>,
+    /// Shell's local calendar date; set after `SyncLocalTime`.
+    pub local_date: Option<reminder::CivilDate>,
     pub reminder_settings: ReminderSettings,
     pub reminder_digests: Vec<ReminderDigest>,
     /// Temporal cycle for the shell's local date; set after `SyncLocalTime`.
@@ -544,6 +572,8 @@ impl Default for ViewModel {
             prayers: Vec::new(),
             archived_prayers: Vec::new(),
             reminder_prayers: Vec::new(),
+            today_prayers: Vec::new(),
+            local_date: None,
             reminder_settings: ReminderSettings::default(),
             reminder_digests: Vec::new(),
             liturgical_day: None,
@@ -1321,5 +1351,83 @@ mod test {
                 weekday: 5
             })
         );
+    }
+
+    #[test]
+    fn today_prayers_empty_until_local_time_then_due_only() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
+        let _ = add_with_cadence(
+            &app,
+            &mut model,
+            "Parish",
+            "",
+            &[],
+            IntentionCadence::Weekly,
+        );
+        let _ = add(&app, &mut model, "Dad", "", &[]);
+
+        assert!(app.view(&model).today_prayers.is_empty());
+
+        app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 12,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        let today = app.view(&model).today_prayers;
+        assert_eq!(today.len(), 1);
+        assert_eq!(today[0].prayer.intention, "Mom");
+        assert!(!today[0].prayed_today);
+        assert_eq!(
+            app.view(&model).local_date,
+            Some(reminder::CivilDate {
+                year: 2026,
+                month: 8,
+                day: 12
+            })
+        );
+    }
+
+    #[test]
+    fn today_prayers_marks_prayed_today_from_local_date() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
+
+        app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 12,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        app.update(Event::LogPrayer { id: 0 }, &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { value, .. } = op else {
+                    panic!("expected KeyValue set effect");
+                };
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.prayers[0].prayed_on.len(), 1);
+            });
+
+        let today = app.view(&model).today_prayers;
+        assert_eq!(today.len(), 1);
+        assert!(today[0].prayed_today);
     }
 }

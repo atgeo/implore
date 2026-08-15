@@ -1,4 +1,4 @@
-use crate::reminder::CivilDateTime;
+use crate::reminder::{CivilDate, CivilDateTime};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
 
@@ -25,6 +25,13 @@ impl PrayerLogEntry {
     }
 }
 
+/// True when `prayed_on` has at least one log entry on `date` (local calendar day).
+pub fn prayed_on_date(prayed_on: &[PrayerLogEntry], date: CivilDate) -> bool {
+    prayed_on.iter().any(|entry| {
+        entry.year == date.year && entry.month == date.month && entry.day == date.day
+    })
+}
+
 /// Appends `entry` (append order preserved, repeats allowed).
 pub fn append_entry(prayed_on: &mut Vec<PrayerLogEntry>, entry: PrayerLogEntry) {
     prayed_on.push(entry);
@@ -42,7 +49,6 @@ pub fn remove_entry(prayed_on: &mut Vec<PrayerLogEntry>, index: usize) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::reminder::CivilDate;
 
     fn entry(day: u32, hour: u32, minute: u32) -> PrayerLogEntry {
         PrayerLogEntry {
@@ -67,6 +73,19 @@ mod tests {
         };
 
         assert_eq!(PrayerLogEntry::from_local(now), entry(12, 15, 30));
+    }
+
+    #[test]
+    fn prayed_on_date_matches_calendar_day() {
+        let mut prayed_on = vec![entry(12, 9, 0), entry(11, 18, 15)];
+        let date = CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+        assert!(prayed_on_date(&prayed_on, date));
+        prayed_on.retain(|entry| entry.day != 12);
+        assert!(!prayed_on_date(&prayed_on, date));
     }
 
     #[test]

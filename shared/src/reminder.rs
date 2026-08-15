@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use crate::{IntentionCadence, Prayer, PrayerStatus};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
@@ -42,6 +44,31 @@ pub fn is_due(prayer: &Prayer, date: CivilDate) -> bool {
         IntentionCadence::Weekly => weekday(date) == 1,
         IntentionCadence::Monthly => date.day == 1,
     }
+}
+
+/// Due intentions for Today: never-prayed first, then least-recently-prayed.
+pub fn select_today(prayers: &[Prayer], date: CivilDate) -> Vec<Prayer> {
+    let mut due: Vec<Prayer> = prayers
+        .iter()
+        .filter(|prayer| is_due(prayer, date))
+        .cloned()
+        .collect();
+    due.sort_by(
+        |lhs, rhs| match (last_prayed_rank(lhs), last_prayed_rank(rhs)) {
+            (None, None) => lhs.id.cmp(&rhs.id),
+            (None, Some(_)) => Ordering::Less,
+            (Some(_), None) => Ordering::Greater,
+            (Some(a), Some(b)) => a.cmp(&b).then(lhs.id.cmp(&rhs.id)),
+        },
+    );
+    due
+}
+
+fn last_prayed_rank(prayer: &Prayer) -> Option<(i32, u32, u32, u32, u32)> {
+    prayer
+        .prayed_on
+        .last()
+        .map(|entry| (entry.year, entry.month, entry.day, entry.hour, entry.minute))
 }
 
 pub fn plan_digests(
@@ -149,7 +176,11 @@ pub fn add_days(date: CivilDate, days: u32) -> CivilDate {
         }
     }
 
-    CivilDate { year: y, month: m, day: d }
+    CivilDate {
+        year: y,
+        month: m,
+        day: d,
+    }
 }
 
 fn days_in_month(year: i32, month: u32) -> u32 {
@@ -201,9 +232,23 @@ mod tests {
     #[test]
     fn weekday_matches_sunday_and_monday() {
         // 2026-08-12 is a Wednesday
-        assert_eq!(weekday(CivilDate { year: 2026, month: 8, day: 12 }), 4);
+        assert_eq!(
+            weekday(CivilDate {
+                year: 2026,
+                month: 8,
+                day: 12
+            }),
+            4
+        );
         // 2026-08-16 is a Sunday
-        assert_eq!(weekday(CivilDate { year: 2026, month: 8, day: 16 }), 1);
+        assert_eq!(
+            weekday(CivilDate {
+                year: 2026,
+                month: 8,
+                day: 16
+            }),
+            1
+        );
     }
 
     #[test]
@@ -263,7 +308,14 @@ mod tests {
     fn archived_and_unscheduled_are_never_due() {
         let mut prayer = scheduled_prayer("Mom", IntentionCadence::Daily);
         prayer.status = PrayerStatus::Archived;
-        assert!(!is_due(&prayer, CivilDate { year: 2026, month: 8, day: 12 }));
+        assert!(!is_due(
+            &prayer,
+            CivilDate {
+                year: 2026,
+                month: 8,
+                day: 12
+            }
+        ));
 
         let unscheduled = scheduled_prayer("Dad", IntentionCadence::Unscheduled);
         assert!(!is_due(
@@ -306,5 +358,69 @@ mod tests {
         assert_eq!(digests.len(), 2);
         assert_eq!(digests[0].day, 16);
         assert_eq!(digests[1].day, 23);
+    }
+
+    #[test]
+    fn select_today_skips_unscheduled_and_weekly_on_weekday() {
+        let mut mom = scheduled_prayer("Mom", IntentionCadence::Daily);
+        mom.id = 0;
+        let mut parish = scheduled_prayer("Parish", IntentionCadence::Weekly);
+        parish.id = 1;
+        let mut dad = scheduled_prayer("Dad", IntentionCadence::Unscheduled);
+        dad.id = 2;
+        let date = CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+        let today = select_today(&[mom, parish, dad], date);
+        assert_eq!(today.len(), 1);
+        assert_eq!(today[0].intention, "Mom");
+    }
+
+    #[test]
+    fn select_today_never_prayed_before_recent() {
+        let mut never = scheduled_prayer("Never", IntentionCadence::Daily);
+        never.id = 2;
+        let mut older = scheduled_prayer("Older", IntentionCadence::Daily);
+        older.id = 0;
+        older.prayed_on = vec![crate::PrayerLogEntry {
+            year: 2026,
+            month: 8,
+            day: 10,
+            hour: 8,
+            minute: 0,
+        }];
+        let mut newer = scheduled_prayer("Newer", IntentionCadence::Daily);
+        newer.id = 1;
+        newer.prayed_on = vec![crate::PrayerLogEntry {
+            year: 2026,
+            month: 8,
+            day: 11,
+            hour: 8,
+            minute: 0,
+        }];
+        let mut extra = scheduled_prayer("Extra", IntentionCadence::Daily);
+        extra.id = 3;
+        extra.prayed_on = vec![crate::PrayerLogEntry {
+            year: 2026,
+            month: 8,
+            day: 12,
+            hour: 8,
+            minute: 0,
+        }];
+        let date = CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+        let today = select_today(&[extra, newer, older, never], date);
+        assert_eq!(
+            today
+                .iter()
+                .map(|prayer| prayer.intention.as_str())
+                .collect::<Vec<_>>(),
+            vec!["Never", "Older", "Newer", "Extra"]
+        );
     }
 }

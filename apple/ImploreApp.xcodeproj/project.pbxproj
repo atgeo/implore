@@ -17,7 +17,6 @@
 		360DA44C38731A4205091E4E /* FormSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */; };
 		3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
-		4721257C0695FBEA7E2CF255 /* TodaySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAF73DC58567A1DDAA75AC4 /* TodaySelection.swift */; };
 		537D818CF132B170682CE332 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C063053B92EB5DBF3FC18EC /* TodayView.swift */; };
 		66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */; };
 		792C7945B52FD4D2C5A3CCE0 /* ObservancesCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72884BE51EC193019E354D6E /* ObservancesCatalog.swift */; };
@@ -48,7 +47,6 @@
 		61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionHeader.swift; sourceTree = "<group>"; };
 		6919AFC91DCFABD766110A09 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		6EAF73DC58567A1DDAA75AC4 /* TodaySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySelection.swift; sourceTree = "<group>"; };
 		72884BE51EC193019E354D6E /* ObservancesCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservancesCatalog.swift; sourceTree = "<group>"; };
 		76B0A5092C9E7AE18E2C554A /* observances */ = {isa = PBXFileReference; lastKnownFileType = folder; name = observances; path = ../content/observances; sourceTree = SOURCE_ROOT; };
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 				D1D3C646D12BD2AFA50041E1 /* SaintPickerView.swift */,
 				1CC33549E306444FE996F54E /* SettingsView.swift */,
 				24AA3D2FA59759775B89B801 /* Theme.swift */,
-				6EAF73DC58567A1DDAA75AC4 /* TodaySelection.swift */,
 				4C063053B92EB5DBF3FC18EC /* TodayView.swift */,
 			);
 			path = ImploreApp;
@@ -231,7 +228,6 @@
 				F97E546352BAE2FFD29C4425 /* SaintPickerView.swift in Sources */,
 				0551B0510554C64835B7A27E /* SettingsView.swift in Sources */,
 				9B55579D358FA5E5236B661B /* Theme.swift in Sources */,
-				4721257C0695FBEA7E2CF255 /* TodaySelection.swift in Sources */,
 				537D818CF132B170682CE332 /* TodayView.swift in Sources */,
 				B732D0377E04819944429B06 /* core.swift in Sources */,
 			);
