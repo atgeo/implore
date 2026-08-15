@@ -1070,6 +1070,43 @@ mod test {
     }
 
     #[test]
+    fn reminder_digests_omit_intentions_already_prayed_that_day() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
+        let _ = add_with_cadence(&app, &mut model, "Dad", "", &[], IntentionCadence::Daily);
+        let _ = app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 12,
+                hour: 7,
+                minute: 0,
+            },
+            &mut model,
+        );
+        let _ = app.update(
+            Event::SetReminderSettings {
+                enabled: true,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        );
+        let _ = app.update(Event::LogPrayer { id: 0 }, &mut model);
+
+        let view = app.view(&model);
+        assert_eq!(view.reminder_digests[0].day, 12);
+        assert_eq!(view.reminder_digests[0].intentions, vec!["Dad".to_string()]);
+        assert!(view
+            .reminder_digests
+            .iter()
+            .skip(1)
+            .all(|digest| digest.intentions == ["Mom", "Dad"]));
+    }
+
+    #[test]
     fn reminder_prayers_skip_unscheduled_archived_and_respect_filter_independence() {
         let app = Implore;
         let mut model = Model::default();

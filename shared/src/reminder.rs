@@ -1,5 +1,6 @@
 use std::cmp::Ordering;
 
+use crate::prayer_log;
 use crate::{IntentionCadence, Prayer, PrayerStatus};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
@@ -101,7 +102,9 @@ pub fn plan_digests(
 
         let intentions: Vec<String> = prayers
             .iter()
-            .filter(|prayer| is_due(prayer, date))
+            .filter(|prayer| {
+                is_due(prayer, date) && !prayer_log::prayed_on_date(&prayer.prayed_on, date)
+            })
             .map(|prayer| prayer.intention.clone())
             .collect();
 
@@ -348,6 +351,46 @@ mod tests {
         let digests = plan_digests(&prayers, 8, 0, now, 1);
         assert_eq!(digests.len(), 1);
         assert_eq!(digests[0].intentions.len(), 2);
+    }
+
+    #[test]
+    fn plan_skips_intentions_already_prayed_that_day() {
+        let mut mom = scheduled_prayer("Mom", IntentionCadence::Daily);
+        mom.prayed_on = vec![crate::PrayerLogEntry {
+            year: 2026,
+            month: 8,
+            day: 12,
+            hour: 7,
+            minute: 0,
+        }];
+        let dad = scheduled_prayer("Dad", IntentionCadence::Daily);
+        let now = dt(2026, 8, 12, 7, 30);
+        let digests = plan_digests(&[mom, dad], 8, 0, now, 2);
+        assert_eq!(digests.len(), 2);
+        assert_eq!(digests[0].day, 12);
+        assert_eq!(digests[0].intentions, vec!["Dad".to_string()]);
+        assert_eq!(digests[1].day, 13);
+        assert_eq!(
+            digests[1].intentions,
+            vec!["Mom".to_string(), "Dad".to_string()]
+        );
+    }
+
+    #[test]
+    fn plan_omits_day_when_every_due_intention_is_already_prayed() {
+        let mut mom = scheduled_prayer("Mom", IntentionCadence::Daily);
+        mom.prayed_on = vec![crate::PrayerLogEntry {
+            year: 2026,
+            month: 8,
+            day: 12,
+            hour: 7,
+            minute: 0,
+        }];
+        let now = dt(2026, 8, 12, 7, 30);
+        let digests = plan_digests(&[mom], 8, 0, now, 2);
+        assert_eq!(digests.len(), 1);
+        assert_eq!(digests[0].day, 13);
+        assert_eq!(digests[0].intentions, vec!["Mom".to_string()]);
     }
 
     #[test]
