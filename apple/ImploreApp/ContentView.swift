@@ -65,11 +65,6 @@ struct IntentionsView: View {
                         AddIntentionView(core: core)
                     }
                 }
-                .onAppear {
-                    if core.view.filter != .active {
-                        core.update(.setFilter(filter: .active))
-                    }
-                }
         }
     }
 }
@@ -185,21 +180,11 @@ private struct IntentionsList: View {
 
 struct IntentionRow: View {
     let prayer: Prayer
-    var showStatus = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(prayer.intention)
-                    .font(.body)
-
-                if showStatus, prayer.status == .archived {
-                    Spacer(minLength: 8)
-                    Text("Archived")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                }
-            }
+            Text(prayer.intention)
+                .font(.body)
 
             if !prayer.tags.isEmpty {
                 Text(prayer.tags.joined(separator: " · "))
@@ -214,7 +199,6 @@ struct IntentionRow: View {
             }
         }
         .padding(.vertical, 2)
-        .opacity(prayer.status == .archived ? 0.7 : 1)
     }
 
     private var cadenceLabel: LocalizedStringKey? {

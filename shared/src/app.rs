@@ -135,10 +135,6 @@ impl App for Implore {
             }
             Event::ArchivePrayer { id } => set_status(model, id, PrayerStatus::Archived),
             Event::UnarchivePrayer { id } => set_status(model, id, PrayerStatus::Active),
-            Event::SetFilter { filter } => {
-                model.filter = filter;
-                render()
-            }
             Event::SetReminderSettings {
                 enabled,
                 hour,
@@ -215,12 +211,11 @@ impl App for Implore {
 
         ViewModel {
             version: VERSION.to_string(),
-            filter: model.filter,
             has_prayers: !model.prayers.is_empty(),
             prayers: model
                 .prayers
                 .iter()
-                .filter(|prayer| model.filter.matches(prayer.status))
+                .filter(|prayer| matches!(prayer.status, PrayerStatus::Active))
                 .cloned()
                 .collect(),
             archived_prayers: model
@@ -229,7 +224,6 @@ impl App for Implore {
                 .filter(|prayer| matches!(prayer.status, PrayerStatus::Archived))
                 .cloned()
                 .collect(),
-            reminder_prayers,
             today_prayers: model
                 .local_now
                 .map(|now| {
@@ -368,25 +362,6 @@ pub enum PrayerStatus {
 
 #[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
 #[repr(C)]
-pub enum IntentionFilter {
-    #[default]
-    Active,
-    Archived,
-    All,
-}
-
-impl IntentionFilter {
-    const fn matches(self, status: PrayerStatus) -> bool {
-        match self {
-            Self::All => true,
-            Self::Active => matches!(status, PrayerStatus::Active),
-            Self::Archived => matches!(status, PrayerStatus::Archived),
-        }
-    }
-}
-
-#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
-#[repr(C)]
 pub enum IntentionCadence {
     #[default]
     Unscheduled,
@@ -442,9 +417,6 @@ pub enum Event {
     UnarchivePrayer {
         id: u64,
     },
-    SetFilter {
-        filter: IntentionFilter,
-    },
     SetReminderSettings {
         enabled: bool,
         hour: u8,
@@ -481,7 +453,6 @@ pub enum Event {
 pub struct Model {
     prayers: Vec<Prayer>,
     next_id: u64,
-    filter: IntentionFilter,
     reminder_settings: ReminderSettings,
     local_now: Option<CivilDateTime>,
 }
@@ -537,14 +508,12 @@ pub struct TodayPrayer {
 pub struct ViewModel {
     /// Workspace crate version (`CARGO_PKG_VERSION`).
     pub version: String,
-    pub filter: IntentionFilter,
-    /// True when any intention exists (ignores list filter).
+    /// True when any intention exists (active or archived).
     pub has_prayers: bool,
+    /// Active intentions for the Intentions list.
     pub prayers: Vec<Prayer>,
-    /// Archived intentions (ignores list filter) for the Archived screen.
+    /// Archived intentions for the Archived screen.
     pub archived_prayers: Vec<Prayer>,
-    /// Active intentions with a schedule, for local reminder digests (ignore list filter).
-    pub reminder_prayers: Vec<Prayer>,
     /// Intentions due on the shell's local date (never-prayed first, then least-recently-prayed).
     pub today_prayers: Vec<TodayPrayer>,
     /// Shell's local calendar date; set after `SyncLocalTime`.
@@ -567,11 +536,9 @@ impl Default for ViewModel {
     fn default() -> Self {
         Self {
             version: VERSION.to_string(),
-            filter: IntentionFilter::default(),
             has_prayers: false,
             prayers: Vec::new(),
             archived_prayers: Vec::new(),
-            reminder_prayers: Vec::new(),
             today_prayers: Vec::new(),
             local_date: None,
             reminder_settings: ReminderSettings::default(),
@@ -733,7 +700,6 @@ mod test {
         let model = Model::default();
 
         assert!(app.view(&model).prayers.is_empty());
-        assert_eq!(app.view(&model).filter, IntentionFilter::Active);
         assert_eq!(app.view(&model).version, VERSION);
     }
 
@@ -943,7 +909,7 @@ mod test {
     }
 
     #[test]
-    fn archives_prayer_and_hides_from_active_filter() {
+    fn archives_prayer_and_hides_from_active_list() {
         let app = Implore;
         let mut model = Model::default();
 
@@ -965,7 +931,7 @@ mod test {
     }
 
     #[test]
-    fn filter_archived_and_all() {
+    fn active_and_archived_lists_are_separate() {
         let app = Implore;
         let mut model = Model::default();
 
@@ -973,28 +939,15 @@ mod test {
         let _ = add(&app, &mut model, "Dad", "", &[]);
         let _ = app.update(Event::ArchivePrayer { id: 0 }, &mut model);
 
-        app.update(
-            Event::SetFilter {
-                filter: IntentionFilter::Archived,
-            },
-            &mut model,
-        )
-        .expect_only_render();
-
+        let view = app.view(&model);
         assert_eq!(
-            app.view(&model).prayers,
+            view.prayers,
+            vec![prayer(1, "Dad", None, &[], PrayerStatus::Active)]
+        );
+        assert_eq!(
+            view.archived_prayers,
             vec![prayer(0, "Mom", None, &[], PrayerStatus::Archived)]
         );
-
-        app.update(
-            Event::SetFilter {
-                filter: IntentionFilter::All,
-            },
-            &mut model,
-        )
-        .expect_only_render();
-
-        assert_eq!(app.view(&model).prayers.len(), 2);
     }
 
     #[test]
@@ -1107,7 +1060,7 @@ mod test {
     }
 
     #[test]
-    fn reminder_prayers_skip_unscheduled_archived_and_respect_filter_independence() {
+    fn reminder_digests_skip_unscheduled_and_archived() {
         let app = Implore;
         let mut model = Model::default();
 
@@ -1130,17 +1083,31 @@ mod test {
         );
         let _ = app.update(Event::ArchivePrayer { id: 2 }, &mut model);
         let _ = app.update(
-            Event::SetFilter {
-                filter: IntentionFilter::Archived,
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 16,
+                hour: 7,
+                minute: 0,
+            },
+            &mut model,
+        );
+        let _ = app.update(
+            Event::SetReminderSettings {
+                enabled: true,
+                hour: 8,
+                minute: 0,
             },
             &mut model,
         );
 
         let view = app.view(&model);
-        assert_eq!(view.filter, IntentionFilter::Archived);
-        assert_eq!(view.prayers.len(), 1);
-        assert_eq!(view.reminder_prayers.len(), 1);
-        assert_eq!(view.reminder_prayers[0].intention, "Mom");
+        assert_eq!(view.prayers.len(), 2);
+        assert_eq!(view.archived_prayers.len(), 1);
+        assert!(view
+            .reminder_digests
+            .iter()
+            .all(|digest| digest.intentions == ["Mom"]));
     }
 
     #[test]
@@ -1159,11 +1126,6 @@ mod test {
             });
 
         assert_eq!(app.view(&model).prayers[0].cadence, IntentionCadence::Daily);
-        assert_eq!(app.view(&model).reminder_prayers.len(), 1);
-        assert_eq!(
-            app.view(&model).reminder_prayers[0].cadence,
-            IntentionCadence::Daily
-        );
 
         add_with_cadence(&app, &mut model, "Dad", "", &[], IntentionCadence::Monthly)
             .expect_render()

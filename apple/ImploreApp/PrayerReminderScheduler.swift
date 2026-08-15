@@ -86,9 +86,11 @@ enum PrayerReminderScheduler {
 
 enum LocalTimeSync {
     /// Gregorian civil calendar in the device time zone (matches Rust `CivilDate`).
+    /// Week starts on Sunday (`firstWeekday = 1`) so `weekOfYear` matches core cadence.
     static var civilCalendar: Calendar {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = .current
+        calendar.firstWeekday = 1
         return calendar
     }
 
