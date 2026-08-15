@@ -22,6 +22,7 @@
 		66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */; };
 		792C7945B52FD4D2C5A3CCE0 /* ObservancesCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72884BE51EC193019E354D6E /* ObservancesCatalog.swift */; };
 		7B3EA9012A7B3313FC38DE5C /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */; };
+		87C5607FBDE17418C0FC0823 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EFC9DB3D14C408F49881B /* CalendarView.swift */; };
 		8B3033F088C9C5A41B134E16 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 08AC2D01ADA7F6920CE288A4 /* Shared */; };
 		9676580860F1F3269772EF02 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6919AFC91DCFABD766110A09 /* Appearance.swift */; };
 		9B55579D358FA5E5236B661B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA3D2FA59759775B89B801 /* Theme.swift */; };
@@ -53,6 +54,7 @@
 		88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImploreApp.swift; sourceTree = "<group>"; };
 		8C314023CD429346511CA770 /* core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = core.swift; sourceTree = "<group>"; };
 		9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterHourTimePicker.swift; sourceTree = "<group>"; };
+		9E3EFC9DB3D14C408F49881B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		AE7E5CF551686D545526FF84 /* PrayerReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerReminderScheduler.swift; sourceTree = "<group>"; };
 		AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIntentionView.swift; sourceTree = "<group>"; };
 		BF08D43EE2EA8AEB332BE687 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shared; path = generated/Shared; sourceTree = SOURCE_ROOT; };
@@ -93,6 +95,7 @@
 				6919AFC91DCFABD766110A09 /* Appearance.swift */,
 				DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */,
 				E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */,
+				9E3EFC9DB3D14C408F49881B /* CalendarView.swift */,
 				61FBEEDA513A25C4FC4E51C0 /* ContentView.swift */,
 				8C314023CD429346511CA770 /* core.swift */,
 				660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */,
@@ -217,6 +220,7 @@
 				D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */,
 				7B3EA9012A7B3313FC38DE5C /* AppLanguage.swift in Sources */,
 				9676580860F1F3269772EF02 /* Appearance.swift in Sources */,
+				87C5607FBDE17418C0FC0823 /* CalendarView.swift in Sources */,
 				FF9A9FB9D144C0445C1318CD /* ContentView.swift in Sources */,
 				360DA44C38731A4205091E4E /* FormSectionHeader.swift in Sources */,
 				BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */,

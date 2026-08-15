@@ -8,7 +8,8 @@ Add prayer intentions with optional details, tags, color, schedule, and an optio
 
 iOS app with local persistence:
 
-- **Today** — intentions due today (daily / weekly / monthly cadence), mark as prayed, temporal-cycle liturgical day heading (US calendar, computed in Rust), and named observances from the remote catalog
+- **Today** — intentions due today (daily / weekly / monthly / novena cadence), mark as prayed, temporal-cycle liturgical day heading (US calendar, computed in Rust), and named observances from the remote catalog
+- **Calendar** — browse ±1 year from today; liturgical day, observances, and intentions due on the selected day (mark prayed only for today)
 - **Intentions** — add / edit / remove / archive; optional saint companion from the same catalog (`companion: true`)
 - **Settings** — daily reminder digest, appearance, language (en / fr / es)
 
@@ -62,11 +63,11 @@ Use the **ImploreApp-iOS** scheme. Generated packages under `apple/generated/` a
 
 ## Content catalog
 
-Locale JSON in `content/observances/` (`en.json`, `fr.json`, `es.json`). One list drives both Today and the saint picker:
+Locale JSON in `content/observances/` (`en.json`, `fr.json`, `es.json`). One list drives Today, Calendar, and the saint picker:
 
 | Field | Role |
 |-------|------|
-| `id`, `name`, `date` (`MM-DD`), `rank`, `summary` | Today named feast / memorial |
+| `id`, `name`, `date` (`MM-DD`), `rank`, `summary` | Today / Calendar named feast / memorial |
 | `companion: true` | Intention picker (+ patronage) |
 | `companion: false` | Calendar-only (e.g. Transfiguration, Assumption) |
 

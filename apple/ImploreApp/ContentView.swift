@@ -11,6 +11,11 @@ struct ContentView: View {
                     Label("Today", systemImage: "sun.max")
                 }
 
+            CalendarView(core: core)
+                .tabItem {
+                    Label("Calendar", systemImage: "calendar")
+                }
+
             IntentionsView(core: core)
                 .tabItem {
                     Label("Intentions", systemImage: "hands.sparkles")

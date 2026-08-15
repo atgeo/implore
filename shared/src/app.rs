@@ -169,14 +169,31 @@ impl App for Implore {
                 hour,
                 minute,
             } => {
+                let today = reminder::CivilDate {
+                    year: i32::from(year),
+                    month: u32::from(month),
+                    day: u32::from(day),
+                };
                 model.local_now = Some(CivilDateTime {
-                    date: reminder::CivilDate {
-                        year: i32::from(year),
-                        month: u32::from(month),
-                        day: u32::from(day),
-                    },
+                    date: today,
                     hour: u32::from(hour),
                     minute: u32::from(minute),
+                });
+                model.calendar_date = Some(match model.calendar_date {
+                    Some(selected) => reminder::clamp_calendar_date(selected, today),
+                    None => today,
+                });
+                render()
+            }
+            Event::SelectCalendarDate { year, month, day } => {
+                let date = reminder::CivilDate {
+                    year: i32::from(year),
+                    month: u32::from(month),
+                    day: u32::from(day),
+                };
+                model.calendar_date = Some(match model.local_now {
+                    Some(now) => reminder::clamp_calendar_date(date, now.date),
+                    None => date,
                 });
                 render()
             }
@@ -233,30 +250,43 @@ impl App for Implore {
                 .collect(),
             today_prayers: model
                 .local_now
-                .map(|now| {
-                    reminder::select_today(&model.prayers, now.date)
-                        .into_iter()
-                        .map(|prayer| {
-                            let prayed_today =
-                                prayer_log::prayed_on_date(&prayer.prayed_on, now.date);
-                            TodayPrayer {
-                                prayer,
-                                prayed_today,
-                            }
-                        })
-                        .collect()
-                })
+                .map(|now| day_prayers(&model.prayers, now.date))
                 .unwrap_or_default(),
             local_date: model.local_now.map(|now| now.date),
             reminder_settings: model.reminder_settings,
             reminder_digests,
             liturgical_day: model.local_now.map(|now| liturgical_day_for(now.date)),
+            calendar_date: model.calendar_date,
+            calendar_min_date: model
+                .local_now
+                .map(|now| reminder::calendar_range(now.date).0),
+            calendar_max_date: model
+                .local_now
+                .map(|now| reminder::calendar_range(now.date).1),
+            calendar_liturgical_day: model.calendar_date.map(liturgical_day_for),
+            calendar_prayers: model
+                .calendar_date
+                .map(|date| day_prayers(&model.prayers, date))
+                .unwrap_or_default(),
             max_tags: MAX_TAGS as u8,
             max_tag_len: MAX_TAG_LEN as u8,
             max_intention_len: MAX_INTENTION_LEN as u8,
             max_details_len: MAX_DETAILS_LEN as u16,
         }
     }
+}
+
+fn day_prayers(prayers: &[Prayer], date: reminder::CivilDate) -> Vec<TodayPrayer> {
+    reminder::select_today(prayers, date)
+        .into_iter()
+        .map(|prayer| {
+            let prayed_today = prayer_log::prayed_on_date(&prayer.prayed_on, date);
+            TodayPrayer {
+                prayer,
+                prayed_today,
+            }
+        })
+        .collect()
 }
 
 fn log_prayer(model: &mut Model, id: u64) -> Command<Effect, Event> {
@@ -450,6 +480,12 @@ pub enum Event {
         hour: u8,
         minute: u8,
     },
+    /// Selected day on the in-app calendar (±1 year from local today).
+    SelectCalendarDate {
+        year: u16,
+        month: u8,
+        day: u8,
+    },
     /// Append a prayer log entry for this intention (today's local date).
     LogPrayer {
         id: u64,
@@ -475,6 +511,8 @@ pub struct Model {
     next_id: u64,
     reminder_settings: ReminderSettings,
     local_now: Option<CivilDateTime>,
+    /// Browse selection for the Calendar tab; defaults to local today after sync.
+    calendar_date: Option<reminder::CivilDate>,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
@@ -545,6 +583,16 @@ pub struct ViewModel {
     pub reminder_digests: Vec<ReminderDigest>,
     /// Temporal cycle for the shell's local date; set after `SyncLocalTime`.
     pub liturgical_day: Option<LiturgicalDay>,
+    /// Selected day on the Calendar tab.
+    pub calendar_date: Option<reminder::CivilDate>,
+    /// Earliest selectable calendar day (±1 year from local today).
+    pub calendar_min_date: Option<reminder::CivilDate>,
+    /// Latest selectable calendar day (±1 year from local today).
+    pub calendar_max_date: Option<reminder::CivilDate>,
+    /// Temporal cycle for [`Self::calendar_date`].
+    pub calendar_liturgical_day: Option<LiturgicalDay>,
+    /// Intentions due on [`Self::calendar_date`] (same ordering as today).
+    pub calendar_prayers: Vec<TodayPrayer>,
     /// Max tags per intention (shell UX + [`normalize_tags`]).
     pub max_tags: u8,
     /// Max characters per tag (shell UX + [`normalize_tags`]).
@@ -567,6 +615,11 @@ impl Default for ViewModel {
             reminder_settings: ReminderSettings::default(),
             reminder_digests: Vec::new(),
             liturgical_day: None,
+            calendar_date: None,
+            calendar_min_date: None,
+            calendar_max_date: None,
+            calendar_liturgical_day: None,
+            calendar_prayers: Vec::new(),
             max_tags: MAX_TAGS as u8,
             max_tag_len: MAX_TAG_LEN as u8,
             max_intention_len: MAX_INTENTION_LEN as u8,
@@ -1475,6 +1528,120 @@ mod test {
             Some(LiturgicalDay::OrdinaryTime {
                 week: 19,
                 weekday: 5
+            })
+        );
+    }
+
+    #[test]
+    fn sync_local_time_defaults_calendar_date_to_today() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 15,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        let view = app.view(&model);
+        assert_eq!(
+            view.calendar_date,
+            Some(reminder::CivilDate {
+                year: 2026,
+                month: 8,
+                day: 15
+            })
+        );
+        assert_eq!(
+            view.calendar_min_date,
+            Some(reminder::CivilDate {
+                year: 2025,
+                month: 8,
+                day: 15
+            })
+        );
+        assert_eq!(
+            view.calendar_max_date,
+            Some(reminder::CivilDate {
+                year: 2027,
+                month: 8,
+                day: 15
+            })
+        );
+        assert_eq!(view.calendar_liturgical_day, view.liturgical_day);
+    }
+
+    #[test]
+    fn select_calendar_date_clamps_and_lists_due() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let _ = add_with_cadence(&app, &mut model, "Mom", "", &[], IntentionCadence::Daily);
+        let _ = add_with_cadence(
+            &app,
+            &mut model,
+            "Parish",
+            "",
+            &[],
+            IntentionCadence::Weekly,
+        );
+
+        app.update(
+            Event::SyncLocalTime {
+                year: 2026,
+                month: 8,
+                day: 15,
+                hour: 8,
+                minute: 0,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        // Sunday: both daily and weekly due
+        app.update(
+            Event::SelectCalendarDate {
+                year: 2026,
+                month: 8,
+                day: 16,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        let view = app.view(&model);
+        assert_eq!(
+            view.calendar_date,
+            Some(reminder::CivilDate {
+                year: 2026,
+                month: 8,
+                day: 16
+            })
+        );
+        assert_eq!(view.calendar_prayers.len(), 2);
+
+        // Far past clamps to min
+        app.update(
+            Event::SelectCalendarDate {
+                year: 2020,
+                month: 1,
+                day: 1,
+            },
+            &mut model,
+        )
+        .expect_only_render();
+        assert_eq!(
+            app.view(&model).calendar_date,
+            Some(reminder::CivilDate {
+                year: 2025,
+                month: 8,
+                day: 15
             })
         );
     }

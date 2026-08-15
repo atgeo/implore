@@ -130,7 +130,7 @@ struct TodayView: View {
 }
 
 /// Leading control: empty circle → check. Tap only logs; does not un-log.
-private struct PrayerToggle: View {
+struct PrayerToggle: View {
     let prayed: Bool
     let action: () -> Void
 
@@ -157,7 +157,7 @@ private struct PrayerToggle: View {
     }
 }
 
-private struct TodayIntentionRow: View {
+struct TodayIntentionRow: View {
     let prayer: Prayer
     let prayedToday: Bool
     let localDate: CivilDate?

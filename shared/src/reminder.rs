@@ -10,6 +10,9 @@ pub const DIGEST_HORIZON_DAYS: u32 = 14;
 /// Length of a classic novena window (consecutive calendar days).
 pub const NOVENA_SPAN_DAYS: u32 = 9;
 
+/// In-app calendar browse window: ± this many years from today.
+pub const CALENDAR_SPAN_YEARS: i32 = 1;
+
 /// Calendar date in the user's local timezone (weekday 1 = Sunday, matching `Calendar`).
 #[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 #[repr(C)]
@@ -193,6 +196,36 @@ pub fn add_days(date: CivilDate, days: u32) -> CivilDate {
     }
 }
 
+/// Same month/day shifted by `years`, clamped to the last valid day of that month.
+pub fn add_years(date: CivilDate, years: i32) -> CivilDate {
+    let year = date.year + years;
+    let day = date.day.min(days_in_month(year, date.month));
+    CivilDate {
+        year,
+        month: date.month,
+        day,
+    }
+}
+
+/// Inclusive browse bounds for the in-app calendar (±[`CALENDAR_SPAN_YEARS`] from today).
+pub fn calendar_range(today: CivilDate) -> (CivilDate, CivilDate) {
+    (
+        add_years(today, -CALENDAR_SPAN_YEARS),
+        add_years(today, CALENDAR_SPAN_YEARS),
+    )
+}
+
+pub fn clamp_calendar_date(date: CivilDate, today: CivilDate) -> CivilDate {
+    let (min, max) = calendar_range(today);
+    if date < min {
+        min
+    } else if date > max {
+        max
+    } else {
+        date
+    }
+}
+
 fn days_in_month(year: i32, month: u32) -> u32 {
     match month {
         1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
@@ -265,6 +298,71 @@ mod tests {
                 day: 16
             }),
             1
+        );
+    }
+
+    #[test]
+    fn calendar_range_is_one_year_each_side() {
+        let today = CivilDate {
+            year: 2026,
+            month: 8,
+            day: 15,
+        };
+        let (min, max) = calendar_range(today);
+        assert_eq!(
+            min,
+            CivilDate {
+                year: 2025,
+                month: 8,
+                day: 15
+            }
+        );
+        assert_eq!(
+            max,
+            CivilDate {
+                year: 2027,
+                month: 8,
+                day: 15
+            }
+        );
+        assert_eq!(
+            clamp_calendar_date(
+                CivilDate {
+                    year: 2024,
+                    month: 1,
+                    day: 1
+                },
+                today
+            ),
+            min
+        );
+        assert_eq!(
+            clamp_calendar_date(
+                CivilDate {
+                    year: 2028,
+                    month: 1,
+                    day: 1
+                },
+                today
+            ),
+            max
+        );
+    }
+
+    #[test]
+    fn add_years_clamps_leap_day() {
+        let leap = CivilDate {
+            year: 2024,
+            month: 2,
+            day: 29,
+        };
+        assert_eq!(
+            add_years(leap, 1),
+            CivilDate {
+                year: 2025,
+                month: 2,
+                day: 28
+            }
         );
     }
 

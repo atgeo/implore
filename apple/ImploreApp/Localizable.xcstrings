@@ -797,6 +797,30 @@
         }
       }
     },
+    "Calendar": {
+      "comment": "Tab and navigation title for the liturgical calendar browser.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendario"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendrier"
+          }
+        }
+      }
+    },
     "Archived": {
       "comment": "Filter segment and status caption for archived intentions.",
       "extractionState": "manual",
@@ -1627,6 +1651,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rien pour aujourd’hui"
+          }
+        }
+      }
+    },
+    "Nothing due": {
+      "comment": "Empty-state title when no intentions are due on the selected calendar day.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing due"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada programado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien à prier"
+          }
+        }
+      }
+    },
+    "Nothing is due on this day.": {
+      "comment": "Empty-state description when intentions exist but none are due on the selected calendar day.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing is due on this day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada corresponde este día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n’est prévu ce jour-là."
           }
         }
       }
