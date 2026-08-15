@@ -34,7 +34,7 @@ struct SettingsView: View {
                         }
                     }
                 } else {
-                    Text("One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st.")
+                    Text("One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st, novenas for nine consecutive days from their start.")
                 }
             }
 

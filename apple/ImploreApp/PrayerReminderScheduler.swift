@@ -131,6 +131,17 @@ enum LocalTimeSync {
         return civilCalendar.date(from: components)
     }
 
+    static func civilDate(from date: Date) -> CivilDate? {
+        let components = civilCalendar.dateComponents([.year, .month, .day], from: date)
+        guard let year = components.year,
+              let month = components.month,
+              let day = components.day,
+              (1...12).contains(month),
+              (1...31).contains(day)
+        else { return nil }
+        return CivilDate(year: Int32(year), month: UInt32(month), day: UInt32(day))
+    }
+
     static func date(from entry: PrayerLogEntry) -> Date? {
         var components = DateComponents()
         components.year = Int(entry.year)

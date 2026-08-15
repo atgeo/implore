@@ -214,6 +214,11 @@ struct IntentionDetailView: View {
         case .daily: "Daily"
         case .weekly: "Weekly"
         case .monthly: "Monthly"
+        case .novena:
+            NovenaScheduleLabel.detailLabel(
+                start: prayer.novenaStart,
+                localDate: core.view.localDate
+            )
         }
     }
 
@@ -276,6 +281,7 @@ private struct PrayerLogAction: View {
                 cadence: .daily,
                 saintId: "st-joseph",
                 color: .sky,
+                novenaStart: nil,
                 prayedOn: [
                     PrayerLogEntry(year: 2025, month: 12, day: 24, hour: 22, minute: 5),
                     PrayerLogEntry(year: 2026, month: 8, day: 10, hour: 7, minute: 40),
@@ -300,6 +306,7 @@ private struct PrayerLogAction: View {
                 cadence: .daily,
                 saintId: nil,
                 color: .none,
+                novenaStart: nil,
                 prayedOn: []
             )
         )

@@ -53,6 +53,7 @@ impl App for Implore {
                 cadence,
                 saint_id,
                 color,
+                novena_start,
             } => {
                 let intention = normalize_intention(intention);
                 if intention.is_empty() {
@@ -62,6 +63,7 @@ impl App for Implore {
                 let details = normalize_details(details);
                 let saint_id = trim_optional(saint_id);
                 let tags = normalize_tags(tags);
+                let novena_start = resolve_novena_start(cadence, novena_start);
                 let id = model.next_id;
                 model.next_id += 1;
                 model.prayers.push(Prayer {
@@ -73,6 +75,7 @@ impl App for Implore {
                     cadence,
                     saint_id,
                     color,
+                    novena_start,
                     prayed_on: Vec::new(),
                 });
 
@@ -86,6 +89,7 @@ impl App for Implore {
                 cadence,
                 saint_id,
                 color,
+                novena_start,
             } => {
                 let intention = normalize_intention(intention);
                 if intention.is_empty() {
@@ -95,6 +99,7 @@ impl App for Implore {
                 let details = normalize_details(details);
                 let saint_id = trim_optional(saint_id);
                 let tags = normalize_tags(tags);
+                let novena_start = resolve_novena_start(cadence, novena_start);
                 let Some(prayer) = model.prayers.iter_mut().find(|prayer| prayer.id == id) else {
                     return render();
                 };
@@ -104,6 +109,7 @@ impl App for Implore {
                     && prayer.cadence == cadence
                     && prayer.saint_id == saint_id
                     && prayer.color == color
+                    && prayer.novena_start == novena_start
                 {
                     return render();
                 }
@@ -114,6 +120,7 @@ impl App for Implore {
                 prayer.cadence = cadence;
                 prayer.saint_id = saint_id;
                 prayer.color = color;
+                prayer.novena_start = novena_start;
                 render().and(persist_prayers(model))
             }
             Event::RemovePrayer { id } => {
@@ -318,6 +325,16 @@ fn trim_optional(value: String) -> Option<String> {
     }
 }
 
+fn resolve_novena_start(
+    cadence: IntentionCadence,
+    start: Option<reminder::CivilDate>,
+) -> Option<reminder::CivilDate> {
+    match cadence {
+        IntentionCadence::Novena => start,
+        _ => None,
+    }
+}
+
 fn normalize_intention(value: String) -> String {
     value
         .trim()
@@ -368,6 +385,7 @@ pub enum IntentionCadence {
     Daily,
     Weekly,
     Monthly,
+    Novena,
 }
 
 /// Preset accent colors for intention rows (shell maps to platform colors).
@@ -396,6 +414,7 @@ pub enum Event {
         cadence: IntentionCadence,
         saint_id: String,
         color: IntentionColor,
+        novena_start: Option<reminder::CivilDate>,
     },
     UpdatePrayer {
         id: u64,
@@ -405,6 +424,7 @@ pub enum Event {
         cadence: IntentionCadence,
         saint_id: String,
         color: IntentionColor,
+        novena_start: Option<reminder::CivilDate>,
     },
     RemovePrayer {
         id: u64,
@@ -494,6 +514,9 @@ pub struct Prayer {
     pub saint_id: Option<String>,
     #[serde(default)]
     pub color: IntentionColor,
+    /// Start of a classic 9-day novena; only set when [`IntentionCadence::Novena`].
+    #[serde(default)]
+    pub novena_start: Option<reminder::CivilDate>,
     pub prayed_on: Vec<PrayerLogEntry>,
 }
 
@@ -579,6 +602,7 @@ mod test {
             cadence: IntentionCadence::Unscheduled,
             saint_id: None,
             color: IntentionColor::None,
+            novena_start: None,
             prayed_on: Vec::new(),
         }
     }
@@ -616,6 +640,7 @@ mod test {
                 cadence,
                 saint_id: String::new(),
                 color: IntentionColor::None,
+                novena_start: None,
             },
             model,
         )
@@ -1139,6 +1164,103 @@ mod test {
     }
 
     #[test]
+    fn adds_and_persists_novena_with_start() {
+        let app = Implore;
+        let mut model = Model::default();
+        let start = reminder::CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+
+        app.update(
+            Event::AddPrayer {
+                intention: "Peace".into(),
+                details: String::new(),
+                tags: vec![],
+                cadence: IntentionCadence::Novena,
+                saint_id: String::new(),
+                color: IntentionColor::None,
+                novena_start: Some(start),
+            },
+            &mut model,
+        )
+        .expect_render()
+        .expect_key_value_with(|op| {
+            let KeyValueOperation::Set { value, .. } = op else {
+                panic!("expected KeyValue set effect");
+            };
+            let stored: StoredState = serde_json::from_slice(value).unwrap();
+            assert_eq!(stored.prayers[0].cadence, IntentionCadence::Novena);
+            assert_eq!(stored.prayers[0].novena_start, Some(start));
+        });
+
+        assert_eq!(app.view(&model).prayers[0].novena_start, Some(start));
+    }
+
+    #[test]
+    fn clearing_novena_cadence_clears_start() {
+        let app = Implore;
+        let mut model = Model::default();
+        let start = reminder::CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+
+        let _ = app.update(
+            Event::AddPrayer {
+                intention: "Peace".into(),
+                details: String::new(),
+                tags: vec![],
+                cadence: IntentionCadence::Novena,
+                saint_id: String::new(),
+                color: IntentionColor::None,
+                novena_start: Some(start),
+            },
+            &mut model,
+        );
+
+        app.update(
+            Event::UpdatePrayer {
+                id: 0,
+                intention: "Peace".into(),
+                details: String::new(),
+                tags: vec![],
+                cadence: IntentionCadence::Daily,
+                saint_id: String::new(),
+                color: IntentionColor::None,
+                novena_start: Some(start),
+            },
+            &mut model,
+        )
+        .expect_render()
+        .expect_key_value_with(|op| {
+            let KeyValueOperation::Set { value, .. } = op else {
+                panic!("expected KeyValue set effect");
+            };
+            let stored: StoredState = serde_json::from_slice(value).unwrap();
+            assert_eq!(stored.prayers[0].cadence, IntentionCadence::Daily);
+            assert_eq!(stored.prayers[0].novena_start, None);
+        });
+    }
+
+    #[test]
+    fn loads_persisted_prayers_without_novena_start_field() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        let legacy = r#"{"prayers":[{"id":1,"intention":"Mom","details":null,"tags":[],"status":"Active","cadence":"Unscheduled","prayed_on":[]}],"next_id":2,"reminder_settings":{"enabled":false,"hour":8,"minute":0}}"#;
+        app.update(
+            Event::PrayersLoaded(Ok(Some(legacy.as_bytes().to_vec()))),
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(app.view(&model).prayers[0].novena_start, None);
+    }
+
+    #[test]
     fn updates_prayer_fields_and_cadence() {
         let app = Implore;
         let mut model = Model::default();
@@ -1153,6 +1275,7 @@ mod test {
                 cadence: IntentionCadence::Weekly,
                 saint_id: "st-joseph".into(),
                 color: IntentionColor::Sage,
+                novena_start: None,
             },
             &mut model,
         )
@@ -1169,6 +1292,7 @@ mod test {
             assert_eq!(stored.prayers[0].status, PrayerStatus::Active);
             assert_eq!(stored.prayers[0].saint_id.as_deref(), Some("st-joseph"));
             assert_eq!(stored.prayers[0].color, IntentionColor::Sage);
+            assert_eq!(stored.prayers[0].novena_start, None);
         });
 
         assert_eq!(
@@ -1182,6 +1306,7 @@ mod test {
                 cadence: IntentionCadence::Weekly,
                 saint_id: Some("st-joseph".into()),
                 color: IntentionColor::Sage,
+                novena_start: None,
                 prayed_on: Vec::new(),
             }
         );
@@ -1300,6 +1425,7 @@ mod test {
                 cadence: IntentionCadence::Daily,
                 saint_id: String::new(),
                 color: IntentionColor::Sky,
+                novena_start: None,
             },
             &mut model,
         )
@@ -1314,6 +1440,7 @@ mod test {
                 cadence: IntentionCadence::Daily,
                 saint_id: String::new(),
                 color: IntentionColor::Sky,
+                novena_start: None,
             },
             &mut model,
         )

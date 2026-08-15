@@ -7,8 +7,11 @@ use serde::{Deserialize, Serialize};
 
 pub const DIGEST_HORIZON_DAYS: u32 = 14;
 
+/// Length of a classic novena window (consecutive calendar days).
+pub const NOVENA_SPAN_DAYS: u32 = 9;
+
 /// Calendar date in the user's local timezone (weekday 1 = Sunday, matching `Calendar`).
-#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 #[repr(C)]
 pub struct CivilDate {
     pub year: i32,
@@ -34,7 +37,8 @@ pub struct ReminderDigest {
     pub intentions: Vec<String>,
 }
 
-/// Daily every day; weekly on Sunday; monthly on the 1st. Active + scheduled only.
+/// Daily every day; weekly on Sunday; monthly on the 1st; novena for 9 calendar days
+/// from `novena_start` inclusive. Active + scheduled only.
 pub fn is_due(prayer: &Prayer, date: CivilDate) -> bool {
     if prayer.status != PrayerStatus::Active {
         return false;
@@ -44,6 +48,9 @@ pub fn is_due(prayer: &Prayer, date: CivilDate) -> bool {
         IntentionCadence::Daily => true,
         IntentionCadence::Weekly => weekday(date) == 1,
         IntentionCadence::Monthly => date.day == 1,
+        IntentionCadence::Novena => prayer.novena_start.is_some_and(|start| {
+            date >= start && date <= add_days(start, NOVENA_SPAN_DAYS - 1)
+        }),
     }
 }
 
@@ -220,8 +227,15 @@ mod tests {
             cadence,
             saint_id: None,
             color: IntentionColor::None,
+            novena_start: None,
             prayed_on: Vec::new(),
         }
+    }
+
+    fn novena_prayer(intention: &str, start: CivilDate) -> Prayer {
+        let mut prayer = scheduled_prayer(intention, IntentionCadence::Novena);
+        prayer.novena_start = Some(start);
+        prayer
     }
 
     fn dt(year: i32, month: u32, day: u32, hour: u32, minute: u32) -> CivilDateTime {
@@ -305,6 +319,71 @@ mod tests {
                 day: 1
             }
         ));
+    }
+
+    #[test]
+    fn novena_is_due_for_nine_calendar_days_from_start() {
+        let start = CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+        let prayer = novena_prayer("Peace", start);
+
+        assert!(!is_due(
+            &prayer,
+            CivilDate {
+                year: 2026,
+                month: 8,
+                day: 11
+            }
+        ));
+        assert!(is_due(&prayer, start));
+        assert!(is_due(
+            &prayer,
+            CivilDate {
+                year: 2026,
+                month: 8,
+                day: 20
+            }
+        ));
+        assert!(!is_due(
+            &prayer,
+            CivilDate {
+                year: 2026,
+                month: 8,
+                day: 21
+            }
+        ));
+    }
+
+    #[test]
+    fn novena_without_start_is_never_due() {
+        let prayer = scheduled_prayer("Peace", IntentionCadence::Novena);
+        assert!(!is_due(
+            &prayer,
+            CivilDate {
+                year: 2026,
+                month: 8,
+                day: 12
+            }
+        ));
+    }
+
+    #[test]
+    fn plan_novena_only_inside_window() {
+        let start = CivilDate {
+            year: 2026,
+            month: 8,
+            day: 12,
+        };
+        let prayers = vec![novena_prayer("Peace", start)];
+        let now = dt(2026, 8, 12, 7, 0);
+        let digests = plan_digests(&prayers, 8, 0, now, 14);
+        assert_eq!(digests.len(), 9);
+        assert_eq!(digests[0].day, 12);
+        assert_eq!(digests[8].day, 20);
+        assert!(digests.iter().all(|d| d.intentions == ["Peace"]));
     }
 
     #[test]

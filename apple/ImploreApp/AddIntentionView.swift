@@ -13,6 +13,7 @@ struct AddIntentionView: View {
     @State private var tags: [String]
     @State private var tagDraft: String = ""
     @State private var cadence: IntentionCadence
+    @State private var novenaStartDate: Date
     @State private var saintId: String?
     @State private var color: IntentionColor
 
@@ -23,6 +24,10 @@ struct AddIntentionView: View {
         _details = State(initialValue: prayer?.details ?? "")
         _tags = State(initialValue: prayer?.tags ?? [])
         _cadence = State(initialValue: prayer?.cadence ?? .unscheduled)
+        let defaultStart = prayer?.novenaStart.flatMap(LocalTimeSync.date(from:))
+            ?? core.view.localDate.flatMap(LocalTimeSync.date(from:))
+            ?? Date()
+        _novenaStartDate = State(initialValue: NovenaScheduleLabel.clampStart(defaultStart))
         _saintId = State(initialValue: prayer?.saintId)
         _color = State(initialValue: prayer?.color ?? .none)
     }
@@ -122,10 +127,26 @@ struct AddIntentionView: View {
                         Text("Daily").tag(IntentionCadence.daily)
                         Text("Weekly").tag(IntentionCadence.weekly)
                         Text("Monthly").tag(IntentionCadence.monthly)
+                        Text("Novena").tag(IntentionCadence.novena)
                     }
                     .paperCardRow()
+
+                    if cadence == .novena {
+                        DatePicker(
+                            "Starts",
+                            selection: $novenaStartDate,
+                            in: NovenaScheduleLabel.startDateRange(),
+                            displayedComponents: .date
+                        )
+                        .environment(\.calendar, LocalTimeSync.civilCalendar)
+                        .paperCardRow()
+                    }
                 } footer: {
-                    Text("How often you hope to pray this.")
+                    if cadence == .novena {
+                        Text("Nine consecutive days from the start date.")
+                    } else {
+                        Text("How often you hope to pray this.")
+                    }
                 }
             }
         }
@@ -137,10 +158,19 @@ struct AddIntentionView: View {
                     .disabled(!canSave)
             }
         }
+        .onChange(of: cadence) { _, newValue in
+            if newValue == .novena {
+                novenaStartDate = NovenaScheduleLabel.clampStart(novenaStartDate)
+            }
+        }
     }
 
     private func save() {
         commitDraft()
+
+        let novenaStart: CivilDate? = cadence == .novena
+            ? LocalTimeSync.civilDate(from: NovenaScheduleLabel.clampStart(novenaStartDate))
+            : nil
 
         if let prayer {
             core.update(
@@ -151,7 +181,8 @@ struct AddIntentionView: View {
                     tags: tags,
                     cadence: cadence,
                     saintId: saintId ?? "",
-                    color: color
+                    color: color,
+                    novenaStart: novenaStart
                 )
             )
         } else {
@@ -162,7 +193,8 @@ struct AddIntentionView: View {
                     tags: tags,
                     cadence: cadence,
                     saintId: saintId ?? "",
-                    color: color
+                    color: color,
+                    novenaStart: novenaStart
                 )
             )
         }
@@ -377,6 +409,7 @@ private struct FlowLayout: Layout {
                 cadence: .daily,
                 saintId: "st-joseph",
                 color: .sage,
+                novenaStart: nil,
                 prayedOn: []
             )
         )

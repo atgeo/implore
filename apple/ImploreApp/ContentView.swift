@@ -203,12 +203,7 @@ struct IntentionRow: View {
 
     private var cadenceLabel: LocalizedStringKey? {
         guard prayer.status != .archived else { return nil }
-        switch prayer.cadence {
-        case .unscheduled: return nil
-        case .daily: return "Daily"
-        case .weekly: return "Weekly"
-        case .monthly: return "Monthly"
-        }
+        return prayer.cadence.listLabel
     }
 }
 

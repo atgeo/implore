@@ -50,7 +50,8 @@ struct TodayView: View {
                                     } label: {
                                         TodayIntentionRow(
                                             prayer: item.prayer,
-                                            prayedToday: item.prayedToday
+                                            prayedToday: item.prayedToday,
+                                            localDate: core.view.localDate
                                         )
                                     }
                                 }
@@ -159,6 +160,7 @@ private struct PrayerToggle: View {
 private struct TodayIntentionRow: View {
     let prayer: Prayer
     let prayedToday: Bool
+    let localDate: CivilDate?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -190,6 +192,11 @@ private struct TodayIntentionRow: View {
         case .daily: "Daily"
         case .weekly: "Weekly"
         case .monthly: "Monthly"
+        case .novena:
+            NovenaScheduleLabel.detailLabel(
+                start: prayer.novenaStart,
+                localDate: localDate
+            )
         }
     }
 }
