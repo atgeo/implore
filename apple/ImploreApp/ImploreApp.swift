@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 @main
 struct ImploreApp: App {
@@ -14,7 +15,6 @@ struct ImploreApp: App {
                 .preferredColorScheme(appearance.colorScheme)
                 .appLocale(language)
                 .task {
-                    LocalTimeSync.sync(to: core)
                     ObservancesCatalog.shared.load(for: language)
                     await syncReminders()
                 }
@@ -31,6 +31,16 @@ struct ImploreApp: App {
                     if phase == .active {
                         LocalTimeSync.sync(to: core)
                     }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged)) { _ in
+                    LocalTimeSync.sync(to: core)
+                }
+                .onReceive(
+                    NotificationCenter.default.publisher(
+                        for: UIApplication.significantTimeChangeNotification
+                    )
+                ) { _ in
+                    LocalTimeSync.sync(to: core)
                 }
         }
     }

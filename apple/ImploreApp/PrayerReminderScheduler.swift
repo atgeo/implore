@@ -85,21 +85,57 @@ enum PrayerReminderScheduler {
 }
 
 enum LocalTimeSync {
+    /// Gregorian civil calendar in the device time zone (matches Rust `CivilDate`).
+    static var civilCalendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .current
+        return calendar
+    }
+
     @MainActor
     static func sync(to core: Core) {
-        let now = Date()
-        let components = Calendar.current.dateComponents(
+        let components = civilCalendar.dateComponents(
             [.year, .month, .day, .hour, .minute],
-            from: now
+            from: Date()
         )
+        guard let year = components.year,
+              let month = components.month,
+              let day = components.day,
+              let hour = components.hour,
+              let minute = components.minute,
+              (0...Int(UInt16.max)).contains(year),
+              (1...12).contains(month),
+              (1...31).contains(day),
+              (0...23).contains(hour),
+              (0...59).contains(minute)
+        else { return }
+
         core.update(
             .syncLocalTime(
-                year: UInt16(components.year ?? 0),
-                month: UInt8(components.month ?? 0),
-                day: UInt8(components.day ?? 0),
-                hour: UInt8(components.hour ?? 0),
-                minute: UInt8(components.minute ?? 0)
+                year: UInt16(year),
+                month: UInt8(month),
+                day: UInt8(day),
+                hour: UInt8(hour),
+                minute: UInt8(minute)
             )
         )
+    }
+
+    static func date(from civil: CivilDate) -> Date? {
+        var components = DateComponents()
+        components.year = Int(civil.year)
+        components.month = Int(civil.month)
+        components.day = Int(civil.day)
+        return civilCalendar.date(from: components)
+    }
+
+    static func date(from entry: PrayerLogEntry) -> Date? {
+        var components = DateComponents()
+        components.year = Int(entry.year)
+        components.month = Int(entry.month)
+        components.day = Int(entry.day)
+        components.hour = Int(entry.hour)
+        components.minute = Int(entry.minute)
+        return civilCalendar.date(from: components)
     }
 }

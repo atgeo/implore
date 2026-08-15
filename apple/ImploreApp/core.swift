@@ -13,6 +13,7 @@ class Core: ObservableObject {
         self.core = CoreFFI()
         // swiftlint:disable:next force_try
         self.view = try! .bincodeDeserialize(input: [UInt8](core.view()))
+        LocalTimeSync.sync(to: self)
         update(.restore)
     }
 

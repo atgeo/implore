@@ -110,9 +110,6 @@ struct IntentionDetailView: View {
                 }
             }
         }
-        .onAppear {
-            LocalTimeSync.sync(to: core)
-        }
     }
 
     @ViewBuilder
@@ -158,53 +155,50 @@ struct IntentionDetailView: View {
 
     /// Relative for recent entries, and the year is dropped inside the current year.
     private func prayerLogLabel(for entry: PrayerLogEntry) -> Text {
-        guard let date = date(from: entry) else {
+        guard let date = LocalTimeSync.date(from: entry) else {
             return Text(verbatim: "\(entry.month)/\(entry.day)/\(entry.year)")
         }
 
-        let calendar = Calendar.current
+        let calendar = LocalTimeSync.civilCalendar
         let time = date.formatted(.dateTime.hour().minute().locale(locale))
 
-        if calendar.isDateInToday(date) {
+        if let today, calendar.isDate(date, inSameDayAs: today) {
             return Text("Today, \(time)")
         }
-        if calendar.isDateInYesterday(date) {
+        if let yesterday, calendar.isDate(date, inSameDayAs: yesterday) {
             return Text("Yesterday, \(time)")
         }
 
         var style = Date.FormatStyle.dateTime.month(.abbreviated).day().hour().minute()
-        if !calendar.isDate(date, equalTo: Date(), toGranularity: .year) {
+        if let today, !calendar.isDate(date, equalTo: today, toGranularity: .year) {
             style = style.year()
         }
         return Text(verbatim: date.formatted(style.locale(locale)))
     }
 
     private var prayerLogSpan: PrayerLogSpan {
-        let calendar = Calendar.current
-        let now = Date()
-        let dates = prayer.prayedOn.compactMap(date(from:))
-        guard !dates.isEmpty else { return .overall }
+        let calendar = LocalTimeSync.civilCalendar
+        let dates = prayer.prayedOn.compactMap(LocalTimeSync.date(from:))
+        guard !dates.isEmpty, let today else { return .overall }
 
-        if dates.allSatisfy({ calendar.isDateInToday($0) }) {
+        if dates.allSatisfy({ calendar.isDate($0, inSameDayAs: today) }) {
             return .today
         }
-        if dates.allSatisfy({ calendar.isDate($0, equalTo: now, toGranularity: .weekOfYear) }) {
+        if dates.allSatisfy({ calendar.isDate($0, equalTo: today, toGranularity: .weekOfYear) }) {
             return .thisWeek
         }
-        if dates.allSatisfy({ calendar.isDate($0, equalTo: now, toGranularity: .month) }) {
+        if dates.allSatisfy({ calendar.isDate($0, equalTo: today, toGranularity: .month) }) {
             return .thisMonth
         }
         return .overall
     }
 
-    private func date(from entry: PrayerLogEntry) -> Date? {
-        var components = DateComponents()
-        components.year = Int(entry.year)
-        components.month = Int(entry.month)
-        components.day = Int(entry.day)
-        components.hour = Int(entry.hour)
-        components.minute = Int(entry.minute)
-        return Calendar.current.date(from: components)
+    private var today: Date? {
+        core.view.localDate.flatMap(LocalTimeSync.date(from:))
+    }
+
+    private var yesterday: Date? {
+        today.flatMap { LocalTimeSync.civilCalendar.date(byAdding: .day, value: -1, to: $0) }
     }
 
     /// Newest entries first; `index` is the stable index in `prayedOn`.

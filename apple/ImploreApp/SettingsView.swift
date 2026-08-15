@@ -152,7 +152,7 @@ struct SettingsView: View {
     private var reminderTimeBinding: Binding<Date> {
         Binding(
             get: {
-                Calendar.current.date(
+                LocalTimeSync.civilCalendar.date(
                     from: DateComponents(
                         hour: Int(core.view.reminderSettings.hour),
                         minute: Int(core.view.reminderSettings.minute)
@@ -160,7 +160,10 @@ struct SettingsView: View {
                 ) ?? Date()
             },
             set: { newValue in
-                let components = Calendar.current.dateComponents([.hour, .minute], from: newValue)
+                let components = LocalTimeSync.civilCalendar.dateComponents(
+                    [.hour, .minute],
+                    from: newValue
+                )
                 applyReminderSettings(
                     enabled: core.view.reminderSettings.enabled,
                     hour: UInt8(components.hour ?? 8),

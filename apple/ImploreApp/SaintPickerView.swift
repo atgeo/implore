@@ -134,7 +134,7 @@ struct SaintPickerView: View {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         formatter.setLocalizedDateFormatFromTemplate("MMMMd")
-        if let date = Calendar.current.date(from: components) {
+        if let date = LocalTimeSync.civilCalendar.date(from: components) {
             return formatter.string(from: date)
         }
         return feast

@@ -11,7 +11,10 @@ struct TodayView: View {
     }
 
     private var todayObservances: [Observance] {
-        observancesCatalog.observances(onMonthDay: Self.todayMonthDay())
+        guard let date = core.view.localDate else { return [] }
+        return observancesCatalog.observances(
+            onMonthDay: String(format: "%02d-%02d", Int(date.month), Int(date.day))
+        )
     }
 
     private var showsDayHeading: Bool {
@@ -104,13 +107,6 @@ struct TodayView: View {
             .accessibilityElement(children: .combine)
             .accessibilityAddTraits(.isHeader)
         }
-    }
-
-    private static func todayMonthDay() -> String {
-        let comps = Calendar.current.dateComponents([.month, .day], from: Date())
-        let month = comps.month ?? 1
-        let day = comps.day ?? 1
-        return String(format: "%02d-%02d", month, day)
     }
 
     private var emptyTitle: LocalizedStringKey {
