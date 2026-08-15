@@ -2,9 +2,7 @@ import App
 import Foundation
 
 enum TodaySelection {
-    static let limit = 3
-
-    /// Intentions due today, least-recently-prayed first, capped for the Today surface.
+    /// Intentions due today, least-recently-prayed first.
     static func prayers(from scheduled: [Prayer], now: Date = Date(), calendar: Calendar = .current)
         -> [Prayer]
     {
@@ -19,7 +17,7 @@ enum TodaySelection {
                 return lhs.id < rhs.id
             }
         }
-        return Array(due.prefix(limit))
+        return due
     }
 
     static func isDue(_ prayer: Prayer, on date: Date, calendar: Calendar = .current) -> Bool {
