@@ -6,19 +6,20 @@ Add prayer intentions with optional details, tags, color, schedule, and an optio
 
 ## Status
 
-iOS app with local persistence:
+iOS app with local persistence and optional private account sync:
 
 - **Today** — intentions due today (daily / weekly / monthly / novena cadence), mark as prayed, temporal-cycle liturgical day heading (US calendar, computed in Rust), and named observances from the remote catalog
 - **Calendar** — browse ±1 year from today; liturgical day, observances, and intentions due on the selected day (mark prayed only for today)
 - **Intentions** — add / edit / remove / archive; optional saint companion from the same catalog (`companion: true`)
-- **Settings** — daily reminder digest, appearance, language (en / fr / es)
+- **Settings** — daily reminder digest, appearance, language (en / fr / es), optional email/password account + sync
 
-Not built yet: iCloud sync.
+Auth and sync state machines live in the Crux core (`crux_http` + `crux_kv`). A small Axum API in `server/` stores private sync documents (SQLite).
 
 ## Layout
 
 ```
-shared/                 # Rust Crux core (events, model, view model, liturgical) + BoltFFI
+shared/                 # Rust Crux core (events, model, view model, liturgical, account/sync) + BoltFFI
+server/                 # Local Axum sync API (auth + GET/PUT /sync)
 apple/                  # SwiftUI iOS app (XcodeGen + generated bindings)
 content/observances/    # Unified calendar + companions (en, fr, es)
 ```
@@ -44,6 +45,18 @@ cargo run -p shared --features codegen,facet_typegen --bin codegen -- \
   --language swift --output-dir apple/generated
 ```
 
+## Sync API (local)
+
+```bash
+cargo run -p server
+```
+
+Listens on `http://0.0.0.0:3000` by default (`IMPLORE_BIND`, `IMPLORE_DB` env vars optional). The iOS Simulator reaches it at `http://127.0.0.1:3000` (the core’s `API_BASE_URL`).
+
+```bash
+cargo test -p server
+```
+
 ## iOS app
 
 From `apple/`:
@@ -60,6 +73,8 @@ just build
 ```
 
 Use the **ImploreApp-iOS** scheme. Generated packages under `apple/generated/` are gitignored; run `just generate` after a fresh clone.
+
+Start the sync server before using Account in Settings.
 
 ## Content catalog
 

@@ -12,6 +12,21 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section {
+                NavigationLink {
+                    AccountView(core: core)
+                } label: {
+                    LabeledContent {
+                        accountStatusValue
+                    } label: {
+                        Text("Account")
+                    }
+                }
+                .paperCardRow()
+            } footer: {
+                Text("Optional. Back up intentions and restore them on another device.")
+            }
+
+            Section {
                 Toggle("Reminders", isOn: remindersEnabledBinding)
                     .paperCardRow()
 
@@ -103,6 +118,33 @@ struct SettingsView: View {
         }
         .task {
             await refreshAuthorizationStatus()
+        }
+    }
+
+    @ViewBuilder
+    private var accountStatusValue: some View {
+        let email = core.view.signedInEmail
+        if !email.isEmpty {
+            Text(email)
+        } else {
+            Text(accountStatusKey)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private var accountStatusKey: LocalizedStringKey {
+        switch core.view.accountStatus {
+        case .signingIn:
+            switch core.view.accountOperation {
+            case .signUp:
+                "Creating Account…"
+            default:
+                "Signing In…"
+            }
+        case .syncing:
+            "Syncing…"
+        default:
+            "Not Signed In"
         }
     }
 

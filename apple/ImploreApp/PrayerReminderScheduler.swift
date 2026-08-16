@@ -118,7 +118,8 @@ enum LocalTimeSync {
                 month: UInt8(month),
                 day: UInt8(day),
                 hour: UInt8(hour),
-                minute: UInt8(minute)
+                minute: UInt8(minute),
+                unixSeconds: UInt64(Date().timeIntervalSince1970.rounded(.down))
             )
         )
     }

@@ -56,3 +56,7 @@ Desktop.ini
 *.pem
 *.p12
 *.mobileprovision
+
+# Local sync API database
+*.sqlite3
+implore-sync.sqlite3*

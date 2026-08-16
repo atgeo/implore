@@ -1,387 +1,327 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "%@ after Ash Wednesday": {
-      "comment": "Thursday, Friday, or Saturday after Ash Wednesday.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ after Ash Wednesday"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ after Ash Wednesday" : {
+      "comment" : "Thursday, Friday, or Saturday after Ash Wednesday.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ after Ash Wednesday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ después de Ceniza"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ después de Ceniza"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ après les Cendres"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ après les Cendres"
           }
         }
       }
     },
-    "%@ of Holy Week": {
-      "comment": "Monday–Wednesday of Holy Week.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ of Holy Week"
+    "%@ of Holy Week" : {
+      "comment" : "Monday–Wednesday of Holy Week.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ of Holy Week"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la Semana Santa"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la Semana Santa"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la Semaine sainte"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la Semaine sainte"
           }
         }
       }
     },
-    "%@ of the %@ Week in Ordinary Time": {
-      "comment": "Ordinary Time weekday, e.g. Thursday of the 19th Week in Ordinary Time.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ of the %@ Week in Ordinary Time"
+    "%@ of the %@ Week in Ordinary Time" : {
+      "comment" : "Ordinary Time weekday, e.g. Thursday of the 19th Week in Ordinary Time.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ of the %@ Week in Ordinary Time"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semana del Tiempo Ordinario"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semana del Tiempo Ordinario"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semaine du Temps ordinaire"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semaine du Temps ordinaire"
           }
         }
       }
     },
-    "%@ of the %@ Week of Advent": {
-      "comment": "Advent weekday, e.g. Monday of the 1st Week of Advent.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ of the %@ Week of Advent"
+    "%@ of the %@ Week of Advent" : {
+      "comment" : "Advent weekday, e.g. Monday of the 1st Week of Advent.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ of the %@ Week of Advent"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semana de Adviento"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semana de Adviento"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semaine de l’Avent"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semaine de l’Avent"
           }
         }
       }
     },
-    "%@ of the %@ Week of Easter": {
-      "comment": "Easter season weekday, e.g. Monday of the 1st Week of Easter.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ of the %@ Week of Easter"
+    "%@ of the %@ Week of Easter" : {
+      "comment" : "Easter season weekday, e.g. Monday of the 1st Week of Easter.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ of the %@ Week of Easter"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semana de Pascua"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semana de Pascua"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semaine de Pâques"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semaine de Pâques"
           }
         }
       }
     },
-    "%@ of the %@ Week of Lent": {
-      "comment": "Lent weekday, e.g. Wednesday of the 1st Week of Lent.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ of the %@ Week of Lent"
+    "%@ of the %@ Week of Lent" : {
+      "comment" : "Lent weekday, e.g. Wednesday of the 1st Week of Lent.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ of the %@ Week of Lent"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semana de Cuaresma"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semana de Cuaresma"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ de la %@ semaine de Carême"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ de la %@ semaine de Carême"
           }
         }
       }
     },
-    "%@ Sunday in Ordinary Time": {
-      "comment": "Ordinary Time Sunday, e.g. 19th Sunday in Ordinary Time.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Sunday in Ordinary Time"
+    "%@ Sunday in Ordinary Time" : {
+      "comment" : "Ordinary Time Sunday, e.g. 19th Sunday in Ordinary Time.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Sunday in Ordinary Time"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ domingo del Tiempo Ordinario"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ domingo del Tiempo Ordinario"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ dimanche du Temps ordinaire"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ dimanche du Temps ordinaire"
           }
         }
       }
     },
-    "%@ Sunday of Advent": {
-      "comment": "Advent Sunday, e.g. 1st Sunday of Advent.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Sunday of Advent"
+    "%@ Sunday of Advent" : {
+      "comment" : "Advent Sunday, e.g. 1st Sunday of Advent.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Sunday of Advent"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ domingo de Adviento"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ domingo de Adviento"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ dimanche de l’Avent"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ dimanche de l’Avent"
           }
         }
       }
     },
-    "%@ Sunday of Easter": {
-      "comment": "Easter season Sunday after Easter Sunday itself.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Sunday of Easter"
+    "%@ Sunday of Easter" : {
+      "comment" : "Easter season Sunday after Easter Sunday itself.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Sunday of Easter"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ domingo de Pascua"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ domingo de Pascua"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ dimanche de Pâques"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ dimanche de Pâques"
           }
         }
       }
     },
-    "%@ Sunday of Lent": {
-      "comment": "Lent Sunday, e.g. 1st Sunday of Lent.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Sunday of Lent"
+    "%@ Sunday of Lent" : {
+      "comment" : "Lent Sunday, e.g. 1st Sunday of Lent.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Sunday of Lent"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ domingo de Cuaresma"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ domingo de Cuaresma"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ dimanche de Carême"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ dimanche de Carême"
           }
         }
       }
     },
-    "%@ times": {},
-    "%@ times this month": {},
-    "%@ times this week": {},
-    "%@ times today": {},
-    "%lld intentions for today": {
-      "comment": "Notification body when more than three intentions are due.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld intentions for today"
+    "%@ times" : {},
+    "%@ times this month" : {},
+    "%@ times this week" : {},
+    "%@ times today" : {},
+    "%lld intentions for today" : {
+      "comment" : "Notification body when more than three intentions are due.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld intentions for today"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld intenciones para hoy"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld intenciones para hoy"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld intentions pour aujourd’hui"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld intentions pour aujourd’hui"
           }
         }
       }
     },
-    "%lld times": {
-      "comment": "Prayer log footer when entries span more than the current month.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 time"
+    "%lld times" : {
+      "comment" : "Prayer log footer when entries span more than the current month.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld times"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times"
                 }
               }
             }
           }
         },
-        "es": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 vez"
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld veces"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces"
                 }
               }
             }
           }
         },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 fois"
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld fois"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "%lld times this month": {
-      "comment": "Prayer log footer when every entry is in the current month.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 time this month"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld times this month"
-                }
-              }
-            }
-          }
-        },
-        "es": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 vez este mes"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld veces este mes"
-                }
-              }
-            }
-          }
-        },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 fois ce mois-ci"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld fois ce mois-ci"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois"
                 }
               }
             }
@@ -389,119 +329,59 @@
         }
       }
     },
-    "%lld times this week": {
-      "comment": "Prayer log footer when every entry is in the current week.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 time this week"
+    "%lld times this month" : {
+      "comment" : "Prayer log footer when every entry is in the current month.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time this month"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld times this week"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times this month"
                 }
               }
             }
           }
         },
-        "es": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 vez esta semana"
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez este mes"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld veces esta semana"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces este mes"
                 }
               }
             }
           }
         },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 fois cette semaine"
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois ce mois-ci"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld fois cette semaine"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "%lld times today": {
-      "comment": "Prayer log footer when every entry is today.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 time today"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld times today"
-                }
-              }
-            }
-          }
-        },
-        "es": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 vez hoy"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld veces hoy"
-                }
-              }
-            }
-          }
-        },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "1 fois aujourd’hui"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld fois aujourd’hui"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois ce mois-ci"
                 }
               }
             }
@@ -509,2488 +389,3328 @@
         }
       }
     },
-    "A person, family, or cause to pray for.": {
-      "comment": "Footer under the intention name field.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A person, family, or cause to pray for."
+    "%lld times this week" : {
+      "comment" : "Prayer log footer when every entry is in the current week.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time this week"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times this week"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez esta semana"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces esta semana"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois cette semaine"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois cette semaine"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld times today" : {
+      "comment" : "Prayer log footer when every entry is today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 time today"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld times today"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 vez hoy"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld veces hoy"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 fois aujourd’hui"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld fois aujourd’hui"
+                }
+              }
+            }
           }
+        }
+      }
+    },
+    "A person, family, or cause to pray for." : {
+      "comment" : "Footer under the intention name field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A person, family, or cause to pray for."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una persona, familia o causa por la que orar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une personne, une famille ou une cause à confier."
+          }
+        }
+      }
+    },
+    "A private note for this prayer." : {
+      "comment" : "Footer under the details field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A private note for this prayer."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una nota privada para esta oración."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une note privée pour cette prière."
+          }
+        }
+      }
+    },
+    "Account" : {
+      "comment" : "Settings row and account screen title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compte"
+          }
+        }
+      }
+    },
+    "Active" : {
+      "comment" : "Filter segment for active intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actives"
+          }
+        }
+      }
+    },
+    "Add a tag" : {
+      "comment" : "Placeholder for the tag draft field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a tag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir una etiqueta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une étiquette"
+          }
+        }
+      }
+    },
+    "Add Intention" : {
+      "comment" : "Navigation title for the add-intention form.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Intention"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir intención"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une intention"
+          }
+        }
+      }
+    },
+    "Add prayer entry" : {
+      "comment" : "Primary action text to append a prayer log entry.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add prayer entry"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir entrada de oración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une entrée de prière"
+          }
+        }
+      }
+    },
+    "Add someone you are carrying in prayer from the Intentions tab." : {
+      "comment" : "Empty-state description on Today when the library has no intentions yet.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add someone you are carrying in prayer from the Intentions tab."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade a alguien que llevas en oración desde la pestaña Intenciones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez quelqu’un que vous portez dans la prière depuis l’onglet Intentions."
+          }
+        }
+      }
+    },
+    "Add someone you are carrying in prayer." : {
+      "comment" : "Empty-state description when the Active or All list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add someone you are carrying in prayer."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade a alguien que llevas en oración."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez quelqu’un que vous portez dans la prière."
+          }
+        }
+      }
+    },
+    "All" : {
+      "comment" : "Filter segment that shows every intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes"
+          }
+        }
+      }
+    },
+    "An account with this email already exists" : {
+      "comment" : "Account error when creating an account with an email that is taken.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An account with this email already exists"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya existe una cuenta con este correo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un compte existe déjà avec cette adresse e-mail"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "comment" : "Settings picker for light, dark, or system color scheme.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apariencia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparence"
+          }
+        }
+      }
+    },
+    "Archive" : {
+      "comment" : "Swipe action that archives an intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiver"
+          }
+        }
+      }
+    },
+    "Archived" : {
+      "comment" : "Filter segment and status caption for archived intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archived"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivadas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivées"
+          }
+        }
+      }
+    },
+    "Ash Wednesday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ash Wednesday"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miércoles de Ceniza"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mercredi des Cendres"
+          }
+        }
+      }
+    },
+    "Calendar" : {
+      "comment" : "Tab and navigation title for the liturgical calendar browser.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendario"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendrier"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "comment" : "Cancel button that dismisses a confirmation dialog.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        }
+      }
+    },
+    "Choose a password of at least 8 characters. You can use this email later to restore intentions on another device." : {
+      "comment" : "Create-account password guidance.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a password of at least 8 characters. You can use this email later to restore intentions on another device."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige una contraseña de al menos 8 caracteres. Podrás usar este correo para restaurar tus intenciones en otro dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez un mot de passe d’au moins 8 caractères. Vous pourrez utiliser cette adresse e-mail pour restaurer vos intentions sur un autre appareil."
+          }
+        }
+      }
+    },
+    "Christmas" : {
+      "comment" : "Liturgical Today heading for December 25.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Christmas"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navidad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noël"
+          }
+        }
+      }
+    },
+    "Christmas Weekday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Christmas Weekday"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feria de Navidad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Férie de Noël"
+          }
+        }
+      }
+    },
+    "Color" : {
+      "comment" : "Section header for intention accent color.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur"
+          }
+        }
+      }
+    },
+    "Compares this device with your account and keeps the newer copy." : {
+      "comment" : "Footer explaining Sync Now.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compares this device with your account and keeps the newer copy."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compara este dispositivo con tu cuenta y conserva la copia más reciente."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compare cet appareil et votre compte, et conserve la copie la plus récente."
+          }
+        }
+      }
+    },
+    "Could not complete sign-in. Try again." : {
+      "comment" : "Account error when the auth response is empty or invalid.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not complete sign-in. Try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo iniciar sesión. Inténtalo de nuevo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de se connecter. Réessayez."
+          }
+        }
+      }
+    },
+    "Create Account" : {
+      "comment" : "Button and screen title to create a private sync account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear cuenta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer un compte"
+          }
+        }
+      }
+    },
+    "Creating Account…" : {
+      "comment" : "Transient status while creating an account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creating Account…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creando cuenta…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Création du compte…"
+          }
+        }
+      }
+    },
+    "Daily" : {
+      "comment" : "Cadence option and list caption for a daily intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diaria"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quotidienne"
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "comment" : "Appearance option that always uses dark mode.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sombre"
+          }
+        }
+      }
+    },
+    "Date" : {
+      "comment" : "Saint picker sort option that orders by feast date.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        }
+      }
+    },
+    "Day %lld of %lld" : {
+      "comment" : "Novena progress, e.g. Day 3 of 9.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day %lld of %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Día %lld de %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jour %lld sur %lld"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "comment" : "Swipe action that deletes an intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
+          }
+        }
+      }
+    },
+    "Details" : {
+      "comment" : "Section header and field label for optional intention details.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una persona, familia o causa por la que orar."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une personne, une famille ou une cause à confier."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détails"
           }
         }
       }
     },
-    "A private note for this prayer.": {
-      "comment": "Footer under the details field.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A private note for this prayer."
+    "Easter Sunday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easter Sunday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una nota privada para esta oración."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domingo de Pascua"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une note privée pour cette prière."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimanche de Pâques"
           }
         }
       }
     },
-    "© 2026 Implore": {
-      "comment": "Settings About footer with copyright year and app name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "© 2026 Implore"
+    "Edit" : {
+      "comment" : "Toolbar button to edit an intention from the detail screen.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "© 2026 Implore"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "© 2026 Implore"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier"
           }
         }
       }
     },
-    "Active": {
-      "comment": "Filter segment for active intentions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Active"
+    "Edit Intention" : {
+      "comment" : "Navigation title for the edit-intention form.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Intention"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar intención"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actives"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier l’intention"
           }
         }
       }
     },
-    "Add a tag": {
-      "comment": "Placeholder for the tag draft field.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a tag"
+    "Email" : {
+      "comment" : "Account email field and signed-in email label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir una etiqueta"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter une étiquette"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mail"
           }
         }
       }
     },
-    "Add Intention": {
-      "comment": "Navigation title for the add-intention form.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Intention"
+    "Email and password are required" : {
+      "comment" : "Account error when email or password is empty.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email and password are required"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir intención"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El correo y la contraseña son obligatorios"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter une intention"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’e-mail et le mot de passe sont requis"
           }
         }
       }
     },
-    "Add prayer entry": {
-      "comment": "Primary action text to append a prayer log entry.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add prayer entry"
+    "Enter a valid email address" : {
+      "comment" : "Account error when the email is not a valid address.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a valid email address"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir entrada de oración"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce una dirección de correo válida"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter une entrée de prière"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisissez une adresse e-mail valide"
           }
         }
       }
     },
-    "Add someone you are carrying in prayer from the Intentions tab.": {
-      "comment": "Empty-state description on Today when the library has no intentions yet.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add someone you are carrying in prayer from the Intentions tab."
+    "Filter" : {
+      "comment" : "Accessibility label for the Active/Archived/All picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añade a alguien que llevas en oración desde la pestaña Intenciones."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutez quelqu’un que vous portez dans la prière depuis l’onglet Intentions."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrer"
           }
         }
       }
     },
-    "Add someone you are carrying in prayer.": {
-      "comment": "Empty-state description when the Active or All list has no intentions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add someone you are carrying in prayer."
+    "Gold" : {
+      "comment" : "Intention accent color name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gold"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añade a alguien que llevas en oración."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dorado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutez quelqu’un que vous portez dans la prière."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or"
           }
         }
       }
     },
-    "All": {
-      "comment": "Filter segment that shows every intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All"
+    "Good Friday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good Friday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viernes Santo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toutes"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vendredi saint"
           }
         }
       }
     },
-    "Appearance": {
-      "comment": "Settings picker for light, dark, or system color scheme.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appearance"
+    "Holy Saturday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Holy Saturday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apariencia"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sábado Santo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apparence"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samedi saint"
           }
         }
       }
     },
-    "Archive": {
-      "comment": "Swipe action that archives an intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archive"
+    "Holy Thursday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Holy Thursday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archivar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jueves Santo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archiver"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeudi saint"
           }
         }
       }
     },
-    "Calendar": {
-      "comment": "Tab and navigation title for the liturgical calendar browser.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calendar"
+    "How often you hope to pray this." : {
+      "comment" : "Footer under the schedule picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How often you hope to pray this."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calendario"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con qué frecuencia esperas orar por esto."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calendrier"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À quelle fréquence vous espérez prier pour cela."
           }
         }
       }
     },
-    "Archived": {
-      "comment": "Filter segment and status caption for archived intentions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archived"
+    "I prayed for them" : {
+      "comment" : "Primary action button to log prayer for this intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I prayed for them"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archivadas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oré por ellos"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archivées"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai prié pour eux"
           }
         }
       }
     },
-    "Ash Wednesday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ash Wednesday"
+    "I prayed today" : {
+      "comment" : "Row label to log prayer for today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I prayed today"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Miércoles de Ceniza"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oré hoy"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mercredi des Cendres"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai prié aujourd’hui"
           }
         }
       }
     },
-    "Cancel": {
-      "comment": "Cancel button that dismisses a confirmation dialog.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+    "Implore" : {
+      "comment" : "Notification title / app name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Implore"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancelar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Implore"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Annuler"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Implore"
           }
         }
       }
     },
-    "Christmas": {
-      "comment": "Liturgical Today heading for December 25.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Christmas"
+    "Intention" : {
+      "comment" : "Section header for the required intention name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intention"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Navidad"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intención"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noël"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intention"
           }
         }
       }
     },
-    "Christmas Weekday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Christmas Weekday"
+    "Intentions" : {
+      "comment" : "Tab and navigation title for the full intention list.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intentions"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feria de Navidad"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intenciones"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Férie de Noël"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intentions"
           }
         }
       }
     },
-    "Color": {
-      "comment": "Section header for intention accent color.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color"
+    "Intentions you set aside will appear here." : {
+      "comment" : "Empty-state description when the Archived list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intentions you set aside will appear here."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las intenciones que apartes aparecerán aquí."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Couleur"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les intentions mises de côté apparaîtront ici."
           }
         }
       }
     },
-    "Daily": {
-      "comment": "Cadence option and list caption for a daily intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daily"
+    "Invalid email or password" : {
+      "comment" : "Account error when sign-in credentials are wrong.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid email or password"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diaria"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo o contraseña incorrectos"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quotidienne"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mail ou mot de passe incorrect"
           }
         }
       }
     },
-    "Date": {
-      "comment": "Saint picker sort option that orders by feast date.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date"
+    "Language" : {
+      "comment" : "Settings picker for app language.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fecha"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue"
           }
         }
       }
     },
-    "Dark": {
-      "comment": "Appearance option that always uses dark mode.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dark"
+    "Last Synced" : {
+      "comment" : "Label for when this device last finished a successful sync.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Synced"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oscuro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última sincronización"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sombre"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernière synchro"
           }
         }
       }
     },
-    "Delete": {
-      "comment": "Swipe action that deletes an intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete"
+    "Light" : {
+      "comment" : "Appearance option that always uses light mode.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eliminar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claro"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supprimer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clair"
           }
         }
       }
     },
-    "Details": {
-      "comment": "Section header and field label for optional intention details.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Details"
+    "Mark as prayed" : {
+      "comment" : "Accessibility label for the Today row control before logging prayer.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as prayed"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detalles"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como rezado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Détails"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme prié"
           }
         }
       }
     },
-    "Easter Sunday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Easter Sunday"
+    "Monthly" : {
+      "comment" : "Cadence option and list caption for a monthly intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monthly"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Domingo de Pascua"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensual"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dimanche de Pâques"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensuelle"
           }
         }
       }
     },
-    "Edit": {
-      "comment": "Toolbar button to edit an intention from the detail screen.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit"
+    "Name" : {
+      "comment" : "Saint picker sort option that orders by saint name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Editar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifier"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
           }
         }
       }
     },
-    "Edit Intention": {
-      "comment": "Navigation title for the edit-intention form.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit Intention"
+    "Network error. Check your connection and try again." : {
+      "comment" : "Account error when the sync server cannot be reached.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network error. Check your connection and try again."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Editar intención"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error de red. Comprueba la conexión e inténtalo de nuevo."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifier l’intention"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur réseau. Vérifiez votre connexion et réessayez."
           }
         }
       }
     },
-    "Filter": {
-      "comment": "Accessibility label for the Active/Archived/All picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filter"
+    "Never" : {
+      "comment" : "Last-synced value when this device has not synced yet.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filtro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nunca"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filtrer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jamais"
           }
         }
       }
     },
-    "Gold": {
-      "comment": "Intention accent color name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gold"
+    "New to sync? Create a private account with the same email you’ll use on other devices." : {
+      "comment" : "Footer under Create Account on the sign-in screen.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New to sync? Create a private account with the same email you’ll use on other devices."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dorado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Nuevo? Crea una cuenta privada con el mismo correo que usarás en otros dispositivos."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Or"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau ? Créez un compte privé avec la même adresse e-mail sur vos autres appareils."
           }
         }
       }
     },
-    "Good Friday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good Friday"
+    "Nine consecutive days from the start date." : {
+      "comment" : "Footer under novena schedule picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nine consecutive days from the start date."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Viernes Santo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueve días consecutivos desde la fecha de inicio."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vendredi saint"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuf jours consécutifs à partir de la date de début."
           }
         }
       }
     },
-    "Holy Saturday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Holy Saturday"
+    "No intentions yet" : {
+      "comment" : "Empty-state title when the Active or All list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No intentions yet"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sábado Santo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay intenciones"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Samedi saint"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore d’intentions"
           }
         }
       }
     },
-    "Holy Thursday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Holy Thursday"
+    "No schedule" : {
+      "comment" : "Cadence option for an intention with no schedule.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No schedule"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jueves Santo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin ritmo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeudi saint"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans rythme"
           }
         }
       }
     },
-    "How often you hope to pray this.": {
-      "comment": "Footer under the schedule picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How often you hope to pray this."
+    "None" : {
+      "comment" : "No saint selected in the saint picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con qué frecuencia esperas orar por esto."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguno"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À quelle fréquence vous espérez prier pour cela."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
           }
         }
       }
     },
-    "I prayed for them": {
-      "comment": "Primary action button to log prayer for this intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I prayed for them"
+    "Not Signed In" : {
+      "comment" : "Settings account row when no session is present.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Signed In"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oré por ellos"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin sesión"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J’ai prié pour eux"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non connecté"
           }
         }
       }
     },
-    "I prayed today": {
-      "comment": "Row label to log prayer for today.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I prayed today"
+    "Nothing due" : {
+      "comment" : "Empty-state title when no intentions are due on the selected calendar day.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing due"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oré hoy"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nada programado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J’ai prié aujourd’hui"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien à prier"
           }
         }
       }
     },
-    "Implore": {
-      "comment": "Notification title / app name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Implore"
+    "Nothing for today" : {
+      "comment" : "Empty-state title when no intentions are due today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing for today"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Implore"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nada para hoy"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Implore"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien pour aujourd’hui"
           }
         }
       }
     },
-    "Intention": {
-      "comment": "Section header for the required intention name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intention"
+    "Nothing is due on this day." : {
+      "comment" : "Empty-state description when intentions exist but none are due on the selected calendar day.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing is due on this day."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intención"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nada corresponde este día."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intention"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien n’est prévu ce jour-là."
           }
         }
       }
     },
-    "Intentions": {
-      "comment": "Tab and navigation title for the full intention list.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intentions"
+    "Nothing is due today. Set a schedule on an intention to see it here." : {
+      "comment" : "Empty-state description when intentions exist but none are due today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing is due today. Set a schedule on an intention to see it here."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intenciones"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nada corresponde hoy. Programa una intención para verla aquí."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intentions"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien n’est prévu aujourd’hui. Ajoutez un horaire à une intention pour la voir ici."
           }
         }
       }
     },
-    "Intentions you set aside will appear here.": {
-      "comment": "Empty-state description when the Archived list has no intentions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intentions you set aside will appear here."
+    "Nothing set aside" : {
+      "comment" : "Empty-state title when the Archived list has no intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing set aside"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las intenciones que apartes aparecerán aquí."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nada apartado"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les intentions mises de côté apparaîtront ici."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien de mis de côté"
           }
         }
       }
     },
-    "Language": {
-      "comment": "Settings picker for app language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Language"
+    "Notifications are off for Implore. Turn them on in Settings to receive reminders." : {
+      "comment" : "Footer when notification permission is denied.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications are off for Implore. Turn them on in Settings to receive reminders."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Idioma"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las notificaciones están desactivadas para Implore. Actívalas en Ajustes para recibir recordatorios."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Langue"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications sont désactivées pour Implore. Activez-les dans Réglages pour recevoir des rappels."
           }
         }
       }
     },
-    "Light": {
-      "comment": "Appearance option that always uses light mode.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Light"
+    "Novena" : {
+      "comment" : "Cadence option and list caption for a nine-day novena.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novena"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claro"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novena"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clair"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuvaine"
           }
         }
       }
     },
-    "Mark as prayed": {
-      "comment": "Accessibility label for the Today row control before logging prayer.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mark as prayed"
+    "Novena (ended)" : {
+      "comment" : "Schedule label after a novena's nine days have passed.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novena (ended)"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marcar como rezado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novena (terminada)"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Marquer comme prié"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuvaine (terminée)"
           }
         }
       }
     },
-    "Monthly": {
-      "comment": "Cadence option and list caption for a monthly intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monthly"
+    "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st, novenas for nine consecutive days from their start." : {
+      "comment" : "Footer under reminder settings.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st, novenas for nine consecutive days from their start."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mensual"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un resumen diario de las intenciones de ese día. Semanal los domingos, mensual el día 1, novenas nueve días seguidos desde su inicio."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mensuelle"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un rappel quotidien pour les intentions du jour. Hebdomadaire le dimanche, mensuel le 1er, neuvaines neuf jours consécutifs à partir du début."
           }
         }
       }
     },
-    "Name": {
-      "comment": "Saint picker sort option that orders by saint name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name"
+    "Open Settings" : {
+      "comment" : "Button that opens the system Settings app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nombre"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ajustes"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Réglages"
           }
         }
       }
     },
-    "No intentions yet": {
-      "comment": "Empty-state title when the Active or All list has no intentions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No intentions yet"
+    "Optional. A quiet accent on the list." : {
+      "comment" : "Footer for intention color picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional. A quiet accent on the list."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aún no hay intenciones"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcional. Un acento discreto en la lista."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pas encore d’intentions"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif. Une touche discrète dans la liste."
           }
         }
       }
     },
-    "No schedule": {
-      "comment": "Cadence option for an intention with no schedule.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No schedule"
+    "Optional. Ask this saint to pray with you." : {
+      "comment" : "Footer under the optional saint picker on add/edit intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional. Ask this saint to pray with you."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sin ritmo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcional. Pida a este santo que ore con usted."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sans rythme"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif. Demandez à ce saint de prier avec vous."
           }
         }
       }
     },
-    "None": {
-      "comment": "No saint selected in the saint picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "None"
+    "Optional. Back up intentions and restore them on another device." : {
+      "comment" : "Settings footer for the Account row.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional. Back up intentions and restore them on another device."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ninguno"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcional. Guarda tus intenciones y restáuralas en otro dispositivo."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif. Sauvegardez vos intentions et restaurez-les sur un autre appareil."
           }
         }
       }
     },
-    "Nothing for today": {
-      "comment": "Empty-state title when no intentions are due today.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing for today"
+    "Optional. Sign in to back up intentions and restore them on another device. The app works fully offline without an account." : {
+      "comment" : "Sign-in footer explaining that an account is optional.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional. Sign in to back up intentions and restore them on another device. The app works fully offline without an account."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada para hoy"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcional. Inicia sesión para guardar tus intenciones y restaurarlas en otro dispositivo. La app funciona sin conexión y sin cuenta."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rien pour aujourd’hui"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif. Connectez-vous pour sauvegarder vos intentions et les restaurer sur un autre appareil. L’app fonctionne hors ligne sans compte."
           }
         }
       }
     },
-    "Nothing due": {
-      "comment": "Empty-state title when no intentions are due on the selected calendar day.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing due"
+    "Optional. Up to %@ tags." : {},
+    "Optional. Up to %lld tags." : {
+      "comment" : "Footer under the tags chip editor. Argument is the max tag count from the core.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional. Up to %lld tags."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada programado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcional. Hasta %lld etiquetas."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rien à prier"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultatif. Jusqu’à %lld étiquettes."
           }
         }
       }
     },
-    "Nothing is due on this day.": {
-      "comment": "Empty-state description when intentions exist but none are due on the selected calendar day.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing is due on this day."
+    "Our Lord Jesus Christ, King of the Universe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Our Lord Jesus Christ, King of the Universe"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada corresponde este día."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jesucristo, Rey del Universo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rien n’est prévu ce jour-là."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Christ, Roi de l’univers"
           }
         }
       }
     },
-    "Nothing is due today. Set a schedule on an intention to see it here.": {
-      "comment": "Empty-state description when intentions exist but none are due today.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing is due today. Set a schedule on an intention to see it here."
+    "Palm Sunday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palm Sunday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada corresponde hoy. Programa una intención para verla aquí."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domingo de Ramos"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rien n’est prévu aujourd’hui. Ajoutez un horaire à une intention pour la voir ici."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimanche des Rameaux"
           }
         }
       }
     },
-    "Nothing set aside": {
-      "comment": "Empty-state title when the Archived list has no intentions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing set aside"
+    "Password" : {
+      "comment" : "Account password field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada apartado"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contraseña"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rien de mis de côté"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot de passe"
           }
         }
       }
     },
-    "Notifications are off for Implore. Turn them on in Settings to receive reminders.": {
-      "comment": "Footer when notification permission is denied.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifications are off for Implore. Turn them on in Settings to receive reminders."
+    "Password must be at least 8 characters" : {
+      "comment" : "Account error when the new password is too short.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password must be at least 8 characters"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las notificaciones están desactivadas para Implore. Actívalas en Ajustes para recibir recordatorios."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contraseña debe tener al menos 8 caracteres"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les notifications sont désactivées pour Implore. Activez-les dans Réglages pour recevoir des rappels."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le mot de passe doit contenir au moins 8 caractères"
           }
         }
       }
     },
-    "Open Settings": {
-      "comment": "Button that opens the system Settings app.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Settings"
+    "Pentecost Sunday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pentecost Sunday"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abrir Ajustes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domingo de Pentecostés"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvrir Réglages"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimanche de Pentecôte"
           }
         }
       }
     },
-    "Optional. A quiet accent on the list.": {
-      "comment": "Footer for intention color picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Optional. A quiet accent on the list."
+    "Permanently deletes every intention, including archived ones." : {
+      "comment" : "Footer under the remove-all-intentions settings button.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permanently deletes every intention, including archived ones."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opcional. Un acento discreto en la lista."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina permanentemente todas las intenciones, incluidas las archivadas."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Facultatif. Une touche discrète dans la liste."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprime définitivement toutes les intentions, y compris celles qui sont archivées."
           }
         }
       }
     },
-    "Optional. Ask this saint to pray with you.": {
-      "comment": "Footer under the optional saint picker on add/edit intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Optional. Ask this saint to pray with you."
+    "Prayed" : {
+      "comment" : "Action button that appends a prayer log entry.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayed"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opcional. Pida a este santo que ore con usted."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oré"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Facultatif. Demandez à ce saint de prier avec vous."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai prié"
           }
         }
       }
     },
-    "Optional. Up to %@ tags.": {},
-    "Optional. Up to %lld tags.": {
-      "comment": "Footer under the tags chip editor. Argument is the max tag count from the core.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Optional. Up to %lld tags."
+    "Prayed today" : {
+      "comment" : "Accessibility label when an intention has already been logged today.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayed today"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opcional. Hasta %lld etiquetas."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rezado hoy"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Facultatif. Jusqu’à %lld étiquettes."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prié aujourd’hui"
           }
         }
       }
     },
-    "Our Lord Jesus Christ, King of the Universe": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Our Lord Jesus Christ, King of the Universe"
+    "Prayer" : {
+      "comment" : "Section header for prayer action controls.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jesucristo, Rey del Universo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oración"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le Christ, Roi de l’univers"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prière"
           }
         }
       }
     },
-    "Palm Sunday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Palm Sunday"
+    "Prayer log" : {
+      "comment" : "Section header listing past prayer dates.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prayer log"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Domingo de Ramos"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registro de oración"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dimanche des Rameaux"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journal de prière"
           }
         }
       }
     },
-    "Pentecost Sunday": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pentecost Sunday"
+    "Privacy Policy" : {
+      "comment" : "Settings About row that opens the privacy policy.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Domingo de Pentecostés"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dimanche de Pentecôte"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
           }
         }
       }
     },
-    "Permanently deletes every intention, including archived ones.": {
-      "comment": "Footer under the remove-all-intentions settings button.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Permanently deletes every intention, including archived ones."
+    "Reminders" : {
+      "comment" : "Settings toggle for prayer digest notifications.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elimina permanentemente todas las intenciones, incluidas las archivadas."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatorios"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supprime définitivement toutes les intentions, y compris celles qui sont archivées."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels"
           }
         }
       }
     },
-    "Prayed": {
-      "comment": "Action button that appends a prayer log entry.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prayed"
+    "Remove All Intentions" : {
+      "comment" : "Destructive settings button and confirmation action that deletes every intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove All Intentions"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oré"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar todas las intenciones"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J’ai prié"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer toutes les intentions"
           }
         }
       }
     },
-    "Prayed today": {
-      "comment": "Accessibility label when an intention has already been logged today.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prayed today"
+    "Remove All Intentions?" : {
+      "comment" : "Confirmation dialog title before deleting every intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove All Intentions?"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rezado hoy"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar todas las intenciones?"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prié aujourd’hui"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer toutes les intentions ?"
           }
         }
       }
     },
-    "Prayer": {
-      "comment": "Section header for prayer action controls.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prayer"
+    "Removes the account session from this device. Intentions already on the device are kept." : {
+      "comment" : "Footer explaining Sign Out.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes the account session from this device. Intentions already on the device are kept."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oración"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cierra la sesión en este dispositivo. Las intenciones que ya están aquí se conservan."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prière"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déconnecte cet appareil. Les intentions déjà présentes restent sur l’appareil."
           }
         }
       }
     },
-    "Prayer log": {
-      "comment": "Section header listing past prayer dates.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prayer log"
+    "Rose" : {
+      "comment" : "Intention accent color name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rose"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Registro de oración"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rosa"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Journal de prière"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rose"
           }
         }
       }
     },
-    "Privacy Policy": {
-      "comment": "Settings About row that opens the privacy policy.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy Policy"
+    "Sage" : {
+      "comment" : "Intention accent color name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sage"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Política de privacidad"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvia"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Politique de confidentialité"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauge"
           }
         }
       }
     },
-    "Reminders": {
-      "comment": "Settings toggle for prayer digest notifications.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reminders"
+    "Saint" : {
+      "comment" : "Section header and navigation title for saint association.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saint"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recordatorios"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rappels"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saint"
           }
         }
       }
     },
-    "Remove All Intentions": {
-      "comment": "Destructive settings button and confirmation action that deletes every intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove All Intentions"
+    "Sand" : {
+      "comment" : "Intention accent color name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sand"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eliminar todas las intenciones"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arena"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supprimer toutes les intentions"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sable"
           }
         }
       }
     },
-    "Remove All Intentions?": {
-      "comment": "Confirmation dialog title before deleting every intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove All Intentions?"
+    "Save" : {
+      "comment" : "Toolbar button that saves a new intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¿Eliminar todas las intenciones?"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supprimer toutes les intentions ?"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer"
           }
         }
       }
     },
-    "Rose": {
-      "comment": "Intention accent color name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rose"
+    "Schedule" : {
+      "comment" : "Section header and picker label for intention cadence.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rosa"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ritmo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rose"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rythme"
           }
         }
       }
     },
-    "Sage": {
-      "comment": "Intention accent color name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sage"
+    "Search saints" : {
+      "comment" : "Search field placeholder in the saint picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search saints"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salvia"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar santos"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sauge"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher un saint"
           }
         }
       }
     },
-    "Saint": {
-      "comment": "Section header and navigation title for saint association.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saint"
+    "Session expired. Sign in again." : {
+      "comment" : "Account error when the saved session is no longer valid.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session expired. Sign in again."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Santo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sesión caducada. Vuelve a iniciar sesión."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saint"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session expirée. Reconnectez-vous."
           }
         }
       }
     },
-    "Sand": {
-      "comment": "Intention accent color name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sand"
+    "Settings" : {
+      "comment" : "Navigation title and toolbar accessibility label for settings.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arena"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sable"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
           }
         }
       }
     },
-    "Save": {
-      "comment": "Toolbar button that saves a new intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save"
+    "Sign In" : {
+      "comment" : "Button and section header to sign in to an existing account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign In"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enregistrer"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion"
           }
         }
       }
     },
-    "Schedule": {
-      "comment": "Section header and picker label for intention cadence.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schedule"
+    "Sign in to sync" : {
+      "comment" : "Account error when sync is requested while signed out.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in to sync"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ritmo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia sesión para sincronizar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rythme"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez-vous pour synchroniser"
           }
         }
       }
     },
-    "Search saints": {
-      "comment": "Search field placeholder in the saint picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search saints"
+    "Sign Out" : {
+      "comment" : "Button that clears the account session on this device.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Out"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar santos"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher un saint"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déconnexion"
           }
         }
       }
     },
-    "Settings": {
-      "comment": "Navigation title and toolbar accessibility label for settings.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+    "Signed in on this device." : {
+      "comment" : "Footer under the signed-in email.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed in on this device."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sesión iniciada en este dispositivo."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réglages"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté sur cet appareil."
           }
         }
       }
     },
-    "Sky": {
-      "comment": "Intention accent color name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sky"
+    "Signing In…" : {
+      "comment" : "Transient status while signing in.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing In…"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cielo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciando sesión…"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ciel"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion…"
           }
         }
       }
     },
-    "Slate": {
-      "comment": "Intention accent color name.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Slate"
+    "Sky" : {
+      "comment" : "Intention accent color name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sky"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pizarra"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cielo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardoise"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ciel"
           }
         }
       }
     },
-    "Someone you are carrying": {
-      "comment": "Placeholder for the required intention name field.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Someone you are carrying"
+    "Slate" : {
+      "comment" : "Intention accent color name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slate"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alguien que llevas en oración"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pizarra"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quelqu’un que vous portez"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ardoise"
           }
         }
       }
     },
-    "Sort": {
-      "comment": "Saint picker toolbar control for name vs date order.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sort"
+    "Someone you are carrying" : {
+      "comment" : "Placeholder for the required intention name field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Someone you are carrying"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ordenar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alguien que llevas en oración"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trier"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelqu’un que vous portez"
           }
         }
       }
     },
-    "System": {
-      "comment": "Option that follows the device appearance or language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System"
+    "Sort" : {
+      "comment" : "Saint picker toolbar control for name vs date order.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sistema"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordenar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Système"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trier"
           }
         }
       }
     },
-    "Tags": {
-      "comment": "Section header for optional tags.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tags"
+    "Starts" : {
+      "comment" : "Date picker label for when a novena begins.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Etiquetas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empieza"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Étiquettes"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Début"
           }
         }
       }
     },
-    "Terms of Use": {
-      "comment": "Settings About row that opens the terms of use.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terms of Use"
+    "Sync" : {
+      "comment" : "Section header for backing up and restoring intentions.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Condiciones de uso"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronización"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conditions d’utilisation"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchronisation"
           }
         }
       }
     },
-    "The Baptism of the Lord": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Baptism of the Lord"
+    "Sync Now" : {
+      "comment" : "Button that compares this device with the account copy.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync Now"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El Bautismo del Señor"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le Baptême du Seigneur"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchroniser"
           }
         }
       }
     },
-    "The Epiphany of the Lord": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Epiphany of the Lord"
+    "Syncing…" : {
+      "comment" : "Transient status while syncing.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Syncing…"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La Epifanía del Señor"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizando…"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’Épiphanie du Seigneur"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchronisation…"
           }
         }
       }
     },
-    "The Holy Family": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Holy Family"
+    "System" : {
+      "comment" : "Option that follows the device appearance or language.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La Sagrada Familia"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La Sainte Famille"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Système"
           }
         }
       }
     },
-    "The Most Holy Body and Blood of Christ": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Most Holy Body and Blood of Christ"
+    "Tags" : {
+      "comment" : "Section header for optional tags.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El Santísimo Cuerpo y Sangre de Cristo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetas"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le Très Saint Corps et Sang du Christ"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étiquettes"
           }
         }
       }
     },
-    "The Most Holy Trinity": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Most Holy Trinity"
+    "Terms of Use" : {
+      "comment" : "Settings About row that opens the terms of use.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Use"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La Santísima Trinidad"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condiciones de uso"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La Sainte Trinité"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conditions d’utilisation"
           }
         }
       }
     },
-    "The Most Sacred Heart of Jesus": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Most Sacred Heart of Jesus"
+    "The Baptism of the Lord" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Baptism of the Lord"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El Sagrado Corazón de Jesús"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Bautismo del Señor"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le Sacré-Cœur de Jésus"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Baptême du Seigneur"
           }
         }
       }
     },
-    "This cannot be undone.": {
-      "comment": "Confirmation dialog message before deleting every intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This cannot be undone."
+    "The Epiphany of the Lord" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Epiphany of the Lord"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esta acción no se puede deshacer."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Epifanía del Señor"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cette action est irréversible."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’Épiphanie du Seigneur"
           }
         }
       }
     },
-    "Time": {
-      "comment": "Label for the reminder time picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time"
+    "The Holy Family" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Holy Family"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hora"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Sagrada Familia"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heure"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Sainte Famille"
           }
         }
       }
     },
-    "Today": {
-      "comment": "Tab and navigation title for the daily practice list.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today"
+    "The Most Holy Body and Blood of Christ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Most Holy Body and Blood of Christ"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hoy"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Santísimo Cuerpo y Sangre de Cristo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aujourd’hui"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Très Saint Corps et Sang du Christ"
           }
         }
       }
     },
-    "Today, %@": {
-      "comment": "Prayer log entry from today, followed by the time.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today, %@"
+    "The Most Holy Trinity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Most Holy Trinity"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hoy, %@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Santísima Trinidad"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aujourd’hui, %@"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La Sainte Trinité"
           }
         }
       }
     },
-    "Unarchive": {
-      "comment": "Swipe action that restores an archived intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unarchive"
+    "The Most Sacred Heart of Jesus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Most Sacred Heart of Jesus"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desarchivar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Sagrado Corazón de Jesús"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Désarchiver"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Sacré-Cœur de Jésus"
           }
         }
       }
     },
-    "Version": {
-      "comment": "Settings row label for the app version.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Version"
+    "This cannot be undone." : {
+      "comment" : "Confirmation dialog message before deleting every intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This cannot be undone."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Versión"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta acción no se puede deshacer."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Version"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette action est irréversible."
           }
         }
       }
     },
-    "Weekly": {
-      "comment": "Cadence option and list caption for a weekly intention.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weekly"
+    "Time" : {
+      "comment" : "Label for the reminder time picker.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Semanal"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hebdomadaire"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heure"
           }
         }
       }
     },
-    "Yesterday, %@": {
-      "comment": "Prayer log entry from yesterday, followed by the time.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yesterday, %@"
+    "Today" : {
+      "comment" : "Tab and navigation title for the daily practice list.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ayer, %@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoy"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier, %@"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aujourd’hui"
           }
         }
       }
     },
-    "Novena": {
-      "comment": "Cadence option and list caption for a nine-day novena.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novena"
+    "Today, %@" : {
+      "comment" : "Prayer log entry from today, followed by the time.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today, %@"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novena"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoy, %@"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neuvaine"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aujourd’hui, %@"
           }
         }
       }
     },
-    "Novena (ended)": {
-      "comment": "Schedule label after a novena's nine days have passed.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novena (ended)"
+    "Unarchive" : {
+      "comment" : "Swipe action that restores an archived intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unarchive"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novena (terminada)"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desarchivar"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neuvaine (terminée)"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désarchiver"
           }
         }
       }
     },
-    "Starts": {
-      "comment": "Date picker label for when a novena begins.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Starts"
+    "Version" : {
+      "comment" : "Settings row label for the app version.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Empieza"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Début"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
           }
         }
       }
     },
-    "Nine consecutive days from the start date.": {
-      "comment": "Footer under novena schedule picker.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nine consecutive days from the start date."
+    "Weekly" : {
+      "comment" : "Cadence option and list caption for a weekly intention.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nueve días consecutivos desde la fecha de inicio."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semanal"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neuf jours consécutifs à partir de la date de début."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hebdomadaire"
           }
         }
       }
     },
-    "Day %lld of %lld": {
-      "comment": "Novena progress, e.g. Day 3 of 9.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Day %lld of %lld"
+    "Yesterday, %@" : {
+      "comment" : "Prayer log entry from yesterday, followed by the time.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday, %@"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Día %lld de %lld"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayer, %@"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jour %lld sur %lld"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier, %@"
           }
         }
       }
     },
-    "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st, novenas for nine consecutive days from their start.": {
-      "comment": "Footer under reminder settings.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One daily digest for intentions due that day. Weekly on Sundays, monthly on the 1st, novenas for nine consecutive days from their start."
+    "© 2026 Implore" : {
+      "comment" : "Settings About footer with copyright year and app name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Implore"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un resumen diario de las intenciones de ese día. Semanal los domingos, mensual el día 1, novenas nueve días seguidos desde su inicio."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Implore"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un rappel quotidien pour les intentions du jour. Hebdomadaire le dimanche, mensuel le 1er, neuvaines neuf jours consécutifs à partir du début."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Implore"
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

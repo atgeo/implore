@@ -17,6 +17,7 @@
 		2CB6967B2837C13AB595BB41 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D7FBE1F5251153AA96EEE /* SafariView.swift */; };
 		360DA44C38731A4205091E4E /* FormSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660A55540DE2CB5337D57FB8 /* FormSectionHeader.swift */; };
 		3642C6C2420D772653DE0FBA /* QuarterHourTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59DDCCF00374916CFA57E7 /* QuarterHourTimePicker.swift */; };
+		3F5774E3B8639CE0CF97F459 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8339EC2B7D89F436D9CBB1C /* KeychainStore.swift */; };
 		42D9548EDEF193F0D7515212 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3691C5498E1B0EA15431F3 /* App */; };
 		537D818CF132B170682CE332 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C063053B92EB5DBF3FC18EC /* TodayView.swift */; };
 		66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */; };
@@ -29,6 +30,7 @@
 		9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */; };
 		B043510AD9DC2010BBFFE6C8 /* LiturgicalDay+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */; };
 		B732D0377E04819944429B06 /* core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C314023CD429346511CA770 /* core.swift */; };
+		B7D00AE3D7C995797DC9E1D7 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B14AB38107C5DEB7421E41 /* AccountView.swift */; };
 		BFF0B7FF8EC560B4B8A568DA /* ImploreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7CBF1A3DEBAC5D4CEBAEB /* ImploreApp.swift */; };
 		D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */; };
 		F97E546352BAE2FFD29C4425 /* SaintPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D3C646D12BD2AFA50041E1 /* SaintPickerView.swift */; };
@@ -42,6 +44,7 @@
 		24AA3D2FA59759775B89B801 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		251E98733EC880B827C7660A /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; name = App; path = generated/App; sourceTree = SOURCE_ROOT; };
 		2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentionDetailView.swift; sourceTree = "<group>"; };
+		35B14AB38107C5DEB7421E41 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiturgicalDay+Label.swift"; sourceTree = "<group>"; };
 		41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentionColor+UI.swift"; sourceTree = "<group>"; };
 		4C063053B92EB5DBF3FC18EC /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		E34EB11125ADB78C27A5BDB1 /* ImploreApp-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "ImploreApp-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E38EF9AB3FECD7DF7210EE17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E8339EC2B7D89F436D9CBB1C /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 		4AD4A10AA3D8FE9C33E27309 /* ImploreApp */ = {
 			isa = PBXGroup;
 			children = (
+				35B14AB38107C5DEB7421E41 /* AccountView.swift */,
 				AFACE892EFC72A1A3EAF3CEC /* AddIntentionView.swift */,
 				6919AFC91DCFABD766110A09 /* Appearance.swift */,
 				DB8461E1A4DF8ED323F5A22F /* AppLanguage.swift */,
@@ -103,6 +108,7 @@
 				CFFBDF65E7A2930B0D920516 /* IntentionCadence+Label.swift */,
 				41FFE0591B50587CD47DB91C /* IntentionColor+UI.swift */,
 				2660C97580160CFFAD56AA57 /* IntentionDetailView.swift */,
+				E8339EC2B7D89F436D9CBB1C /* KeychainStore.swift */,
 				01A6154DD6BB9C8B386688C7 /* KeyValueStore.swift */,
 				415E8E815C59201119DED60C /* LiturgicalDay+Label.swift */,
 				222A5C6AABD094B5A9E74080 /* Localizable.xcstrings */,
@@ -217,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7D00AE3D7C995797DC9E1D7 /* AccountView.swift in Sources */,
 				D9618191435872739BC5A228 /* AddIntentionView.swift in Sources */,
 				7B3EA9012A7B3313FC38DE5C /* AppLanguage.swift in Sources */,
 				9676580860F1F3269772EF02 /* Appearance.swift in Sources */,
@@ -228,6 +235,7 @@
 				1676BFD570D93F2A5078F9DA /* IntentionColor+UI.swift in Sources */,
 				66B3132268A97D1920C65592 /* IntentionDetailView.swift in Sources */,
 				9E1DA2A604C6B70754C5B860 /* KeyValueStore.swift in Sources */,
+				3F5774E3B8639CE0CF97F459 /* KeychainStore.swift in Sources */,
 				B043510AD9DC2010BBFFE6C8 /* LiturgicalDay+Label.swift in Sources */,
 				792C7945B52FD4D2C5A3CCE0 /* ObservancesCatalog.swift in Sources */,
 				1F8B31513EE2973DA69D78A6 /* PrayerReminderScheduler.swift in Sources */,
@@ -259,7 +267,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "${CARGO_PKG_VERSION}";
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.atgeo.implore;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -281,7 +289,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "${CARGO_PKG_VERSION}";
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.atgeo.implore;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

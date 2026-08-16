@@ -11,6 +11,7 @@ keywords.workspace = true
 facet = { version = "=0.46.5", features = ["chrono"] }
 boltffi.workspace = true
 crux_core.workspace = true
+crux_http.workspace = true
 crux_kv.workspace = true
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
@@ -31,7 +32,11 @@ name = "codegen"
 required-features = ["codegen"]
 
 [features]
-facet_typegen = ["crux_core/facet_typegen", "crux_kv/facet_typegen"]
+facet_typegen = [
+    "crux_core/facet_typegen",
+    "crux_http/facet_typegen",
+    "crux_kv/facet_typegen",
+]
 codegen = [
     "dep:anyhow",
     "dep:clap",

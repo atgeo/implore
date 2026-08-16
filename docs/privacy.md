@@ -4,13 +4,13 @@ title: Privacy Policy
 
 # Privacy Policy for Implore
 
-**Last updated:** August 14, 2026
+**Last updated:** August 16, 2026
 
 Implore (“the App”) is provided by Georges Kmeid (“we,” “us”). This policy describes how the App handles information.
 
 ## Summary
 
-Implore is designed to keep your prayer intentions on your device. We do not create accounts, and we do not sell your personal information.
+Implore keeps your prayer intentions on your device by default. An optional private account can sync that data to a sync server you connect to. We do not sell your personal information.
 
 ## Information stored on your device
 
@@ -20,8 +20,15 @@ The App stores the following locally on your device:
 - Prayer history recorded in the App (for example when you mark an intention as prayed)
 - Reminder preferences (whether daily digests are enabled, and the time you choose)
 - Appearance and language preferences
+- Optional account session details (email and an auth token in the device Keychain) when you sign in
 
-This data stays in the App’s local storage on your device (including Application Support and standard app preferences). It is not uploaded to our servers.
+This data stays on your device unless you use optional sync. Intentions are stored in the App’s Application Support directory. Account tokens are stored in the Keychain.
+
+## Optional account and cloud sync
+
+The App does not require an account. If you create one and sync, the App sends your intentions, prayer log, reminder settings, and account credentials (email and password at sign-up / sign-in) to the configured sync API so you can restore data on another device. Sync is private to your account; there are no public profiles.
+
+You can sign out from Settings (clears the local session without deleting intentions). You can delete intentions in the App; uninstalling removes local data subject to how iOS manages app storage. To remove server-side account data while sync is in development, contact the developer (see Contact).
 
 ## Notifications
 
@@ -29,15 +36,13 @@ If you enable reminders, the App schedules local notifications on your device. N
 
 ## Network use
 
-The App may download a public observances catalog (liturgical names and related reference content) from our content hosting so Today and the saint picker stay up to date. That request does not include your prayer intentions or other personal content you enter in the App. A copy of the catalog may be cached on your device for offline use.
+The App may download a public observances catalog (liturgical names and related reference content) from our content hosting so Today and the saint picker stay up to date. That catalog request does not include your prayer intentions.
+
+When you use optional sync, the App also contacts the sync API for authentication and to upload or download your sync document.
 
 ## Analytics and tracking
 
 The App does not include third-party analytics, advertising, or tracking SDKs.
-
-## Account and cloud sync
-
-The App does not require an account. Cloud sync (for example iCloud) is not offered at this time. If that changes, this policy will be updated.
 
 ## Data retention and deletion
 

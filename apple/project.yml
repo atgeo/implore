@@ -63,3 +63,5 @@ targets:
           - UIInterfaceOrientationLandscapeRight
         UILaunchScreen:
           UIColorName: Paper
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true

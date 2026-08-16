@@ -1,8 +1,10 @@
 import Foundation
 
 /// Local key-value store backed by Application Support.
-/// Values are opaque bytes (JSON from the Rust core).
+/// Session tokens are stored in the Keychain instead of on disk.
 final class KeyValueStore {
+    private static let sessionKey = "session"
+
     private let directory: URL
     private let fileManager = FileManager.default
 
@@ -13,23 +15,41 @@ final class KeyValueStore {
     }
 
     func get(key: String) -> Data? {
-        let url = fileURL(for: key)
-        guard fileManager.fileExists(atPath: url.path) else { return nil }
-        return try? Data(contentsOf: url)
+        if key == Self.sessionKey {
+            if let data = KeychainStore.get(key: key) {
+                return data
+            }
+            if let data = readFile(key: key) {
+                KeychainStore.set(key: key, value: data)
+                deleteFile(key: key)
+                return data
+            }
+            return nil
+        }
+        return readFile(key: key)
     }
 
     func set(key: String, value: Data) {
-        let url = fileURL(for: key)
-        try? value.write(to: url, options: .atomic)
+        if key == Self.sessionKey {
+            KeychainStore.set(key: key, value: value)
+            deleteFile(key: key)
+            return
+        }
+        writeFile(key: key, value: value)
     }
 
     func delete(key: String) {
-        let url = fileURL(for: key)
-        try? fileManager.removeItem(at: url)
+        if key == Self.sessionKey {
+            KeychainStore.delete(key: key)
+        }
+        deleteFile(key: key)
     }
 
     func exists(key: String) -> Bool {
-        fileManager.fileExists(atPath: fileURL(for: key).path)
+        if key == Self.sessionKey {
+            return KeychainStore.exists(key: key) || fileManager.fileExists(atPath: fileURL(for: key).path)
+        }
+        return fileManager.fileExists(atPath: fileURL(for: key).path)
     }
 
     func listKeys(prefix: String, cursor: UInt64) -> [String] {
@@ -40,20 +60,42 @@ final class KeyValueStore {
             return []
         }
 
-        let keys = contents
+        var keys = contents
             .map(\.lastPathComponent)
             .compactMap(decodeKey)
             .filter { $0.hasPrefix(prefix) }
-            .sorted()
+
+        if Self.sessionKey.hasPrefix(prefix),
+           KeychainStore.exists(key: Self.sessionKey),
+           !keys.contains(Self.sessionKey)
+        {
+            keys.append(Self.sessionKey)
+        }
+        keys.sort()
 
         if cursor == 0 {
             return keys
         }
 
-        // Cursor is an opaque index into the sorted key list.
         let start = Int(cursor)
         guard start < keys.count else { return [] }
         return Array(keys[start...])
+    }
+
+    private func readFile(key: String) -> Data? {
+        let url = fileURL(for: key)
+        guard fileManager.fileExists(atPath: url.path) else { return nil }
+        return try? Data(contentsOf: url)
+    }
+
+    private func writeFile(key: String, value: Data) {
+        let url = fileURL(for: key)
+        try? value.write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    private func deleteFile(key: String) {
+        let url = fileURL(for: key)
+        try? fileManager.removeItem(at: url)
     }
 
     private func fileURL(for key: String) -> URL {

@@ -6,10 +6,17 @@ use crux_core::{
     render::{render, RenderOperation},
     App, Command,
 };
+use crux_http::command::Http;
+use crux_http::protocol::HttpRequest;
 use crux_kv::{command::KeyValue, KeyValueError, KeyValueOperation};
 use facet::Facet;
 use serde::{Deserialize, Serialize};
 
+use crate::account::{
+    auth_error_message, auth_url, email_looks_valid, normalize_email, session_expired_message,
+    AccountOperation, AccountStatus, AuthRequest, AuthResponse, Session, API_BASE_URL,
+    MIN_PASSWORD_LEN, SESSION_KEY,
+};
 use crate::prayer_log::{self, PrayerLogEntry};
 use crate::reminder::{self, CivilDateTime, ReminderDigest, DIGEST_HORIZON_DAYS};
 use crate::{liturgical_day_for, LiturgicalDay};
@@ -35,13 +42,28 @@ impl App for Implore {
 
     fn update(&self, event: Event, model: &mut Model) -> Command<Effect, Event> {
         match event {
-            Event::Restore => KeyValue::get(PRAYERS_KEY).then_send(Event::PrayersLoaded),
+            Event::Restore => KeyValue::get(PRAYERS_KEY)
+                .then_send(Event::PrayersLoaded)
+                .and(KeyValue::get(SESSION_KEY).then_send(Event::SessionLoaded)),
             Event::PrayersLoaded(result) => {
                 if let Ok(Some(bytes)) = result {
                     if let Ok(stored) = serde_json::from_slice::<StoredState>(&bytes) {
                         model.prayers = stored.prayers;
                         model.next_id = stored.next_id;
                         model.reminder_settings = stored.reminder_settings;
+                        model.updated_at = stored.updated_at;
+                    }
+                }
+                render()
+            }
+            Event::SessionLoaded(result) => {
+                if let Ok(Some(bytes)) = result {
+                    if let Ok(session) = serde_json::from_slice::<Session>(&bytes) {
+                        model.last_synced_at = session.last_synced_at;
+                        model.session = Some(session);
+                        model.account_status = AccountStatus::SignedIn;
+                        model.account_operation = AccountOperation::Idle;
+                        model.account_error = None;
                     }
                 }
                 render()
@@ -160,7 +182,7 @@ impl App for Implore {
                     hour,
                     minute,
                 };
-                render().and(persist_state(model))
+                render().and(persist_after_mutation(model))
             }
             Event::SyncLocalTime {
                 year,
@@ -168,6 +190,7 @@ impl App for Implore {
                 day,
                 hour,
                 minute,
+                unix_seconds,
             } => {
                 let today = reminder::CivilDate {
                     year: i32::from(year),
@@ -179,6 +202,7 @@ impl App for Implore {
                     hour: u32::from(hour),
                     minute: u32::from(minute),
                 });
+                model.unix_seconds = Some(unix_seconds);
                 model.calendar_date = Some(match model.calendar_date {
                     Some(selected) => reminder::clamp_calendar_date(selected, today),
                     None => today,
@@ -201,6 +225,16 @@ impl App for Implore {
             Event::RemovePrayerLogEntry { id, index } => {
                 remove_prayer_log_entry(model, id, index as usize)
             }
+            Event::SignUp { email, password } => begin_auth(model, email, password, true),
+            Event::SignIn { email, password } => begin_auth(model, email, password, false),
+            Event::SignOut => sign_out(model),
+            Event::DismissAccountError => dismiss_account_error(model),
+            Event::SyncRequested => begin_sync(model),
+            Event::AuthCompleted { email, result } => auth_completed(model, email, result),
+            Event::SyncGetCompleted(result) => sync_get_completed(model, result),
+            Event::SyncPutCompleted(result) => sync_put_completed(model, result),
+            Event::SessionPersisted(_) => Command::done(),
+            Event::SignOutCompleted(_) => Command::done(),
             Event::Persisted(_) => Command::done(),
         }
     }
@@ -272,6 +306,16 @@ impl App for Implore {
             max_tag_len: MAX_TAG_LEN as u8,
             max_intention_len: MAX_INTENTION_LEN as u8,
             max_details_len: MAX_DETAILS_LEN as u16,
+            account_status: model.account_status.clone(),
+            signed_in_email: model
+                .session
+                .as_ref()
+                .map(|session| session.email.clone())
+                .unwrap_or_default(),
+            last_synced_at: model.last_synced_at,
+            account_error: model.account_error.clone().unwrap_or_default(),
+            account_operation: model.account_operation.clone(),
+            api_base_url: API_BASE_URL.to_string(),
         }
     }
 }
@@ -289,6 +333,308 @@ fn day_prayers(prayers: &[Prayer], date: reminder::CivilDate) -> Vec<TodayPrayer
         .collect()
 }
 
+fn is_account_busy(model: &Model) -> bool {
+    matches!(
+        model.account_status,
+        AccountStatus::SigningIn | AccountStatus::Syncing
+    )
+}
+
+fn begin_auth(
+    model: &mut Model,
+    email: String,
+    password: String,
+    sign_up: bool,
+) -> Command<Effect, Event> {
+    if is_account_busy(model) || model.session.is_some() {
+        return Command::done();
+    }
+
+    let email = normalize_email(email);
+    let password = password.trim().to_string();
+    model.account_operation = if sign_up {
+        AccountOperation::SignUp
+    } else {
+        AccountOperation::SignIn
+    };
+
+    if email.is_empty() || password.is_empty() {
+        model.account_status = AccountStatus::Error;
+        model.account_error = Some("Email and password are required".into());
+        return render();
+    }
+    if !email_looks_valid(&email) {
+        model.account_status = AccountStatus::Error;
+        model.account_error = Some("Enter a valid email address".into());
+        return render();
+    }
+    if sign_up && password.len() < MIN_PASSWORD_LEN {
+        model.account_status = AccountStatus::Error;
+        model.account_error = Some(format!(
+            "Password must be at least {MIN_PASSWORD_LEN} characters"
+        ));
+        return render();
+    }
+
+    model.account_status = AccountStatus::SigningIn;
+    model.account_error = None;
+
+    let path = if sign_up {
+        "/auth/sign-up"
+    } else {
+        "/auth/sign-in"
+    };
+    let body = AuthRequest {
+        email: email.clone(),
+        password,
+    };
+
+    render().and(
+        Http::post(auth_url(path))
+            .body_json(&body)
+            .expect("auth body")
+            .expect_json::<AuthResponse>()
+            .build()
+            .then_send(move |result| Event::AuthCompleted { email, result }),
+    )
+}
+
+fn auth_completed(
+    model: &mut Model,
+    email: String,
+    result: crux_http::Result<crux_http::Response<AuthResponse>>,
+) -> Command<Effect, Event> {
+    if model.account_status != AccountStatus::SigningIn {
+        return Command::done();
+    }
+
+    match result {
+        Ok(mut response) => {
+            let Some(body) = response.take_body() else {
+                model.account_status = AccountStatus::Error;
+                model.account_error = Some("Could not complete sign-in. Try again.".into());
+                return render();
+            };
+            if body.token.is_empty() || body.user_id.is_empty() {
+                model.account_status = AccountStatus::Error;
+                model.account_error = Some("Could not complete sign-in. Try again.".into());
+                return render();
+            }
+            let session = Session {
+                user_id: body.user_id,
+                token: body.token,
+                email,
+                last_synced_at: None,
+            };
+            model.session = Some(session.clone());
+            model.last_synced_at = None;
+            model.account_status = AccountStatus::SignedIn;
+            model.account_operation = AccountOperation::Idle;
+            model.account_error = None;
+            render().and(persist_session(&session))
+        }
+        Err(error) => {
+            model.session = None;
+            model.account_status = AccountStatus::Error;
+            model.account_error = Some(auth_error_message(&error));
+            render()
+        }
+    }
+}
+
+fn sign_out(model: &mut Model) -> Command<Effect, Event> {
+    let token = model.session.as_ref().map(|session| session.token.clone());
+    model.session = None;
+    model.account_status = AccountStatus::SignedOut;
+    model.account_operation = AccountOperation::Idle;
+    model.account_error = None;
+    model.last_synced_at = None;
+
+    let clear = render().and(KeyValue::delete(SESSION_KEY).then_send(Event::SessionPersisted));
+    match token {
+        Some(token) => clear.and(
+            Http::post(auth_url("/auth/sign-out"))
+                .header("Authorization", format!("Bearer {token}"))
+                .build()
+                .then_send(Event::SignOutCompleted),
+        ),
+        None => clear,
+    }
+}
+
+fn dismiss_account_error(model: &mut Model) -> Command<Effect, Event> {
+    model.account_error = None;
+    model.account_operation = AccountOperation::Idle;
+    if model.account_status == AccountStatus::Error {
+        model.account_status = if model.session.is_some() {
+            AccountStatus::SignedIn
+        } else {
+            AccountStatus::SignedOut
+        };
+    }
+    render()
+}
+
+fn begin_sync(model: &mut Model) -> Command<Effect, Event> {
+    if model.account_status == AccountStatus::Syncing {
+        return Command::done();
+    }
+    if is_account_busy(model) {
+        return Command::done();
+    }
+
+    let Some(session) = model.session.clone() else {
+        model.account_status = AccountStatus::Error;
+        model.account_operation = AccountOperation::Sync;
+        model.account_error = Some("Sign in to sync".into());
+        return render();
+    };
+
+    model.account_status = AccountStatus::Syncing;
+    model.account_operation = AccountOperation::Sync;
+    model.account_error = None;
+
+    render().and(
+        Http::get(auth_url("/sync"))
+            .header("Authorization", format!("Bearer {}", session.token))
+            .expect_json::<StoredState>()
+            .build()
+            .then_send(Event::SyncGetCompleted),
+    )
+}
+
+fn sync_get_completed(
+    model: &mut Model,
+    result: crux_http::Result<crux_http::Response<StoredState>>,
+) -> Command<Effect, Event> {
+    if model.session.is_none() || model.account_status != AccountStatus::Syncing {
+        return Command::done();
+    }
+
+    match result {
+        Ok(mut response) => {
+            let Some(remote) = response.take_body() else {
+                return push_sync(model);
+            };
+            if remote.updated_at > model.updated_at {
+                apply_stored_state(model, remote);
+                finish_sync_success(model)
+            } else {
+                push_sync(model)
+            }
+        }
+        Err(error) if error.code() == Some(404) => push_sync(model),
+        Err(error) if error.code() == Some(401) => expire_session(model),
+        Err(error) => {
+            model.account_status = AccountStatus::Error;
+            model.account_error = Some(auth_error_message(&error));
+            render()
+        }
+    }
+}
+
+fn push_sync(model: &mut Model) -> Command<Effect, Event> {
+    if model.account_status != AccountStatus::Syncing {
+        return Command::done();
+    }
+    let Some(session) = model.session.clone() else {
+        return Command::done();
+    };
+
+    touch_updated_at(model);
+    let body = stored_state_from_model(model);
+
+    Http::put(auth_url("/sync"))
+        .header("Authorization", format!("Bearer {}", session.token))
+        .body_json(&body)
+        .expect("sync body")
+        .expect_json::<StoredState>()
+        .build()
+        .then_send(Event::SyncPutCompleted)
+}
+
+fn sync_put_completed(
+    model: &mut Model,
+    result: crux_http::Result<crux_http::Response<StoredState>>,
+) -> Command<Effect, Event> {
+    if model.session.is_none() || model.account_status != AccountStatus::Syncing {
+        return Command::done();
+    }
+
+    match result {
+        Ok(mut response) => {
+            if let Some(remote) = response.take_body() {
+                model.updated_at = remote.updated_at.max(model.updated_at);
+            }
+            finish_sync_success(model)
+        }
+        Err(error) if error.code() == Some(401) => expire_session(model),
+        Err(error) => {
+            model.account_status = AccountStatus::Error;
+            model.account_error = Some(auth_error_message(&error));
+            render()
+        }
+    }
+}
+
+fn finish_sync_success(model: &mut Model) -> Command<Effect, Event> {
+    model.last_synced_at = model.unix_seconds;
+    if let Some(session) = model.session.as_mut() {
+        session.last_synced_at = model.last_synced_at;
+    }
+    model.account_status = AccountStatus::SignedIn;
+    model.account_operation = AccountOperation::Idle;
+    model.account_error = None;
+    let Some(session) = model.session.clone() else {
+        return render().and(persist_state(model));
+    };
+    render()
+        .and(persist_state(model))
+        .and(persist_session(&session))
+}
+
+fn expire_session(model: &mut Model) -> Command<Effect, Event> {
+    model.session = None;
+    model.last_synced_at = None;
+    model.account_status = AccountStatus::Error;
+    model.account_operation = AccountOperation::SignIn;
+    model.account_error = Some(session_expired_message());
+    render().and(KeyValue::delete(SESSION_KEY).then_send(Event::SessionPersisted))
+}
+
+fn apply_stored_state(model: &mut Model, stored: StoredState) {
+    model.prayers = stored.prayers;
+    model.next_id = stored.next_id;
+    model.reminder_settings = stored.reminder_settings;
+    model.updated_at = stored.updated_at;
+}
+
+fn stored_state_from_model(model: &Model) -> StoredState {
+    StoredState {
+        prayers: model.prayers.clone(),
+        next_id: model.next_id,
+        reminder_settings: model.reminder_settings,
+        updated_at: model.updated_at,
+    }
+}
+
+fn touch_updated_at(model: &mut Model) {
+    if let Some(unix) = model.unix_seconds {
+        if unix >= model.updated_at {
+            model.updated_at = unix;
+        } else {
+            model.updated_at += 1;
+        }
+    } else {
+        model.updated_at = model.updated_at.saturating_add(1);
+    }
+}
+
+fn persist_session(session: &Session) -> Command<Effect, Event> {
+    let bytes = serde_json::to_vec(session).unwrap_or_default();
+    KeyValue::set(SESSION_KEY, bytes).then_send(Event::SessionPersisted)
+}
+
 fn log_prayer(model: &mut Model, id: u64) -> Command<Effect, Event> {
     let Some(now) = model.local_now else {
         return render();
@@ -301,7 +647,7 @@ fn log_prayer(model: &mut Model, id: u64) -> Command<Effect, Event> {
     }
 
     prayer_log::append_entry(&mut prayer.prayed_on, PrayerLogEntry::from_local(now));
-    render().and(persist_state(model))
+    render().and(persist_after_mutation(model))
 }
 
 fn remove_prayer_log_entry(model: &mut Model, id: u64, index: usize) -> Command<Effect, Event> {
@@ -310,7 +656,7 @@ fn remove_prayer_log_entry(model: &mut Model, id: u64, index: usize) -> Command<
     };
 
     if prayer_log::remove_entry(&mut prayer.prayed_on, index) {
-        render().and(persist_state(model))
+        render().and(persist_after_mutation(model))
     } else {
         render()
     }
@@ -327,18 +673,19 @@ fn set_status(model: &mut Model, id: u64, status: PrayerStatus) -> Command<Effec
     render().and(persist_prayers(model))
 }
 
-fn persist_prayers(model: &Model) -> Command<Effect, Event> {
-    persist_state(model)
+fn persist_prayers(model: &mut Model) -> Command<Effect, Event> {
+    persist_after_mutation(model)
 }
 
 fn persist_state(model: &Model) -> Command<Effect, Event> {
-    let stored = StoredState {
-        prayers: model.prayers.clone(),
-        next_id: model.next_id,
-        reminder_settings: model.reminder_settings,
-    };
-    let bytes = serde_json::to_vec(&stored).unwrap_or_default();
+    let bytes = serde_json::to_vec(&stored_state_from_model(model)).unwrap_or_default();
     KeyValue::set(PRAYERS_KEY, bytes).then_send(Event::Persisted)
+}
+
+/// Persist after a local mutation, bumping [`Model::updated_at`] for LWW sync.
+fn persist_after_mutation(model: &mut Model) -> Command<Effect, Event> {
+    touch_updated_at(model);
+    persist_state(model)
 }
 
 fn snap_minute(minute: u8) -> u8 {
@@ -479,6 +826,8 @@ pub enum Event {
         day: u8,
         hour: u8,
         minute: u8,
+        /// Unix seconds (UTC) from the shell clock; used for sync LWW.
+        unix_seconds: u64,
     },
     /// Selected day on the in-app calendar (±1 year from local today).
     SelectCalendarDate {
@@ -495,14 +844,58 @@ pub enum Event {
         id: u64,
         index: u64,
     },
+    /// Create an account on the sync API.
+    SignUp {
+        email: String,
+        password: String,
+    },
+    /// Sign in to an existing account.
+    SignIn {
+        email: String,
+        password: String,
+    },
+    /// Clear the local session (does not delete intentions).
+    SignOut,
+    /// Clear a stale account error (leaving Create Account, etc.).
+    DismissAccountError,
+    /// Pull/push the sync document (LWW on `updated_at`).
+    SyncRequested,
     /// Internal: shell finished reading the prayers blob.
     #[serde(skip)]
     #[facet(skip)]
     PrayersLoaded(#[facet(opaque)] Result<Option<Vec<u8>>, KeyValueError>),
+    /// Internal: shell finished reading the session blob.
+    #[serde(skip)]
+    #[facet(skip)]
+    SessionLoaded(#[facet(opaque)] Result<Option<Vec<u8>>, KeyValueError>),
     /// Internal: shell finished writing the prayers blob.
     #[serde(skip)]
     #[facet(skip)]
     Persisted(#[facet(opaque)] Result<Option<Vec<u8>>, KeyValueError>),
+    /// Internal: shell finished writing or deleting the session blob.
+    #[serde(skip)]
+    #[facet(skip)]
+    SessionPersisted(#[facet(opaque)] Result<Option<Vec<u8>>, KeyValueError>),
+    /// Internal: auth HTTP response.
+    #[serde(skip)]
+    #[facet(skip)]
+    AuthCompleted {
+        email: String,
+        #[facet(opaque)]
+        result: crux_http::Result<crux_http::Response<AuthResponse>>,
+    },
+    /// Internal: GET /sync response.
+    #[serde(skip)]
+    #[facet(skip)]
+    SyncGetCompleted(#[facet(opaque)] crux_http::Result<crux_http::Response<StoredState>>),
+    /// Internal: PUT /sync response.
+    #[serde(skip)]
+    #[facet(skip)]
+    SyncPutCompleted(#[facet(opaque)] crux_http::Result<crux_http::Response<StoredState>>),
+    /// Internal: best-effort server session revoke finished.
+    #[serde(skip)]
+    #[facet(skip)]
+    SignOutCompleted(#[facet(opaque)] crux_http::Result<crux_http::Response<Vec<u8>>>),
 }
 
 #[derive(Default, Clone)]
@@ -513,6 +906,15 @@ pub struct Model {
     local_now: Option<CivilDateTime>,
     /// Browse selection for the Calendar tab; defaults to local today after sync.
     calendar_date: Option<reminder::CivilDate>,
+    session: Option<Session>,
+    account_status: AccountStatus,
+    account_operation: AccountOperation,
+    account_error: Option<String>,
+    last_synced_at: Option<u64>,
+    /// Document version for LWW sync.
+    updated_at: u64,
+    /// Latest unix seconds from [`Event::SyncLocalTime`].
+    unix_seconds: Option<u64>,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
@@ -533,11 +935,13 @@ impl Default for ReminderSettings {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Default)]
-struct StoredState {
-    prayers: Vec<Prayer>,
-    next_id: u64,
-    reminder_settings: ReminderSettings,
+#[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+pub struct StoredState {
+    pub prayers: Vec<Prayer>,
+    pub next_id: u64,
+    pub reminder_settings: ReminderSettings,
+    #[serde(default)]
+    pub updated_at: u64,
 }
 
 #[derive(Facet, Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
@@ -601,6 +1005,15 @@ pub struct ViewModel {
     pub max_intention_len: u8,
     /// Max characters in optional details (shell UX + [`normalize_details`]).
     pub max_details_len: u16,
+    pub account_status: AccountStatus,
+    /// Empty when signed out.
+    pub signed_in_email: String,
+    pub last_synced_at: Option<u64>,
+    /// Empty when no account error.
+    pub account_error: String,
+    pub account_operation: AccountOperation,
+    /// Sync API base URL the core will call (for Settings / debugging).
+    pub api_base_url: String,
 }
 
 impl Default for ViewModel {
@@ -624,6 +1037,12 @@ impl Default for ViewModel {
             max_tag_len: MAX_TAG_LEN as u8,
             max_intention_len: MAX_INTENTION_LEN as u8,
             max_details_len: MAX_DETAILS_LEN as u16,
+            account_status: AccountStatus::SignedOut,
+            signed_in_email: String::new(),
+            last_synced_at: None,
+            account_error: String::new(),
+            account_operation: AccountOperation::Idle,
+            api_base_url: API_BASE_URL.to_string(),
         }
     }
 }
@@ -633,6 +1052,7 @@ impl Default for ViewModel {
 pub enum Effect {
     Render(RenderOperation),
     KeyValue(KeyValueOperation),
+    Http(HttpRequest),
 }
 
 #[cfg(test)]
@@ -704,13 +1124,18 @@ mod test {
         let app = Implore;
         let mut model = Model::default();
 
-        app.update(Event::Restore, &mut model)
-            .expect_key_value_with(|op| {
-                assert!(matches!(
-                    op,
-                    KeyValueOperation::Get { key } if key == PRAYERS_KEY
-                ));
+        let mut cmd = app.update(Event::Restore, &mut model);
+        let mut keys = Vec::new();
+        for _ in 0..2 {
+            cmd.expect_key_value_with(|op| {
+                let KeyValueOperation::Get { key } = op else {
+                    panic!("expected get");
+                };
+                keys.push(key.clone());
             });
+        }
+        keys.sort();
+        assert_eq!(keys, vec![PRAYERS_KEY.to_string(), SESSION_KEY.to_string()]);
     }
 
     #[test]
@@ -722,6 +1147,7 @@ mod test {
             prayers: vec![prayer(3, "Mom", None, &[], PrayerStatus::Active)],
             next_id: 4,
             reminder_settings: ReminderSettings::default(),
+            updated_at: 0,
         };
         let bytes = serde_json::to_vec(&stored).unwrap();
 
@@ -1082,6 +1508,7 @@ mod test {
                 day: 12,
                 hour: 7,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         );
@@ -1114,6 +1541,7 @@ mod test {
                 day: 12,
                 hour: 7,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         );
@@ -1167,6 +1595,7 @@ mod test {
                 day: 16,
                 hour: 7,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         );
@@ -1378,6 +1807,7 @@ mod test {
                 day: 12,
                 hour: 9,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         );
@@ -1428,6 +1858,7 @@ mod test {
                 day: 12,
                 hour: 9,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         );
@@ -1518,6 +1949,7 @@ mod test {
                 day: 13,
                 hour: 8,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         )
@@ -1544,6 +1976,7 @@ mod test {
                 day: 15,
                 hour: 8,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         )
@@ -1599,6 +2032,7 @@ mod test {
                 day: 15,
                 hour: 8,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         )
@@ -1671,6 +2105,7 @@ mod test {
                 day: 12,
                 hour: 8,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         )
@@ -1704,6 +2139,7 @@ mod test {
                 day: 12,
                 hour: 8,
                 minute: 0,
+                unix_seconds: 1_700_000_000,
             },
             &mut model,
         )
@@ -1722,5 +2158,370 @@ mod test {
         let today = app.view(&model).today_prayers;
         assert_eq!(today.len(), 1);
         assert!(today[0].prayed_today);
+    }
+
+    #[test]
+    fn sign_in_requests_auth_http() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        app.update(
+            Event::SignIn {
+                email: "  Me@Example.com ".into(),
+                password: "secret".into(),
+            },
+            &mut model,
+        )
+        .expect_render()
+        .expect_http_with(|req| {
+            assert_eq!(req.method, "POST");
+            assert_eq!(req.url, format!("{API_BASE_URL}/auth/sign-in"));
+            let body: AuthRequest = serde_json::from_slice(&req.body).unwrap();
+            assert_eq!(body.email, "me@example.com");
+            assert_eq!(body.password, "secret");
+        });
+
+        assert_eq!(model.account_status, AccountStatus::SigningIn);
+    }
+
+    #[test]
+    fn sign_up_requests_auth_http() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        app.update(
+            Event::SignUp {
+                email: "  Me@Example.com ".into(),
+                password: "secret12".into(),
+            },
+            &mut model,
+        )
+        .expect_render()
+        .expect_http_with(|req| {
+            assert_eq!(req.method, "POST");
+            assert_eq!(req.url, format!("{API_BASE_URL}/auth/sign-up"));
+            let body: AuthRequest = serde_json::from_slice(&req.body).unwrap();
+            assert_eq!(body.email, "me@example.com");
+            assert_eq!(body.password, "secret12");
+        });
+
+        assert_eq!(model.account_status, AccountStatus::SigningIn);
+    }
+
+    #[test]
+    fn auth_completed_stores_session() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.account_status = AccountStatus::SigningIn;
+
+        let response = crux_http::testing::ResponseBuilder::ok()
+            .body(AuthResponse {
+                user_id: "u1".into(),
+                token: "tok".into(),
+            })
+            .build();
+
+        app.update(
+            Event::AuthCompleted {
+                email: "me@example.com".into(),
+                result: Ok(response),
+            },
+            &mut model,
+        )
+        .expect_render()
+        .expect_key_value_with(|op| {
+            let KeyValueOperation::Set { key, value } = op else {
+                panic!("expected session set");
+            };
+            assert_eq!(key, SESSION_KEY);
+            let session: Session = serde_json::from_slice(value).unwrap();
+            assert_eq!(session.email, "me@example.com");
+            assert_eq!(session.token, "tok");
+        });
+
+        assert_eq!(model.account_status, AccountStatus::SignedIn);
+        assert_eq!(app.view(&model).signed_in_email, "me@example.com");
+    }
+
+    #[test]
+    fn sign_out_clears_session() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.session = Some(Session {
+            user_id: "u1".into(),
+            token: "tok".into(),
+            email: "me@example.com".into(),
+            last_synced_at: None,
+        });
+        model.account_status = AccountStatus::SignedIn;
+        model.last_synced_at = Some(99);
+
+        app.update(Event::SignOut, &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                assert!(matches!(
+                    op,
+                    KeyValueOperation::Delete { key } if key == SESSION_KEY
+                ));
+            })
+            .expect_http_with(|req| {
+                assert_eq!(req.method, "POST");
+                assert_eq!(req.url, format!("{API_BASE_URL}/auth/sign-out"));
+                assert!(req.headers.iter().any(|h| {
+                    h.name.eq_ignore_ascii_case("authorization") && h.value == "Bearer tok"
+                }));
+            });
+
+        assert!(model.session.is_none());
+        assert_eq!(model.account_status, AccountStatus::SignedOut);
+        assert!(model.last_synced_at.is_none());
+        assert!(app.view(&model).signed_in_email.is_empty());
+    }
+
+    #[test]
+    fn sign_up_rejects_short_password() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        app.update(
+            Event::SignUp {
+                email: "me@example.com".into(),
+                password: "short".into(),
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(model.account_status, AccountStatus::Error);
+        assert_eq!(
+            model.account_error.as_deref(),
+            Some("Password must be at least 8 characters")
+        );
+        assert_eq!(model.account_operation, AccountOperation::SignUp);
+    }
+
+    #[test]
+    fn sign_up_rejects_invalid_email() {
+        let app = Implore;
+        let mut model = Model::default();
+
+        app.update(
+            Event::SignUp {
+                email: "not-an-email".into(),
+                password: "secret12".into(),
+            },
+            &mut model,
+        )
+        .expect_only_render();
+
+        assert_eq!(model.account_status, AccountStatus::Error);
+        assert_eq!(
+            model.account_error.as_deref(),
+            Some("Enter a valid email address")
+        );
+        assert_eq!(model.account_operation, AccountOperation::SignUp);
+    }
+
+    #[test]
+    fn dismiss_account_error_returns_to_signed_out() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.account_status = AccountStatus::Error;
+        model.account_operation = AccountOperation::SignUp;
+        model.account_error = Some("An account with this email already exists".into());
+
+        app.update(Event::DismissAccountError, &mut model)
+            .expect_only_render();
+
+        assert_eq!(model.account_status, AccountStatus::SignedOut);
+        assert_eq!(model.account_operation, AccountOperation::Idle);
+        assert!(model.account_error.is_none());
+        assert!(app.view(&model).account_error.is_empty());
+    }
+
+    #[test]
+    fn auth_completed_ignored_when_not_signing_in() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.account_status = AccountStatus::SignedOut;
+
+        let response = crux_http::testing::ResponseBuilder::ok()
+            .body(AuthResponse {
+                user_id: "u1".into(),
+                token: "tok".into(),
+            })
+            .build();
+
+        app.update(
+            Event::AuthCompleted {
+                email: "me@example.com".into(),
+                result: Ok(response),
+            },
+            &mut model,
+        )
+        .expect_done();
+
+        assert!(model.session.is_none());
+        assert_eq!(model.account_status, AccountStatus::SignedOut);
+    }
+
+    #[test]
+    fn busy_auth_is_ignored() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.account_status = AccountStatus::SigningIn;
+
+        app.update(
+            Event::SignIn {
+                email: "other@example.com".into(),
+                password: "secret12".into(),
+            },
+            &mut model,
+        )
+        .expect_done();
+
+        assert_eq!(model.account_status, AccountStatus::SigningIn);
+    }
+
+    #[test]
+    fn sync_401_expires_session() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.session = Some(Session {
+            user_id: "u1".into(),
+            token: "tok".into(),
+            email: "me@example.com".into(),
+            last_synced_at: Some(9),
+        });
+        model.account_status = AccountStatus::Syncing;
+        model.last_synced_at = Some(9);
+
+        let result = crux_http::testing::rejection::<StoredState>(401, "");
+        app.update(Event::SyncGetCompleted(result), &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                assert!(matches!(
+                    op,
+                    KeyValueOperation::Delete { key } if key == SESSION_KEY
+                ));
+            });
+
+        assert!(model.session.is_none());
+        assert!(model.last_synced_at.is_none());
+        assert_eq!(model.account_status, AccountStatus::Error);
+        assert_eq!(
+            model.account_error.as_deref(),
+            Some("Session expired. Sign in again.")
+        );
+        assert_eq!(model.account_operation, AccountOperation::SignIn);
+    }
+
+    #[test]
+    fn session_loaded_restores_last_synced() {
+        let app = Implore;
+        let mut model = Model::default();
+        let session = Session {
+            user_id: "u1".into(),
+            token: "tok".into(),
+            email: "me@example.com".into(),
+            last_synced_at: Some(42),
+        };
+        let bytes = serde_json::to_vec(&session).unwrap();
+
+        app.update(Event::SessionLoaded(Ok(Some(bytes))), &mut model)
+            .expect_only_render();
+
+        assert_eq!(model.account_status, AccountStatus::SignedIn);
+        assert_eq!(app.view(&model).signed_in_email, "me@example.com");
+        assert_eq!(model.last_synced_at, Some(42));
+    }
+
+    #[test]
+    fn sync_pull_wins_when_remote_newer() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.session = Some(Session {
+            user_id: "u1".into(),
+            token: "tok".into(),
+            email: "me@example.com".into(),
+            last_synced_at: None,
+        });
+        model.account_status = AccountStatus::Syncing;
+        model.updated_at = 10;
+        model.unix_seconds = Some(50);
+        model.prayers = vec![prayer(1, "Local", None, &[], PrayerStatus::Active)];
+        model.next_id = 2;
+
+        let remote = StoredState {
+            prayers: vec![prayer(7, "Remote", None, &[], PrayerStatus::Active)],
+            next_id: 8,
+            reminder_settings: ReminderSettings::default(),
+            updated_at: 20,
+        };
+        let response = crux_http::testing::ResponseBuilder::ok().body(remote).build();
+
+        app.update(Event::SyncGetCompleted(Ok(response)), &mut model)
+            .expect_render()
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { key, value } = op else {
+                    panic!("expected prayers set");
+                };
+                assert_eq!(key, PRAYERS_KEY);
+                let stored: StoredState = serde_json::from_slice(value).unwrap();
+                assert_eq!(stored.updated_at, 20);
+                assert_eq!(stored.prayers[0].intention, "Remote");
+            })
+            .expect_key_value_with(|op| {
+                let KeyValueOperation::Set { key, value } = op else {
+                    panic!("expected session set");
+                };
+                assert_eq!(key, SESSION_KEY);
+                let session: Session = serde_json::from_slice(value).unwrap();
+                assert_eq!(session.last_synced_at, Some(50));
+            });
+
+        assert_eq!(model.updated_at, 20);
+        assert_eq!(app.view(&model).prayers[0].intention, "Remote");
+        assert_eq!(model.last_synced_at, Some(50));
+        assert_eq!(model.account_status, AccountStatus::SignedIn);
+    }
+
+    #[test]
+    fn sync_pushes_when_local_newer() {
+        let app = Implore;
+        let mut model = Model::default();
+        model.session = Some(Session {
+            user_id: "u1".into(),
+            token: "tok".into(),
+            email: "me@example.com".into(),
+            last_synced_at: None,
+        });
+        model.account_status = AccountStatus::Syncing;
+        model.updated_at = 30;
+        model.unix_seconds = Some(40);
+        model.prayers = vec![prayer(1, "Local", None, &[], PrayerStatus::Active)];
+        model.next_id = 2;
+
+        let remote = StoredState {
+            prayers: vec![prayer(7, "Remote", None, &[], PrayerStatus::Active)],
+            next_id: 8,
+            reminder_settings: ReminderSettings::default(),
+            updated_at: 10,
+        };
+        let response = crux_http::testing::ResponseBuilder::ok().body(remote).build();
+
+        app.update(Event::SyncGetCompleted(Ok(response)), &mut model)
+            .expect_http_with(|req| {
+                assert_eq!(req.method, "PUT");
+                assert_eq!(req.url, format!("{API_BASE_URL}/sync"));
+                assert!(req
+                    .headers
+                    .iter()
+                    .any(|h| h.name.eq_ignore_ascii_case("authorization")
+                        && h.value == "Bearer tok"));
+                let body: StoredState = serde_json::from_slice(&req.body).unwrap();
+                assert_eq!(body.updated_at, 40);
+                assert_eq!(body.prayers[0].intention, "Local");
+            });
     }
 }

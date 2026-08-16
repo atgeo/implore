@@ -4,17 +4,17 @@ title: Terms of Use
 
 # Terms of Use for Implore
 
-**Last updated:** August 14, 2026
+**Last updated:** August 15, 2026
 
 Implore (“the App”) is provided by Georges Kmeid (“we,” “us”). By downloading or using the App, you agree to these Terms of Use.
 
 ## The App
 
-Implore is a personal tool for keeping prayer intentions and related reminders on your device. It is provided for personal, non-commercial use.
+Implore is a personal tool for keeping prayer intentions and related reminders on your device. Optional private account sync may store a copy of that data on a sync server. It is provided for personal, non-commercial use.
 
 ## Your content
 
-You are responsible for the intentions and other information you enter. Do not use the App to store or share content that is unlawful or that you do not have the right to keep.
+You are responsible for the intentions and other information you enter. Do not use the App to store or share content that is unlawful or that you do not have the right to keep. If you enable sync, you are responsible for the credentials you use and for treating the sync server as holding a copy of your intentions.
 
 ## No professional or pastoral advice
 
